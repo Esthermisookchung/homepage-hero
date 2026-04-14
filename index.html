@@ -206,6 +206,19 @@
       color: var(--c-text);
     }
 
+    .rotating-text {
+      display: inline-block;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .rotating-text.out {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    .rotating-text.in {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
     /* ── AI chat bubble ── */
     .chat-section {
       display: flex;
@@ -503,7 +516,7 @@
             </div>
             <h1 class="headline" id="hero-heading">
               <span class="headline-line1">Open Sesame</span>
-              <span class="headline-line2">for care within minutes.</span>
+              <span class="headline-line2"><span class="rotating-text">for care within minutes.</span></span>
             </h1>
           </div>
         </div>
@@ -580,5 +593,27 @@
     </section>
   </main>
 
+<script>
+  const phrases = [
+    'for care within minutes.',
+    'to see a doctor today.',
+    'for care without insurance.'
+  ];
+  let current = 0;
+  const el = document.querySelector('.rotating-text');
+
+  setInterval(() => {
+    el.classList.add('out');
+    setTimeout(() => {
+      current = (current + 1) % phrases.length;
+      el.textContent = phrases[current];
+      el.classList.remove('out');
+      el.classList.add('in');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.classList.remove('in');
+      }));
+    }, 350);
+  }, 3000);
+</script>
 </body>
 </html>
