@@ -608,7 +608,7 @@
   let current = 0;
   const el = document.querySelector('.rotating-text');
 
-  setInterval(() => {
+  function rotate() {
     el.classList.remove('in');
     el.classList.add('out');
     setTimeout(() => {
@@ -617,7 +617,10 @@
       el.classList.remove('out');
       el.classList.add('in');
     }, 300);
-  }, 3000);
+    setTimeout(rotate, 5000 + Math.random() * 2000);
+  }
+
+  setTimeout(rotate, 5000 + Math.random() * 2000);
 </script>
 </body>
 </html>
