@@ -206,23 +206,17 @@
       color: var(--c-text);
     }
 
-    @keyframes rotateOut {
-      0%   { opacity: 1; transform: translateY(0) skewY(0deg); }
-      100% { opacity: 0; transform: translateY(-20px) skewY(2deg); }
-    }
-    @keyframes rotateIn {
-      0%   { opacity: 0; transform: translateY(24px) skewY(-2deg); }
-      70%  { opacity: 1; transform: translateY(-4px) skewY(0.5deg); }
-      100% { opacity: 1; transform: translateY(0) skewY(0deg); }
-    }
     .rotating-text {
       display: inline-block;
+      transition: opacity 0.35s ease, transform 0.35s ease;
     }
     .rotating-text.out {
-      animation: rotateOut 0.3s cubic-bezier(0.4, 0, 1, 1) forwards;
+      opacity: 0;
+      transform: translateY(-8px);
     }
     .rotating-text.in {
-      animation: rotateIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      opacity: 0;
+      transform: translateY(8px);
     }
 
     /* ── AI chat bubble ── */
@@ -616,7 +610,10 @@
       el.textContent = phrases[current];
       el.classList.remove('out');
       el.classList.add('in');
-    }, 300);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.classList.remove('in');
+      }));
+    }, 350);
     setTimeout(rotate, 5000 + Math.random() * 2000);
   }
 
