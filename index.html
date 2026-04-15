@@ -206,17 +206,34 @@
       color: var(--c-text);
     }
 
-    .rotating-text {
+    .rotating-wrapper {
       display: inline-block;
-      transition: opacity 0.35s ease, transform 0.35s ease;
+      position: relative;
+    }
+    .rotating-sizer {
+      display: block;
+      visibility: hidden;
+      pointer-events: none;
+      user-select: none;
+    }
+    .rotating-text {
+      position: absolute;
+      left: 0;
+      top: 0;
+      white-space: nowrap;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.45s ease-out, transform 0.45s ease-out;
     }
     .rotating-text.out {
       opacity: 0;
-      transform: translateY(-8px);
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease-in, transform 0.3s ease-in;
     }
     .rotating-text.in {
       opacity: 0;
-      transform: translateY(8px);
+      transform: translateY(10px);
+      transition: none;
     }
 
     /* ── AI chat bubble ── */
@@ -516,7 +533,12 @@
             </div>
             <h1 class="headline" id="hero-heading">
               <span class="headline-line1">Open Sesame</span>
-              <span class="headline-line2"><span class="rotating-text">for care within minutes.</span></span>
+              <span class="headline-line2">
+                <span class="rotating-wrapper">
+                  <span class="rotating-sizer" aria-hidden="true">for care without insurance.</span>
+                  <span class="rotating-text">for care within minutes.</span>
+                </span>
+              </span>
             </h1>
           </div>
         </div>
@@ -603,7 +625,6 @@
   const el = document.querySelector('.rotating-text');
 
   function rotate() {
-    el.classList.remove('in');
     el.classList.add('out');
     setTimeout(() => {
       current = (current + 1) % phrases.length;
@@ -613,7 +634,7 @@
       requestAnimationFrame(() => requestAnimationFrame(() => {
         el.classList.remove('in');
       }));
-    }, 350);
+    }, 300);
     setTimeout(rotate, 5000 + Math.random() * 2000);
   }
 
