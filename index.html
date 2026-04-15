@@ -220,7 +220,7 @@
       to   { opacity: 0; transform: translateY(-8px); }
     }
     @keyframes wordIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     .rotating-text {
@@ -630,7 +630,7 @@
 
   function wordsHTML(phrase) {
     return phrase.split(' ').map((word, i) =>
-      `<span class="word" style="animation-delay:${i * 75}ms">${word}</span>`
+      `<span class="word" style="animation-delay:${i * 30}ms">${word}</span>`
     ).join(' ');
   }
 
