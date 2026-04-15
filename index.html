@@ -223,17 +223,17 @@
       text-align: center;
       white-space: nowrap;
       opacity: 1;
-      transform: translateX(0);
-      transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+      transform: translateY(0) skewX(0deg);
+      transition: opacity 0.45s ease-out, transform 0.5s ease-out;
     }
     .rotating-text.out {
       opacity: 0;
-      transform: translateX(12px);
+      transform: translateY(-10px);
       transition: opacity 0.3s ease-in, transform 0.3s ease-in;
     }
     .rotating-text.in {
       opacity: 0;
-      transform: translateX(-16px);
+      transform: translateY(10px) skewX(-6deg);
       transition: none;
     }
 
