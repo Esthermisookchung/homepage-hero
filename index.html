@@ -223,18 +223,19 @@
       text-align: center;
       white-space: nowrap;
       opacity: 1;
-      transform: translateY(0) skewX(0deg);
-      transition: opacity 0.45s ease-out, transform 0.5s ease-out;
+      transition: opacity 0.3s ease-in, transform 0.3s ease-in;
     }
     .rotating-text.out {
       opacity: 0;
-      transform: translateY(-10px);
-      transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+      transform: translateY(-8px);
     }
-    .rotating-text.in {
-      opacity: 0;
-      transform: translateY(10px) skewX(-6deg);
-      transition: none;
+    @keyframes wordIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .rotating-text .word {
+      display: inline-block;
+      animation: wordIn 0.4s ease-out forwards;
     }
 
     /* ── AI chat bubble ── */
@@ -625,16 +626,22 @@
   let current = 0;
   const el = document.querySelector('.rotating-text');
 
+  function wordsHTML(phrase) {
+    return phrase.split(' ').map((word, i) =>
+      `<span class="word" style="animation-delay:${i * 75}ms">${word}</span>`
+    ).join(' ');
+  }
+
+  el.innerHTML = wordsHTML(phrases[0]);
+
   function rotate() {
     el.classList.add('out');
     setTimeout(() => {
       current = (current + 1) % phrases.length;
-      el.textContent = phrases[current];
+      el.style.transition = 'none';
+      el.innerHTML = wordsHTML(phrases[current]);
       el.classList.remove('out');
-      el.classList.add('in');
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        el.classList.remove('in');
-      }));
+      requestAnimationFrame(() => { el.style.transition = ''; });
     }, 300);
     setTimeout(rotate, 3000 + Math.random() * 1000);
   }
