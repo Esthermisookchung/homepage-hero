@@ -395,8 +395,15 @@
     .input-section {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      align-items: center;
+      gap: 32px;
       width: 640px;
+    }
+    .input-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
       max-width: 100%;
     }
     .input-outer {
@@ -504,6 +511,17 @@
       gap: 8px;
       width: 100%;
     }
+    .chatgpt-link {
+      font-family: var(--f-sans);
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.714;
+      color: var(--c-purple);
+      text-decoration: none;
+      text-align: center;
+      width: 100%;
+    }
+    .chatgpt-link:hover { text-decoration: underline; }
     .option-pill {
       display: flex;
       flex-direction: row;
@@ -782,6 +800,7 @@
 
         <!-- Input area -->
         <div class="input-section">
+          <div class="input-stack">
           <div class="input-outer">
             <div class="providers-bar">
               <div class="providers-left">
@@ -821,6 +840,8 @@
               <span class="option-pill-label">Get urgent care</span>
             </button>
           </div>
+          </div><!-- /.input-stack -->
+          <a class="chatgpt-link" href="#">Already used ChatGPT™ or another AI? Use that conversation to find care faster →</a>
 
         </div><!-- /.input-section -->
       </div><!-- .hero-card -->
