@@ -94,13 +94,13 @@
       z-index: 100;
       width: 100%;
       background: var(--c-white);
-      border-bottom: none;
+      border-bottom: 1px solid var(--c-border);
     }
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 142px;
+      padding: 0 32px;
       height: 72px;
       max-width: 1440px;
       margin: 0 auto;
@@ -110,6 +110,7 @@
       display: flex;
       align-items: center;
       gap: 24px;
+      flex-shrink: 0;
     }
     .nav-menu-btn {
       background: none;
@@ -131,52 +132,123 @@
       display: flex;
       align-items: center;
       text-decoration: none;
+      flex-shrink: 0;
     }
     .nav-logo-img { width: 88px; height: 28px; }
-    .nav-right {
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 4px;
     }
-    .nav-search-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      color: #1C1B1F;
-    }
-    .nav-search-icon {
-      font-size: 24px;
-      display: inline-block;
-      line-height: 1;
-      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-    }
-    .nav-login-link {
+    .nav-link {
       font-family: var(--f-sans);
-      font-weight: 600;
+      font-weight: 460;
       font-size: 14px;
       line-height: 1.714;
       color: #000;
       text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      white-space: nowrap;
     }
-    .nav-signup-btn {
+    .nav-link:hover { background: #F5F5F6; }
+    .nav-right {
       display: flex;
       align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .nav-search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       padding: 8px 16px;
+      border: 1px solid var(--c-border);
       border-radius: 9999px;
-      background: var(--c-purple);
+      background: #fff;
+      width: 280px;
+      cursor: text;
+    }
+    .nav-search-bar-icon {
+      font-size: 20px;
+      display: inline-block;
+      line-height: 1;
+      color: var(--c-purple);
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+      flex-shrink: 0;
+    }
+    .nav-search-bar-placeholder {
+      font-family: var(--f-sans);
+      font-weight: 460;
+      font-size: 14px;
+      line-height: 1.714;
+      color: var(--c-text-sec);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .nav-location-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      white-space: nowrap;
+    }
+    .nav-location-icon {
+      font-size: 20px;
+      display: inline-block;
+      line-height: 1;
+      color: var(--c-purple);
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+    }
+    .nav-location-text {
       font-family: var(--f-sans);
       font-weight: 600;
       font-size: 14px;
       line-height: 1.714;
-      color: #fff;
-      text-decoration: none;
+      color: var(--c-purple);
+    }
+    .nav-login-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .nav-login-icon {
+      font-size: 20px;
+      display: inline-block;
+      line-height: 1;
+      color: var(--c-purple);
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+    }
+    .nav-login-text {
+      font-family: var(--f-sans);
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.714;
+      color: var(--c-purple);
+    }
+    .nav-login-chevron {
+      font-size: 20px;
+      display: inline-block;
+      line-height: 1;
+      color: var(--c-purple);
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+    }
+    @media (max-width: 1100px) {
+      .nav-links { display: none; }
+      .nav-search-bar { width: 200px; }
     }
     @media (max-width: 767px) {
-      .nav-inner { padding: 16px; }
-      .nav-login-link { display: none; }
+      .nav-inner { padding: 0 16px; }
+      .nav-search-bar { display: none; }
+      .nav-location-btn { display: none; }
     }
 
     /* ====================================================================
@@ -654,15 +726,30 @@
           <span class="material-symbols-sharp nav-menu-icon" aria-hidden="true">menu</span>
         </button>
         <a href="https://sesamecare.com/" class="nav-logo" aria-label="Sesame home">
-          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTkiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCA5OSAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTMgMThWMTZIMjFWMThIM1pNMyAxM1YxMUgyMVYxM0gzWk0zIDhWNkgyMVY4SDNaIiBmaWxsPSIjMUMxQjFGIi8+CjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMF84NzZfMTc4MykiPgo8cGF0aCBkPSJNNDAuNTkyNCAyMS45NjA0QzM3Ljc4NTYgMjEuOTYwNCAzNi4yNzA1IDIwLjY4OTQgMzYuMTE0NyAxOC41MTQxQzM2LjA0NzggMTcuNjA5OCAzNi4wNzAxIDE3LjM2NTEgMzYuMDcwMSAxNi4xOTE4SDM5LjE2NjVDMzkuMTY2NSAxNy4wOTY2IDM5LjE4ODggMTcuNzgwNyAzOS4yMTExIDE3LjkyNzNDMzkuMyAxOC41NjQ3IDM5LjcwMTIgMTkuMDAzIDQwLjUwMzIgMTkuMDAzQzQxLjM3MTcgMTkuMDAzIDQxLjgzOTggMTguNDY1MSA0MS44Mzk4IDE3LjQ4OUM0MS44Mzk4IDE1Ljg1MTIgNDEuMzk0IDE0Ljk5NTggNDAuMDgwMSAxMy43MDA2QzM5Ljg1NyAxMy40ODA3IDM4Ljk0MzggMTIuNTc2MyAzOC40NzYxIDEyLjEzNjVDMzYuODcyMSAxMC41OTUgMzYuMDI1OSA5LjM0ODQxIDM2LjAyNTkgNi43MDg1N0MzNi4wMjU5IDMuODcyNzEgMzcuNzE4NyAyLjA0MDA0IDQwLjUyNTUgMi4wNDAwNEM0My4zNTQyIDIuMDQwMDQgNDQuNTc5NyAzLjc5OTggNDQuODI0NyA2LjAyNDFDNDQuODkxNiA2LjQzOTY0IDQ0Ljk1ODIgNy40NjYzMyA0NC45NTgyIDguMDI4NDlINDEuODM5OEM0MS44Mzk1IDcuNDk3NjMgNDEuODA5NyA2Ljk2NzIgNDEuNzUwNiA2LjQzOTY0QzQxLjY2MTMgNS42NTc1NyA0MS4zNDk4IDUuMTY4NzIgNDAuNTAyIDUuMTY4NzJDMzkuNjMzMSA1LjE2ODcyIDM5LjIwOTkgNS42MDY5NyAzOS4yMDk5IDYuNjM1MjZDMzkuMjA5OSA3Ljk3OTQ4IDM5Ljk2NjkgOC45MzI4NyA0MC45Njk3IDkuOTM0ODZDNDEuNDE1MSAxMC4zNzMxIDQyLjI2MTcgMTEuMjA1OCA0Mi41OTYgMTEuNTQ4QzQ0LjE5OTYgMTMuMjEwMiA0NS4wNDYyIDE0LjU1NDQgNDUuMDQ2MiAxNy4xNjk5QzQ1LjA0NjIgMjAuMjAwNiA0My4yNjQxIDIxLjk2MDQgNDAuNTkxMiAyMS45NjA0IiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNNDYuMjcyNSAyMS43NDAxVjIuMjM1MzVINTQuMTEzNVY1LjU4Mzk2SDQ5LjUyNDdWMTAuMzI1NEg1My44MDE2VjEzLjUwMzFINDkuNTI0N1YxOC40NDAxSDU0LjE1ODFWMjEuNzQwMUg0Ni4yNzI1WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggZD0iTTU5LjY2NzMgMjEuOTYwNEM1Ni44NjAxIDIxLjk2MDQgNTUuMzQ1NCAyMC42ODk0IDU1LjE4OTYgMTguNTE0MUM1NS4xMjI3IDE3LjYwOTggNTUuMTQ1IDE3LjM2NTEgNTUuMTQ1IDE2LjE5MThINTguMjQxOEM1OC4yNDE4IDE3LjA5NjYgNTguMjYzNyAxNy43ODA3IDU4LjI4NiAxNy45MjczQzU4LjM3NDggMTguNTY0NyA1OC43NzYgMTkuMDAzIDU5LjU3OCAxOS4wMDNDNjAuNDQ2OSAxOS4wMDMgNjAuOTE0NyAxOC40NjUxIDYwLjkxNDcgMTcuNDg5QzYwLjkxNDcgMTUuODUxMiA2MC40NjkzIDE0Ljk5NTggNTkuMTU0OSAxMy43MDA2QzU4LjkzMjIgMTMuNDgwNyA1OC4wMTg3IDEyLjU3NjMgNTcuNTUwOSAxMi4xMzY1QzU1Ljk0NyAxMC41OTY2IDU1LjEwMDMgOS4zNSA1NS4xMDAzIDYuNzEwMTZDNTUuMTAwMyAzLjg3MjcxIDU2Ljc5MzYgMi4wNDAwNCA1OS42MDAzIDIuMDQwMDRDNjIuNDI5IDIuMDQwMDQgNjMuNjU0NSAzLjc5OTggNjMuODk5NSA2LjAyNDFDNjMuOTY2NSA2LjQzOTY0IDY0LjAzMyA3LjQ2NjMzIDY0LjAzMyA4LjAyODQ5SDYwLjkxNDdDNjAuOTE0NCA3LjQ5NzYzIDYwLjg4NDYgNi45NjcyIDYwLjgyNTQgNi40Mzk2NEM2MC43MzYyIDUuNjU3NTcgNjAuNDI0MiA1LjE2ODcyIDU5LjU3OCA1LjE2ODcyQzU4LjcwOTEgNS4xNjg3MiA1OC4yODYgNS42MDY5NyA1OC4yODYgNi42MzUyNkM1OC4yODYgNy45Nzk0OCA1OS4wNDMgOC45MzI4NyA2MC4wNDU4IDkuOTM0ODZDNjAuNDkxMiAxMC4zNzMxIDYxLjMzNzggMTEuMjA1OCA2MS42NzIgMTEuNTQ4QzYzLjI3NTYgMTMuMjEwMiA2NC4xMjIyIDE0LjU1NDQgNjQuMTIyMiAxNy4xNjk5QzY0LjEyMjIgMjAuMjAwNiA2Mi4zNDAyIDIxLjk2MDQgNTkuNjY3MyAyMS45NjA0WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggZD0iTTY5LjkxNCA4LjM3MDAxQzY5LjgyNDcgNy4zNDM3MiA2OS43NTc4IDUuNDEyNjQgNjkuNzU3OCA1LjQxMjY0QzY5Ljc1NzggNS40MTI2NCA2OS42NDY2IDcuMzE5NDIgNjkuNTU4NiA4LjM3MDAxQzY5LjU1ODYgOC40NjgwMiA2OC43NTY2IDE0LjEzODUgNjguNzU2NiAxNC4xMzg1SDcwLjU4MTdDNzAuNTgxNyAxNC4xMzg1IDY5LjkxMzIgOC40NjgwMiA2OS45MTMyIDguMzcwMDFINjkuOTE0Wk02Ny44MTk5IDIxLjc0MDFINjQuNTY3N0w2Ny41MzAzIDIuMjM1MzVINzIuMDk1Nkw3NC43NDY2IDIxLjc0MDFINzEuNDUxTDcwLjg3MTcgMTcuMDIyNkg2OC40NDM0TDY3LjgxOTkgMjEuNzQwMVoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGQ9Ik04NS41MzYzIDIxLjc0MDFMODUuNTU4NiA5LjcxNDYzTDgzLjU5ODQgMjEuNzQwMUg4MC43MjQ3TDc4Ljc2NDYgOS43Mzg5NEw3OC43ODY5IDIxLjc0MDFINzUuODAxNlYyLjIzNTM1SDgwLjE0NTVMODIuMTcyNiAxNC41Mjk4TDg0LjMxMTIgMi4yMzUzNUg4OC40OTg4VjIxLjc0MDFIODUuNTM2M1oiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGQ9Ik05MC4wODA0IDIuMjM1MzVWMjEuNzQwMUg5Ny45NjYxVjE4LjQ0MDVIOTMuMzMzVjUuNTgzOTZIOTcuOTIxNVYyLjIzNTM1SDkwLjA4MDRaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNOTUuNDc2OSAxMC40OTIyQzk0LjkxOTEgMTAuNDkyMiA5My43NDkgMTAuNzcxMSA5My43NDkgMTEuOTk3NEM5My43NDkgMTMuMjIzNyA5NC45MTk1IDEzLjUwMjEgOTUuNDc2OSAxMy41MDIxQzk2LjAxNTYgMTMuNTAyMSA5Ny4wNTU4IDEzLjI5NzggOTcuOTY2MiAxMS45OTc0Qzk3LjA1NTggMTAuNjk2NiA5Ni4wMTU2IDEwLjQ5MjIgOTUuNDc2OSAxMC40OTIyWiIgZmlsbD0iYmxhY2siLz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF84NzZfMTc4MyI+CjxyZWN0IHdpZHRoPSI2MS45OTIiIGhlaWdodD0iMjAiIGZpbGw9IndoaXRlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNiAyKSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo=" alt="Sesame" class="nav-logo-img" width="88" height="28">
+          <img src="images/sesame-logo-purple.svg" alt="Sesame" class="nav-logo-img" width="88" height="28">
         </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a class="nav-link" href="https://sesamecare.com/urgent-care">Urgent care</a>
+          <a class="nav-link" href="https://sesamecare.com/condition/prescription-refills">Prescription refill</a>
+          <a class="nav-link" href="https://sesamecare.com/weight-loss">Weight loss</a>
+          <a class="nav-link" href="https://sesamecare.com/download">Download the app</a>
+          <a class="nav-link" href="https://sesamecare.com/refer-a-friend">Refer a friend</a>
+        </nav>
       </div>
       <div class="nav-right">
-        <button class="nav-search-btn" type="button" aria-label="Search">
-          <span class="material-symbols-sharp nav-search-icon" aria-hidden="true">search</span>
+        <div class="nav-search-bar" role="search" aria-label="Search">
+          <span class="material-symbols-sharp nav-search-bar-icon" aria-hidden="true">search</span>
+          <span class="nav-search-bar-placeholder">Symptom, service, doctor name, specialty, med...</span>
+        </div>
+        <button class="nav-location-btn" type="button" aria-label="Change location">
+          <span class="material-symbols-sharp nav-location-icon" aria-hidden="true">location_on</span>
+          <span class="nav-location-text">New York, NY</span>
         </button>
-        <a class="nav-login-link" href="https://sesamecare.com/sign-in">Log in</a>
-        <a class="nav-signup-btn" href="https://sesamecare.com/sign-up">Sign up</a>
+        <button class="nav-login-btn" type="button" aria-label="Log in">
+          <span class="material-symbols-sharp nav-login-icon" aria-hidden="true">account_circle</span>
+          <span class="nav-login-text">Log in</span>
+          <span class="material-symbols-sharp nav-login-chevron" aria-hidden="true">keyboard_arrow_down</span>
+        </button>
       </div>
     </div>
   </nav>
