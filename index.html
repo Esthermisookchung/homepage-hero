@@ -100,8 +100,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
-      height: 72px;
+      padding: 16px 24px;
       max-width: 1440px;
       margin: 0 auto;
       box-sizing: border-box;
@@ -110,6 +109,12 @@
       display: flex;
       align-items: center;
       gap: 24px;
+      flex-shrink: 0;
+    }
+    .nav-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       flex-shrink: 0;
     }
     .nav-menu-btn {
@@ -135,57 +140,38 @@
       flex-shrink: 0;
     }
     .nav-logo-img { width: 88px; height: 28px; }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
     .nav-link {
       font-family: var(--f-sans);
-      font-weight: 460;
+      font-weight: 600;
       font-size: 14px;
       line-height: 1.714;
       color: #000;
       text-decoration: none;
-      padding: 6px 10px;
-      border-radius: 8px;
+      padding: 6px 0;
       white-space: nowrap;
     }
-    .nav-link:hover { background: #F5F5F6; }
+    .nav-link:hover { color: var(--c-purple); }
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 24px;
       flex-shrink: 0;
     }
-    .nav-search-bar {
+    .nav-search-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      border: 1px solid var(--c-border);
-      border-radius: 9999px;
-      background: #fff;
-      width: 280px;
-      cursor: text;
+      color: #1C1B1F;
+      order: -1;
     }
-    .nav-search-bar-icon {
-      font-size: 20px;
+    .nav-search-icon {
+      font-size: 24px;
       display: inline-block;
       line-height: 1;
-      color: var(--c-purple);
-      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
-      flex-shrink: 0;
-    }
-    .nav-search-bar-placeholder {
-      font-family: var(--f-sans);
-      font-weight: 460;
-      font-size: 14px;
-      line-height: 1.714;
-      color: var(--c-text-sec);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
     }
     .nav-location-btn {
       display: flex;
@@ -198,57 +184,57 @@
       white-space: nowrap;
     }
     .nav-location-icon {
-      font-size: 20px;
+      font-size: 24px;
       display: inline-block;
       line-height: 1;
-      color: var(--c-purple);
-      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+      color: var(--c-text-sec);
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
     }
     .nav-location-text {
       font-family: var(--f-sans);
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 1.714;
-      color: var(--c-purple);
+      font-weight: 670;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--c-text-sec);
     }
     .nav-login-btn {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 8px;
       background: none;
       border: none;
       cursor: pointer;
       padding: 0;
+      height: 24px;
     }
     .nav-login-icon {
-      font-size: 20px;
+      font-size: 24px;
       display: inline-block;
       line-height: 1;
-      color: var(--c-purple);
-      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+      color: #000;
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
     }
     .nav-login-text {
       font-family: var(--f-sans);
       font-weight: 600;
       font-size: 14px;
       line-height: 1.714;
-      color: var(--c-purple);
+      color: #000;
     }
     .nav-login-chevron {
-      font-size: 20px;
+      font-size: 24px;
       display: inline-block;
       line-height: 1;
-      color: var(--c-purple);
-      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+      color: #000;
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
     }
     @media (max-width: 1100px) {
-      .nav-links { display: none; }
-      .nav-search-bar { width: 200px; }
+      .nav-link { display: none; }
     }
     @media (max-width: 767px) {
-      .nav-inner { padding: 0 16px; }
-      .nav-search-bar { display: none; }
-      .nav-location-btn { display: none; }
+      .nav-inner { padding: 12px 16px; }
+      .nav-login-btn { display: none; }
+      .nav-search-btn { order: 0; }
     }
 
     /* ====================================================================
@@ -722,32 +708,31 @@
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <div class="nav-left">
-        <button class="nav-menu-btn" type="button" aria-label="Open menu">
-          <span class="material-symbols-sharp nav-menu-icon" aria-hidden="true">menu</span>
-        </button>
-        <a href="https://sesamecare.com/" class="nav-logo" aria-label="Sesame home">
-          <img src="images/sesame-logo-purple.svg" alt="Sesame" class="nav-logo-img" width="88" height="28">
-        </a>
-        <nav class="nav-links" aria-label="Primary">
-          <a class="nav-link" href="https://sesamecare.com/urgent-care">Urgent care</a>
-          <a class="nav-link" href="https://sesamecare.com/condition/prescription-refills">Prescription refill</a>
-          <a class="nav-link" href="https://sesamecare.com/weight-loss">Weight loss</a>
-          <a class="nav-link" href="https://sesamecare.com/download">Download the app</a>
-          <a class="nav-link" href="https://sesamecare.com/refer-a-friend">Refer a friend</a>
-        </nav>
+        <div class="nav-logo-group">
+          <button class="nav-menu-btn" type="button" aria-label="Open menu">
+            <span class="material-symbols-sharp nav-menu-icon" aria-hidden="true">menu</span>
+          </button>
+          <a href="https://sesamecare.com/" class="nav-logo" aria-label="Sesame home">
+            <img src="images/sesame-logo-purple.svg" alt="Sesame" class="nav-logo-img" width="88" height="28">
+          </a>
+        </div>
+        <a class="nav-link" href="https://sesamecare.com/urgent-care">Urgent care</a>
+        <a class="nav-link" href="https://sesamecare.com/condition/prescription-refills">Prescription refill</a>
+        <a class="nav-link" href="https://sesamecare.com/weight-loss">Weight loss</a>
+        <a class="nav-link" href="https://sesamecare.com/download">Download the app</a>
+        <a class="nav-link" href="https://sesamecare.com/refer-a-friend">Refer a friend</a>
       </div>
       <div class="nav-right">
-        <div class="nav-search-bar" role="search" aria-label="Search">
-          <span class="material-symbols-sharp nav-search-bar-icon" aria-hidden="true">search</span>
-          <span class="nav-search-bar-placeholder">Symptom, service, doctor name, specialty, med...</span>
-        </div>
         <button class="nav-location-btn" type="button" aria-label="Change location">
           <span class="material-symbols-sharp nav-location-icon" aria-hidden="true">location_on</span>
-          <span class="nav-location-text">New York, NY</span>
+          <span class="nav-location-text">San Francisco, CA</span>
         </button>
-        <button class="nav-login-btn" type="button" aria-label="Log in">
+        <button class="nav-search-btn" type="button" aria-label="Search">
+          <span class="material-symbols-sharp nav-search-icon" aria-hidden="true">search</span>
+        </button>
+        <button class="nav-login-btn" type="button" aria-label="Login">
           <span class="material-symbols-sharp nav-login-icon" aria-hidden="true">account_circle</span>
-          <span class="nav-login-text">Log in</span>
+          <span class="nav-login-text">Login</span>
           <span class="material-symbols-sharp nav-login-chevron" aria-hidden="true">keyboard_arrow_down</span>
         </button>
       </div>
