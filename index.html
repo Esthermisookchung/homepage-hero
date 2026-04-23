@@ -470,6 +470,8 @@
     }
     .chat-input-card.is-active {
       border-color: var(--c-purple);
+    }
+    .chat-input-card.is-growing {
       height: auto;
       min-height: var(--chat-card-height, 128px);
     }
@@ -979,12 +981,15 @@
   heroInput.addEventListener('blur', () => {
     if (!heroInput.value.trim()) {
       chatCard.classList.remove('is-active');
+      chatCard.classList.remove('is-growing');
       heroInput.style.height = '';
     }
   });
   heroInput.addEventListener('input', function() {
     this.style.height = 'auto';
     this.style.height = this.scrollHeight + 'px';
+    const lineH = Math.round(parseFloat(getComputedStyle(this).lineHeight));
+    chatCard.classList.toggle('is-growing', this.scrollHeight > lineH + 2);
     ctaBtn.disabled = this.value.trim().length === 0;
   });
 </script>
