@@ -84,6 +84,7 @@
       color: var(--c-text);
       background: var(--c-white);
     }
+    main { display: block; margin: 0; padding: 0; }
 
     /* ====================================================================
        Navigation
@@ -697,8 +698,19 @@
        ==================================================================== */
     @media (max-width: 767px) {
       .hero-section {
+        position: relative;
         gap: 40px;
         padding: 0 0 56px;
+      }
+      .hero-section::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: var(--c-lavender);
+        pointer-events: none;
       }
       .hero-card {
         gap: 32px;
