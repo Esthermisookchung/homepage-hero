@@ -464,14 +464,14 @@
       background: var(--c-white);
       border: 1px solid var(--c-border);
       border-radius: 12px;
-      height: 152px;
+      height: 120px;
       box-sizing: border-box;
       transition: border-color 0.15s ease;
     }
     .chat-input-card.is-active {
       border-color: var(--c-purple);
       height: auto;
-      min-height: 152px;
+      min-height: 120px;
     }
     .chat-field {
       display: flex;
@@ -518,7 +518,7 @@
     .chat-input-card.is-active .chat-textarea {
       flex: none;
       height: auto;
-      min-height: 48px;
+      min-height: 24px;
       max-height: 120px;
       opacity: 1;
       overflow-y: auto;
@@ -868,7 +868,7 @@
             <div class="chat-input-card" id="chat-input-card" role="group" aria-label="Ask a health question">
             <div class="chat-field">
               <label class="chat-label" for="hero-input">What would you like help with?</label>
-              <textarea class="chat-textarea" id="hero-input" rows="2" aria-label="Describe your health concern"></textarea>
+              <textarea class="chat-textarea" id="hero-input" rows="1" aria-label="Describe your health concern"></textarea>
             </div>
             <div class="input-actions">
               <div class="hipaa-inline">
