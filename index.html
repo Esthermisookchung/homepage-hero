@@ -466,14 +466,21 @@
       border-radius: 12px;
       height: 120px;
     }
-    .chat-placeholder {
+    .chat-textarea {
       font-family: var(--f-sans);
       font-weight: 460;
       font-size: 16px;
       line-height: 1.5;
-      color: var(--c-text-sec);
+      color: #000;
       flex: 1;
+      border: none;
+      outline: none;
+      resize: none;
+      background: transparent;
+      padding: 0;
+      width: 100%;
     }
+    .chat-textarea::placeholder { color: var(--c-text-sec); }
     .input-actions {
       display: flex;
       flex-direction: row;
@@ -557,7 +564,12 @@
       color: var(--c-white);
       cursor: pointer;
     }
-    .cta-btn:hover { background: #4a1ab8; }
+    .cta-btn:hover:not(:disabled) { background: #4a1ab8; }
+    .cta-btn:disabled {
+      background: #ECECED;
+      color: #94969C;
+      cursor: not-allowed;
+    }
 
     /* HIPAA / Private — mobile only */
     .hipaa-row { display: none; }
@@ -806,7 +818,7 @@
               <span class="providers-avail">As soon as 15 min</span>
             </div>
             <div class="chat-input-card" role="group" aria-label="Ask a health question">
-            <p class="chat-placeholder">What would you like help with?</p>
+            <textarea class="chat-textarea" id="hero-input" placeholder="What would you like help with?" rows="1" aria-label="Describe your health concern"></textarea>
             <div class="input-actions">
               <div class="hipaa-inline">
                 <svg class="hipaa-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2.6665 14.6665V5.33317H4.6665V3.99984C4.6665 3.07762 4.9915 2.2915 5.6415 1.6415C6.2915 0.991504 7.07762 0.666504 7.99984 0.666504C8.92206 0.666504 9.70817 0.991504 10.3582 1.6415C11.0082 2.2915 11.3332 3.07762 11.3332 3.99984V5.33317H13.3332V14.6665H2.6665ZM3.99984 13.3332H11.9998V6.6665H3.99984V13.3332ZM7.99984 11.3332C8.3665 11.3332 8.68039 11.2026 8.9415 10.9415C9.20262 10.6804 9.33317 10.3665 9.33317 9.99984C9.33317 9.63317 9.20262 9.31928 8.9415 9.05817C8.68039 8.79706 8.3665 8.6665 7.99984 8.6665C7.63317 8.6665 7.31928 8.79706 7.05817 9.05817C6.79706 9.31928 6.6665 9.63317 6.6665 9.99984C6.6665 10.3665 6.79706 10.6804 7.05817 10.9415C7.31928 11.2026 7.63317 11.3332 7.99984 11.3332ZM5.99984 5.33317H9.99984V3.99984C9.99984 3.44428 9.80539 2.97206 9.4165 2.58317C9.02762 2.19428 8.55539 1.99984 7.99984 1.99984C7.44428 1.99984 6.97206 2.19428 6.58317 2.58317C6.19428 2.97206 5.99984 3.44428 5.99984 3.99984V5.33317Z" fill="#85888E"/></svg>
@@ -814,7 +826,7 @@
                 <div class="hipaa-dot" aria-hidden="true"></div>
                 <span class="hipaa-text">Private</span>
               </div>
-              <button class="cta-btn" type="button">Open Sesame</button>
+              <button class="cta-btn" id="cta-btn" type="button" disabled>Open Sesame</button>
             </div>
             </div>
           </div>
@@ -895,6 +907,13 @@
   }
 
   setTimeout(rotate, 3000 + Math.random() * 1000);
+</script>
+<script>
+  const heroInput = document.getElementById('hero-input');
+  const ctaBtn = document.getElementById('cta-btn');
+  heroInput.addEventListener('input', function() {
+    ctaBtn.disabled = this.value.trim().length === 0;
+  });
 </script>
 </body>
 </html>
