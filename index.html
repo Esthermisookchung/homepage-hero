@@ -464,14 +464,14 @@
       background: var(--c-white);
       border: 1px solid var(--c-border);
       border-radius: 12px;
-      height: 128px;
+      height: var(--chat-card-height, 128px);
       box-sizing: border-box;
       transition: border-color 0.15s ease;
     }
     .chat-input-card.is-active {
       border-color: var(--c-purple);
       height: auto;
-      min-height: 128px;
+      min-height: var(--chat-card-height, 128px);
     }
     .chat-field {
       display: flex;
@@ -964,6 +964,12 @@
   const ctaBtn = document.getElementById('cta-btn');
   const chatCard = document.getElementById('chat-input-card');
   const chatLabel = chatCard.querySelector('.chat-label');
+
+  // Measure the card's rendered height in active state and apply it as the
+  // inactive height so focus never causes a layout shift.
+  chatCard.classList.add('is-active');
+  document.documentElement.style.setProperty('--chat-card-height', chatCard.offsetHeight + 'px');
+  chatCard.classList.remove('is-active');
 
   chatLabel.addEventListener('click', () => heroInput.focus());
 
