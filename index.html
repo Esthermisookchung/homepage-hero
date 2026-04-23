@@ -470,6 +470,8 @@
     }
     .chat-input-card.is-active {
       border-color: var(--c-purple);
+      height: auto;
+      min-height: 152px;
     }
     .chat-field {
       display: flex;
@@ -513,10 +515,15 @@
       transition: opacity 0.15s ease;
     }
     .chat-input-card.is-active .chat-textarea {
-      flex: 1;
+      flex: none;
       height: auto;
+      min-height: 48px;
+      max-height: 120px;
       opacity: 1;
-      overflow: auto;
+      overflow-y: auto;
+    }
+    @media (max-width: 767px) {
+      .chat-input-card.is-active .chat-textarea { max-height: 96px; }
     }
     .input-actions {
       display: flex;
@@ -960,9 +967,14 @@
     chatCard.classList.add('is-active');
   });
   heroInput.addEventListener('blur', () => {
-    if (!heroInput.value.trim()) chatCard.classList.remove('is-active');
+    if (!heroInput.value.trim()) {
+      chatCard.classList.remove('is-active');
+      heroInput.style.height = '';
+    }
   });
   heroInput.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
     ctaBtn.disabled = this.value.trim().length === 0;
   });
 </script>
