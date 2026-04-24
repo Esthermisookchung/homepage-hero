@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F0F1F1">
   <title>Sesame — Open Sesame for care within minutes</title>
   <style>
     /* ====================================================================
@@ -1055,11 +1056,14 @@
     ctaBtn.disabled = this.value.trim().length === 0;
   });
 
-  // Toggle nav border-radius based on announcement bar visibility
+  // Toggle nav border-radius and status bar color based on announcement bar visibility
   const announcementBar = document.getElementById('announcement-bar');
   const nav = document.querySelector('.nav');
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
   new IntersectionObserver(([entry]) => {
-    nav.classList.toggle('is-stuck', !entry.isIntersecting);
+    const stuck = !entry.isIntersecting;
+    nav.classList.toggle('is-stuck', stuck);
+    themeColorMeta.content = stuck ? '#FFFFFF' : '#F0F1F1';
   }, { threshold: 0 }).observe(announcementBar);
 </script>
 </body>
