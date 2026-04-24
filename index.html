@@ -89,14 +89,58 @@
     /* ====================================================================
        Navigation
        ==================================================================== */
+    /* ====================================================================
+       Announcement Bar
+       ==================================================================== */
+    .announcement-bar {
+      width: 100%;
+      background: #F0F1F1;
+    }
+    .announcement-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+    }
+    .announcement-tag {
+      font-family: var(--f-sans);
+      font-weight: 460;
+      font-size: 14px;
+      line-height: 1.714;
+      color: #219F63;
+      background: #C4E9D7;
+      border-radius: 4px;
+      padding: 2px 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .announcement-text {
+      font-family: var(--f-sans);
+      font-weight: 460;
+      font-size: 14px;
+      line-height: 1.714;
+      color: #000;
+    }
+    .announcement-link {
+      font-weight: 600;
+      color: #000;
+      text-decoration: underline;
+    }
+    @media (max-width: 767px) {
+      .announcement-bar-inner { padding: 10px 16px; }
+    }
+
     .nav {
       position: sticky;
       top: 0;
       z-index: 100;
       width: 100%;
       background: var(--c-white);
-
+      border-radius: 16px 16px 0 0;
+      transition: border-radius 0.2s ease;
     }
+    .nav.is-stuck { border-radius: 0; }
     .nav-inner {
       display: flex;
       align-items: center;
@@ -783,6 +827,14 @@
 </head>
 <body>
 
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" id="announcement-bar">
+    <div class="announcement-bar-inner">
+      <span class="announcement-tag">New</span>
+      <p class="announcement-text">Expert fertility care without the wait — or the price tag. <a class="announcement-link" href="#">Learn more</a></p>
+    </div>
+  </div>
+
   <!-- Navigation -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
@@ -1000,6 +1052,13 @@
     chatCard.classList.toggle('is-growing', this.scrollHeight > lineH + 2);
     ctaBtn.disabled = this.value.trim().length === 0;
   });
+
+  // Toggle nav border-radius based on announcement bar visibility
+  const announcementBar = document.getElementById('announcement-bar');
+  const nav = document.querySelector('.nav');
+  new IntersectionObserver(([entry]) => {
+    nav.classList.toggle('is-stuck', !entry.isIntersecting);
+  }, { threshold: 0 }).observe(announcementBar);
 </script>
 </body>
 </html>
