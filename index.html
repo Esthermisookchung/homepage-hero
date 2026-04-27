@@ -958,11 +958,17 @@
       height: 160px;
       width: auto;
       flex-shrink: 0;
+      transition: transform 0.3s ease;
     }
     .tile-svg {
       height: 160px;
       width: auto;
       flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .tile:hover .tile-img,
+    .tile:hover .tile-svg {
+      transform: scale(1.05);
     }
     .tile-arrow {
       width: 24px;
