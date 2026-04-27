@@ -885,7 +885,7 @@
     .tile {
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: stretch;
       height: 160px;
       background: #F5F5F6;
       border-radius: 16px;
@@ -899,7 +899,6 @@
       justify-content: center;
       gap: 4px;
       padding: 0 16px;
-      height: 100%;
       min-width: 0;
     }
     .tile-text--badge {
@@ -951,13 +950,12 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      height: 100%;
       padding-right: 16px;
       flex-shrink: 0;
     }
     .tile-img-wrap {
       width: min(120px, 32%);
-      height: 100%;
+      align-self: stretch;
       overflow: hidden;
       flex-shrink: 0;
     }
@@ -970,9 +968,13 @@
       object-fit: contain;
     }
     .tile-svg {
-      width: min(120px, 32%);
+      /* SVG viewBox is 160×160; illustration sits in left ~100px.
+         Render at natural tile height so content fills correctly;
+         .tile overflow:hidden clips the excess width. */
       height: 100%;
-      object-fit: contain;
+      width: auto;
+      align-self: stretch;
+      flex-shrink: 0;
     }
     .tile-arrow {
       width: 24px;
