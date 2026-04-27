@@ -3,7 +3,6 @@
 <circle cx="60.334" cy="80" r="41" fill="#F5F5F4"/>
 <circle cx="60.334" cy="80" r="41" fill="url(#pattern0_1029_8200)"/>
 <circle cx="60.334" cy="80" r="41" stroke="#F0F1F1" stroke-width="2"/>
-<path d="M132.6 80L128 75.4L129.4 74L135.4 80L129.4 86L128 84.6L132.6 80Z" fill="#61646C"/>
 <defs>
 <pattern id="pattern0_1029_8200" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_1029_8200" transform="translate(-0.876498 -0.029952) scale(0.000793457)"/>
