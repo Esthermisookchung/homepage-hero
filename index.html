@@ -956,7 +956,7 @@
       flex-shrink: 0;
     }
     .tile-img-wrap {
-      width: 120px;
+      width: min(120px, 32%);
       height: 100%;
       overflow: hidden;
       flex-shrink: 0;
@@ -970,7 +970,7 @@
       object-fit: contain;
     }
     .tile-svg {
-      width: 120px;
+      width: min(120px, 32%);
       height: 100%;
       object-fit: contain;
     }
@@ -990,16 +990,19 @@
       padding: 8px 16px;
       border-radius: 9999px;
     }
-    @media (min-width: 768px) and (max-width: 1279px) {
-      .conditions-section { padding: 60px 40px; }
+    @media (min-width: 1025px) and (max-width: 1279px) {
+      .conditions-section { padding: 80px 40px; }
     }
-    @media (max-width: 767px) {
-      .conditions-section { padding: 64px 16px; }
+    @media (max-width: 1024px) {
+      .conditions-section { padding: 64px 40px; }
       .tiles-grid {
         grid-template-columns: 1fr;
         row-gap: 16px;
       }
       .conditions-cta { display: none; }
+    }
+    @media (max-width: 767px) {
+      .conditions-section { padding: 64px 16px; }
       .tile-img-wrap--sm {
         width: 96px;
         height: 128px;
