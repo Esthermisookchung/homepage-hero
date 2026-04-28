@@ -1778,19 +1778,19 @@
             <!-- Asset: phone image + success badge overlaid on top    -->
             <div class="program-card-asset" data-motion-region="guidance-asset">
 
-              <!-- Phone first (behind badge in stacking order)        -->
-              <!-- Future: data-motion="phone-slide" — slide from right -->
-              <img src="images/programs/guidance-phone.png"
-                   alt="Provider guidance shown on a phone"
-                   class="wl-guidance__phone"
-                   data-motion="phone-slide">
-
-              <!-- Badge on top of phone                               -->
+              <!-- Badge renders first (behind phone in stacking order) -->
               <!-- Future: data-motion="badge-pop" — scale/pop entrance -->
               <img src="images/programs/guidance-badge.png"
                    alt="" aria-hidden="true"
                    class="wl-guidance__badge"
                    data-motion="badge-pop">
+
+              <!-- Phone on top of badge                               -->
+              <!-- Future: data-motion="phone-slide" — slide from right -->
+              <img src="images/programs/guidance-phone.png"
+                   alt="Provider guidance shown on a phone"
+                   class="wl-guidance__phone"
+                   data-motion="phone-slide">
 
             </div><!-- [data-motion-region="guidance-asset"] -->
           </article>
