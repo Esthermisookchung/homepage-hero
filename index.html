@@ -1210,8 +1210,8 @@
     /* Badge group: all dimensions % of asset container so it scales at any size */
     .wl-outcome__badge-group {
       position: absolute;
-      left: 6.84%;
-      top: 55.25%;
+      left: 24px;
+      bottom: 24px;
       width: min(34.22%, 130px);
       height: min(36.14%, 110px);
     }
@@ -1231,7 +1231,7 @@
     /* cqw units (% of asset container width) scale font-size */
     .stat-badge {
       position: absolute;
-      top: 40.44%;     /* 41.94 / 103.7 of badge-group height */
+      bottom: 0;
       left: 0;
       width: 100%;
       background: rgba(255, 255, 255, 0.92);
@@ -1260,7 +1260,7 @@
 
     .stat-badge__value {
       font-family: var(--f-sans);
-      font-weight: 500;
+      font-weight: 600;
       font-size: clamp(16px, 6.47cqw, 24px);
       line-height: 1;
       color: #219F63;
