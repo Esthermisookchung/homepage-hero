@@ -1361,9 +1361,9 @@
   });
 
   // Reveal icon-font spans only after Material Symbols has loaded, preventing FOUT
-  document.fonts.ready.then(() => {
-    document.querySelectorAll('.nav-menu-icon, .nav-search-icon, .nav-location-icon, .nav-login-icon, .nav-login-chevron')
-      .forEach(el => { el.style.visibility = ''; });
+  const navIcons = document.querySelectorAll('.nav-menu-icon, .nav-search-icon, .nav-location-icon, .nav-login-icon, .nav-login-chevron');
+  document.fonts.load('24px "Material Symbols Sharp"').then(() => {
+    navIcons.forEach(el => { el.style.visibility = 'visible'; });
   });
 
   // Toggle nav border-radius and status bar color based on announcement bar visibility
