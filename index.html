@@ -1031,6 +1031,15 @@
     .input-section { animation: page-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.13s both; }
     .stats-section { animation: page-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.26s both; }
 
+    /* ── Scroll-triggered reveal ── */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .scroll-reveal.is-visible {
+      animation: page-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
 </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -1200,14 +1209,14 @@
     <!-- Conditions Section -->
     <section class="conditions-section">
       <div class="conditions-inner">
-        <h2 class="conditions-heading">See a doctor today for almost any condition.</h2>
+        <h2 class="conditions-heading scroll-reveal">See a doctor today for almost any condition.</h2>
 
         <div class="filter-pills" role="group" aria-label="Filter by category">
-          <button class="filter-pill filter-pill--selected" type="button">Popular</button>
-          <button class="filter-pill" type="button">Ongoing care</button>
-          <button class="filter-pill" type="button">One-time visits</button>
-          <button class="filter-pill" type="button">Prescriptions</button>
-          <button class="filter-pill" type="button">Labs &amp; imaging</button>
+          <button class="filter-pill filter-pill--selected scroll-reveal" type="button">Popular</button>
+          <button class="filter-pill scroll-reveal" type="button">Ongoing care</button>
+          <button class="filter-pill scroll-reveal" type="button">One-time visits</button>
+          <button class="filter-pill scroll-reveal" type="button">Prescriptions</button>
+          <button class="filter-pill scroll-reveal" type="button">Labs &amp; imaging</button>
         </div>
 
         <div class="tiles-grid">
@@ -1363,6 +1372,19 @@
   document.fonts.load('24px "Material Symbols Sharp"').then(() => {
     navIcons.forEach(el => { el.style.visibility = 'visible'; });
   });
+
+  // Scroll-reveal: conditions heading then filter pills staggered
+  const conditionsHeading = document.querySelector('.conditions-heading');
+  const filterPills = document.querySelectorAll('.filter-pills .filter-pill');
+  new IntersectionObserver(([entry], obs) => {
+    if (!entry.isIntersecting) return;
+    obs.disconnect();
+    conditionsHeading.classList.add('is-visible');
+    filterPills.forEach((pill, i) => {
+      pill.style.animationDelay = (0.13 + i * 0.07) + 's';
+      pill.classList.add('is-visible');
+    });
+  }, { threshold: 0.5 }).observe(conditionsHeading);
 
   // Toggle nav border-radius and status bar color based on announcement bar visibility
   const announcementBar = document.getElementById('announcement-bar');
