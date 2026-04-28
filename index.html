@@ -1149,14 +1149,12 @@
     }
 
     .program-card-text {
-      padding: 16px;
+      padding: 24px;
     }
 
     /* Flex-fills remaining height so asset stays flush at bottom (Card 01) */
     .program-card-text--fill {
       flex: 1;
-      display: flex;
-      align-items: flex-start;
     }
 
     .program-card-heading {
@@ -1172,7 +1170,7 @@
 
     /* ── Card 01: Weight loss outcome ── */
 
-    .wl-outcome__heading {
+    .wl-outcome__highlight {
       color: #219F63;
     }
 
@@ -1378,6 +1376,7 @@
       .programs-section { padding: 16px 16px 0; }
       .program-section { padding: 40px 20px; gap: 24px; }
       .program-section-heading { font-size: 24px; }
+      .program-card-text { padding: 16px; }
       .medication-card-group { gap: 8px; }
       .medication-card { width: 96px; padding: 8px; }
       .featured-med-card { width: 120px; padding: 12px; }
@@ -1680,8 +1679,8 @@
 
             <!-- Text sits above the asset; flex-fills remaining height -->
             <div class="program-card-text program-card-text--fill">
-              <h3 class="program-card-heading wl-outcome__heading">
-                Shed 15% of your body weight
+              <h3 class="program-card-heading">
+                <span class="wl-outcome__highlight">Shed 15%</span> of your body weight
               </h3>
             </div>
 
