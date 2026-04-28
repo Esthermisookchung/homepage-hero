@@ -1212,8 +1212,8 @@
       position: absolute;
       left: 6.84%;
       top: 55.25%;
-      width: 34.22%;   /* 122.74 / 358.67 */
-      height: 36.14%;  /* 103.7 / 286.94 */
+      width: min(34.22%, 130px);
+      height: min(36.14%, 110px);
     }
 
     /* data-motion="pill-deco" — future: subtle float/rotate */
@@ -1247,11 +1247,11 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 0.81cqw;   /* 2.894 / 358.67 */
+      gap: clamp(2px, 0.81cqw, 3px);
     }
 
     .stat-badge__icon {
-      font-size: 4.85cqw;  /* 17.4 / 358.67 */
+      font-size: clamp(13px, 4.85cqw, 18px);
       color: #219F63;
       line-height: 1;
       font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
@@ -1261,7 +1261,7 @@
     .stat-badge__value {
       font-family: var(--f-sans);
       font-weight: 500;
-      font-size: 6.47cqw;  /* 23.197 / 358.67 */
+      font-size: clamp(16px, 6.47cqw, 24px);
       line-height: 1;
       color: #219F63;
     }
