@@ -1183,12 +1183,12 @@
     }
 
     /* data-motion="bg-shape" — future: fade/scale entrance */
+    /* Updated SVG (375×300) matches container aspect ratio, fills edge-to-edge */
     .wl-outcome__bg-shape {
       position: absolute;
-      top: -1.43%;
-      left: -2.57%;
-      width: 107.8%;
-      height: auto;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
     }
 
@@ -1239,13 +1239,27 @@
       z-index: 1;
     }
 
+    .stat-badge__content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .stat-badge__icon {
+      font-size: 17px;
+      color: #219F63;
+      line-height: 1;
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+      visibility: hidden;
+    }
+
     .stat-badge__value {
-      display: block;
       font-family: var(--f-sans);
       font-weight: 500;
       font-size: 23px;
       line-height: 1;
-      color: #000;
+      color: #219F63;
     }
 
     /* ── Card 02: Medications ── */
@@ -1712,7 +1726,10 @@
 
                 <!-- Glass stat badge — live text, animatable separately -->
                 <div class="stat-badge" data-motion="stat-badge">
-                  <span class="stat-badge__value">22 lbs</span>
+                  <div class="stat-badge__content">
+                    <span class="material-symbols-sharp stat-badge__icon">arrow_downward</span>
+                    <span class="stat-badge__value">22 lbs</span>
+                  </div>
                 </div>
               </div>
 
@@ -1909,9 +1926,9 @@
   });
 
   // Reveal icon-font spans only after Material Symbols has loaded, preventing FOUT
-  const navIcons = document.querySelectorAll('.nav-menu-icon, .nav-search-icon, .nav-location-icon, .nav-login-icon, .nav-login-chevron');
+  const matIcons = document.querySelectorAll('.nav-menu-icon, .nav-search-icon, .nav-location-icon, .nav-login-icon, .nav-login-chevron, .stat-badge__icon');
   document.fonts.load('24px "Material Symbols Sharp"').then(() => {
-    navIcons.forEach(el => { el.style.visibility = 'visible'; });
+    matIcons.forEach(el => { el.style.visibility = 'visible'; });
   });
 
   // Scroll-reveal: conditions heading then filter pills staggered
