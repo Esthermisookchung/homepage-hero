@@ -1040,6 +1040,353 @@
       animation: page-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
     }
 
+    /* ================================================================
+       Programs Section — Weight Loss
+       Animation targets are marked with data-motion attributes.
+       Do not add animation rules here yet; targets are hooks only.
+       ================================================================ */
+
+    .programs-section {
+      background: #FAFAFA;
+      padding: 24px 24px 0;
+    }
+
+    /* White rounded container */
+    .program-section {
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 80px 142px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* ── Section header ── */
+    .program-section-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .program-section-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .program-section-heading {
+      font-family: var(--f-sans);
+      font-feature-settings: "ss01" 1;
+      font-weight: 600;
+      font-size: 32px;
+      line-height: 1.1875;
+      letter-spacing: -0.02em;
+      text-align: center;
+      color: #000;
+    }
+
+    .program-section-subheading {
+      font-family: var(--f-sans);
+      font-weight: 460;
+      font-size: 18px;
+      line-height: 1.444;
+      text-align: center;
+      color: #000;
+    }
+
+    .program-section-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .program-btn {
+      font-family: var(--f-sans);
+      font-feature-settings: "ss01" 1;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 1.5;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .program-btn--primary {
+      background: #5921CF;
+      color: #FFFFFF;
+      border: 2px solid #5921CF;
+    }
+
+    .program-btn--secondary {
+      background: transparent;
+      color: #5921CF;
+      border: 2px solid #5921CF;
+    }
+
+    /* ── Three-column card row ── */
+    .program-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* ── Base program card ── */
+    .program-card {
+      background: #F0F1F1;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .program-card-text {
+      padding: 16px;
+    }
+
+    /* Flex-fills remaining height so asset stays flush at bottom (Card 01) */
+    .program-card-text--fill {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .program-card-heading {
+      font-family: var(--f-sans);
+      font-feature-settings: "ss01" 1;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 1.333;
+      letter-spacing: -0.02em;
+      color: #000;
+    }
+
+    /* ── Card 01: Weight loss outcome ── */
+
+    .wl-outcome__heading {
+      color: #219F63;
+    }
+
+    /* Shared asset container for Cards 01 and 03 */
+    .program-card-asset {
+      position: relative;
+      overflow: hidden;
+      height: 287px;
+      flex-shrink: 0;
+    }
+
+    /* data-motion="bg-shape" — future: fade/scale entrance */
+    .wl-outcome__bg-shape {
+      position: absolute;
+      top: -4px;
+      left: -3%;
+      width: 109%;
+      height: auto;
+      pointer-events: none;
+    }
+
+    /* data-motion="person-image" — future: slide-up entrance */
+    .wl-outcome__person {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* Badge group: pill decoration floats above the glass stat badge */
+    /* data-motion="stat-badge-group" — future: float-up entrance */
+    .wl-outcome__badge-group {
+      position: absolute;
+      left: 24px;
+      top: 159px;
+      width: 123px;
+      height: 104px;
+    }
+
+    /* data-motion="pill-deco" — future: subtle float/rotate */
+    .wl-outcome__pill-deco {
+      position: absolute;
+      top: 0;
+      left: 27px;
+      width: 65px;
+      height: 68px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .stat-badge {
+      position: absolute;
+      top: 42px;
+      left: 0;
+      min-width: 123px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(13px);
+      -webkit-backdrop-filter: blur(13px);
+      border-radius: 6px;
+      padding: 15px 12px 12px;
+      box-shadow: 3.8px 3.8px 7.6px rgba(0, 0, 0, 0.08);
+      z-index: 1;
+    }
+
+    .stat-badge__value {
+      display: block;
+      font-family: var(--f-sans);
+      font-weight: 500;
+      font-size: 23px;
+      line-height: 1;
+      color: #000;
+    }
+
+    /* ── Card 02: Medications ── */
+
+    /* data-motion="carousel" — future: translateX reveal */
+    .medication-card-group-wrap {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 287px;
+      flex-shrink: 0;
+    }
+
+    .medication-card-group {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 11px;
+      flex-shrink: 0;
+    }
+
+    /* Off-screen and side cards */
+    .medication-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      padding: 11px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.94);
+      flex-shrink: 0;
+      width: 120px;
+    }
+
+    /* Center featured card — primary animation target */
+    /* data-motion="subtle-scale" — future: scale-up entrance */
+    .featured-med-card {
+      padding: 16px;
+      border-radius: 7px;
+      background: #FFFFFF;
+      box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.04),
+                  -4px 0px 24px rgba(0, 0, 0, 0.04);
+      width: 152px;
+    }
+
+    .med-card__badge {
+      font-family: var(--f-sans);
+      font-weight: 600;
+      font-size: 7px;
+      line-height: 1.4;
+      color: #FFFFFF;
+      background: #219F63;
+      border-radius: 9999px;
+      padding: 2px 5px;
+      align-self: flex-start;
+      white-space: nowrap;
+    }
+
+    .featured-med-card .med-card__badge {
+      font-size: 8px;
+      padding: 2px 7px;
+    }
+
+    .med-card__image {
+      width: 98px;
+      height: 102px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .featured-med-card .med-card__image {
+      width: 119px;
+      height: 123px;
+    }
+
+    .med-card__name {
+      font-family: var(--f-sans);
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: #000;
+      text-align: center;
+    }
+
+    .featured-med-card .med-card__name {
+      font-size: 16px;
+    }
+
+    /* ── Card 03: Guidance ── */
+
+    /* data-motion="phone-slide" — future: slide in from right */
+    .wl-guidance__phone {
+      position: absolute;
+      top: 12px;
+      left: 30%;
+      width: 66%;
+      height: auto;
+    }
+
+    /* data-motion="badge-pop" — future: scale/pop entrance */
+    .wl-guidance__badge {
+      position: absolute;
+      top: 6px;
+      left: 60%;
+      width: 35%;
+      z-index: 2;
+    }
+
+    /* ── Programs responsive ── */
+    @media (min-width: 1025px) and (max-width: 1439px) {
+      .program-section { padding: 80px 40px; }
+    }
+
+    @media (max-width: 1024px) {
+      .program-section { padding: 64px 40px; }
+      .program-cards { grid-template-columns: 1fr; gap: 12px; }
+      .program-section-buttons { flex-direction: column; align-items: center; }
+      .program-btn { width: 100%; max-width: 320px; }
+      .medication-card-group-wrap { height: 240px; }
+      .medication-card { width: 100px; padding: 9px; }
+      .featured-med-card { width: 128px; padding: 13px; }
+      .med-card__image { width: 82px; height: 86px; }
+      .featured-med-card .med-card__image { width: 100px; height: 103px; }
+      .wl-outcome__badge-group { left: 16px; top: 140px; }
+    }
+
+    @media (max-width: 767px) {
+      .programs-section { padding: 16px 16px 0; }
+      .program-section { padding: 40px 20px; gap: 24px; }
+      .program-section-heading { font-size: 24px; }
+      .program-card-asset { height: 220px; }
+      .medication-card-group-wrap { height: 200px; }
+      .medication-card-group { gap: 8px; }
+      .medication-card { width: 96px; padding: 8px; }
+      .featured-med-card { width: 120px; padding: 12px; }
+      .med-card__image { width: 78px; height: 82px; }
+      .featured-med-card .med-card__image { width: 95px; height: 98px; }
+      .wl-outcome__badge-group { left: 12px; top: 118px; }
+    }
+
 </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -1302,6 +1649,203 @@
         <a class="conditions-cta" href="#">See all 383 services &#8594;</a>
       </div>
     </section>
+
+    <!-- ================================================================
+         Weight Loss Program Section
+         Animation targets: data-motion attributes mark future targets.
+         Wrapper components: ProgramSection > ProgramCards > ProgramCard
+         ================================================================ -->
+    <section class="programs-section" aria-labelledby="wl-program-heading">
+      <div class="program-section wl-program-section">
+
+        <!-- Section header: heading + subtitle + CTA buttons -->
+        <header class="program-section-header">
+          <div class="program-section-title">
+            <h2 class="program-section-heading" id="wl-program-heading">Lose weight, affordably.</h2>
+            <p class="program-section-subheading">As low as $99/month.</p>
+          </div>
+          <div class="program-section-buttons">
+            <a href="https://sesamecare.com/service/online-weight-loss-program"
+               class="program-btn program-btn--primary">Get started</a>
+            <a href="https://sesamecare.com/service/online-weight-loss-program"
+               class="program-btn program-btn--secondary">See if this is right for me</a>
+          </div>
+        </header>
+
+        <!-- Three program cards -->
+        <div class="program-cards">
+
+          <!-- ── Card 01: Weight loss outcome ─────────────────────── -->
+          <!-- Future animation region: person slide-up, badge float  -->
+          <article class="program-card wl-card--outcome"
+                   aria-label="Weight loss outcome">
+
+            <!-- Text sits above the asset; flex-fills remaining height -->
+            <div class="program-card-text program-card-text--fill">
+              <h3 class="program-card-heading wl-outcome__heading">
+                Shed 15% of your body weight
+              </h3>
+            </div>
+
+            <!-- Asset: green gradient bg + person photo + stat badge -->
+            <div class="program-card-asset" data-motion-region="outcome-asset">
+
+              <!-- Future: data-motion="bg-shape" — fade/scale on scroll -->
+              <img src="images/programs/wl-bg-shape.svg"
+                   alt="" aria-hidden="true"
+                   class="wl-outcome__bg-shape"
+                   data-motion="bg-shape">
+
+              <!-- Future: data-motion="person-image" — slide-up entrance -->
+              <img src="images/programs/wl-person-2fd977.png"
+                   alt="Person who lost weight with Sesame"
+                   class="wl-outcome__person"
+                   data-motion="person-image">
+
+              <!-- Stat badge: glass card with pill decoration above it -->
+              <!-- Future: data-motion="stat-badge-group" — float entrance -->
+              <div class="wl-outcome__badge-group"
+                   data-motion="stat-badge-group">
+
+                <!-- Future: data-motion="pill-deco" — subtle float/rotate -->
+                <img src="images/programs/wl-pill-deco.svg"
+                     alt="" aria-hidden="true"
+                     class="wl-outcome__pill-deco"
+                     data-motion="pill-deco">
+
+                <!-- Glass stat badge — live text, animatable separately -->
+                <div class="stat-badge" data-motion="stat-badge">
+                  <span class="stat-badge__value">22 lbs</span>
+                </div>
+              </div>
+
+            </div><!-- [data-motion-region="outcome-asset"] -->
+          </article>
+
+          <!-- ── Card 02: Medications ─────────────────────────────── -->
+          <!-- MedicationCardGroup: overflow clips off-screen cards    -->
+          <!-- Future animation: carousel translateX, center scale-up  -->
+          <article class="program-card wl-card--medications"
+                   aria-label="Weight loss medications">
+
+            <!-- Asset first: overflow container centers on featured card -->
+            <div class="medication-card-group-wrap"
+                 data-motion-region="med-carousel">
+
+              <!-- Future: data-motion="carousel" — translateX reveal   -->
+              <div class="medication-card-group" data-motion="carousel">
+
+                <!-- Off-screen left: Zepbound pen (not in initial view) -->
+                <div class="medication-card med-card--offscreen"
+                     aria-hidden="true" data-motion="med-card">
+                  <span class="med-card__badge">In stock</span>
+                  <img src="images/programs/med-zepbound-pen.png"
+                       alt="" aria-hidden="true" class="med-card__image">
+                  <p class="med-card__name">Zepbound®</p>
+                </div>
+
+                <!-- Off-screen left: Zepbound vial -->
+                <div class="medication-card med-card--offscreen"
+                     aria-hidden="true" data-motion="med-card">
+                  <span class="med-card__badge">In stock</span>
+                  <img src="images/programs/med-zepbound-vial.svg"
+                       alt="" aria-hidden="true" class="med-card__image">
+                  <p class="med-card__name">Zepbound® vial</p>
+                </div>
+
+                <!-- Left visible card: Wegovy pen -->
+                <!-- Future: data-motion="med-card-left" — stagger left  -->
+                <div class="medication-card med-card--left"
+                     data-motion="med-card-left">
+                  <span class="med-card__badge">In stock</span>
+                  <img src="images/programs/med-wegovy-pen.png"
+                       alt="Wegovy pen" class="med-card__image">
+                  <p class="med-card__name">Wegovy® pen</p>
+                </div>
+
+                <!-- Center featured card — primary motion target -->
+                <!-- Future: data-motion="subtle-scale" — scale entrance  -->
+                <div class="medication-card featured-med-card motion-target"
+                     data-motion="subtle-scale">
+                  <span class="med-card__badge">In stock</span>
+                  <img src="images/programs/med-wegovy-pill.svg"
+                       alt="Wegovy pill" class="med-card__image">
+                  <p class="med-card__name">Wegovy® pill</p>
+                </div>
+
+                <!-- Right visible card: Ozempic -->
+                <!-- Future: data-motion="med-card-right" — stagger right -->
+                <div class="medication-card med-card--right"
+                     data-motion="med-card-right">
+                  <span class="med-card__badge">In stock</span>
+                  <img src="images/programs/med-ozempic.png"
+                       alt="Ozempic" class="med-card__image">
+                  <p class="med-card__name">Ozempic®</p>
+                </div>
+
+                <!-- Off-screen right: Mounjaro -->
+                <div class="medication-card med-card--offscreen"
+                     aria-hidden="true" data-motion="med-card">
+                  <span class="med-card__badge">In stock</span>
+                  <img src="images/programs/med-mounjaro.png"
+                       alt="" aria-hidden="true" class="med-card__image">
+                  <p class="med-card__name">Mounjaro®</p>
+                </div>
+
+                <!-- Off-screen right: Mounjaro (second) -->
+                <div class="medication-card med-card--offscreen"
+                     aria-hidden="true" data-motion="med-card">
+                  <span class="med-card__badge">In stock</span>
+                  <img src="images/programs/med-mounjaro.png"
+                       alt="" aria-hidden="true" class="med-card__image">
+                  <p class="med-card__name">Mounjaro®</p>
+                </div>
+
+              </div><!-- [data-motion="carousel"] .medication-card-group -->
+            </div><!-- [data-motion-region="med-carousel"] -->
+
+            <div class="program-card-text">
+              <h3 class="program-card-heading">
+                Access a range of weight loss medications
+              </h3>
+            </div>
+
+          </article>
+
+          <!-- ── Card 03: Guidance ────────────────────────────────── -->
+          <!-- Future animation: phone slide-in, badge pop             -->
+          <article class="program-card wl-card--guidance"
+                   aria-label="Personalized weight loss guidance">
+
+            <div class="program-card-text">
+              <h3 class="program-card-heading">
+                Get personalized guidance at every step.
+              </h3>
+            </div>
+
+            <!-- Asset: phone image + success badge overlaid on top    -->
+            <div class="program-card-asset" data-motion-region="guidance-asset">
+
+              <!-- Phone first (behind badge in stacking order)        -->
+              <!-- Future: data-motion="phone-slide" — slide from right -->
+              <img src="images/programs/guidance-phone.png"
+                   alt="Provider guidance shown on a phone"
+                   class="wl-guidance__phone"
+                   data-motion="phone-slide">
+
+              <!-- Badge on top of phone                               -->
+              <!-- Future: data-motion="badge-pop" — scale/pop entrance -->
+              <img src="images/programs/guidance-badge.png"
+                   alt="" aria-hidden="true"
+                   class="wl-guidance__badge"
+                   data-motion="badge-pop">
+
+            </div><!-- [data-motion-region="guidance-asset"] -->
+          </article>
+
+        </div><!-- .program-cards -->
+      </div><!-- .program-section -->
+    </section><!-- .programs-section -->
 
   </main>
 
