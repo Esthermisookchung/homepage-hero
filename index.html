@@ -1266,6 +1266,13 @@
       color: #219F63;
     }
 
+    .program-card-asset-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      flex-shrink: 0;
+    }
+
     /* ── Card 02: Medications ── */
 
     /* data-motion="carousel" — future: translateX reveal */
@@ -1741,81 +1748,13 @@
           <article class="program-card wl-card--medications"
                    aria-label="Weight loss medications">
 
-            <!-- Asset first: overflow container centers on featured card -->
-            <div class="medication-card-group-wrap"
-                 data-motion-region="med-carousel">
-
-              <!-- Future: data-motion="carousel" — translateX reveal   -->
-              <div class="medication-card-group" data-motion="carousel">
-
-                <!-- Off-screen left: Zepbound pen (not in initial view) -->
-                <div class="medication-card med-card--offscreen"
-                     aria-hidden="true" data-motion="med-card">
-                  <span class="med-card__badge">In stock</span>
-                  <img src="images/programs/med-zepbound-pen.png"
-                       alt="" aria-hidden="true" class="med-card__image">
-                  <p class="med-card__name">Zepbound®</p>
-                </div>
-
-                <!-- Off-screen left: Zepbound vial -->
-                <div class="medication-card med-card--offscreen"
-                     aria-hidden="true" data-motion="med-card">
-                  <span class="med-card__badge">In stock</span>
-                  <img src="images/programs/med-zepbound-vial.svg"
-                       alt="" aria-hidden="true" class="med-card__image">
-                  <p class="med-card__name">Zepbound® vial</p>
-                </div>
-
-                <!-- Left visible card: Wegovy pen -->
-                <!-- Future: data-motion="med-card-left" — stagger left  -->
-                <div class="medication-card med-card--left"
-                     data-motion="med-card-left">
-                  <span class="med-card__badge">In stock</span>
-                  <img src="images/programs/med-wegovy-pen.png"
-                       alt="Wegovy pen" class="med-card__image">
-                  <p class="med-card__name">Wegovy® pen</p>
-                </div>
-
-                <!-- Center featured card — primary motion target -->
-                <!-- Future: data-motion="subtle-scale" — scale entrance  -->
-                <div class="medication-card featured-med-card motion-target"
-                     data-motion="subtle-scale">
-                  <span class="med-card__badge">In stock</span>
-                  <img src="images/programs/med-wegovy-pill.svg"
-                       alt="Wegovy pill" class="med-card__image">
-                  <p class="med-card__name">Wegovy® pill</p>
-                </div>
-
-                <!-- Right visible card: Ozempic -->
-                <!-- Future: data-motion="med-card-right" — stagger right -->
-                <div class="medication-card med-card--right"
-                     data-motion="med-card-right">
-                  <span class="med-card__badge">In stock</span>
-                  <img src="images/programs/med-ozempic.png"
-                       alt="Ozempic" class="med-card__image">
-                  <p class="med-card__name">Ozempic®</p>
-                </div>
-
-                <!-- Off-screen right: Mounjaro -->
-                <div class="medication-card med-card--offscreen"
-                     aria-hidden="true" data-motion="med-card">
-                  <span class="med-card__badge">In stock</span>
-                  <img src="images/programs/med-mounjaro.png"
-                       alt="" aria-hidden="true" class="med-card__image">
-                  <p class="med-card__name">Mounjaro®</p>
-                </div>
-
-                <!-- Off-screen right: Mounjaro (second) -->
-                <div class="medication-card med-card--offscreen"
-                     aria-hidden="true" data-motion="med-card">
-                  <span class="med-card__badge">In stock</span>
-                  <img src="images/programs/med-mounjaro.png"
-                       alt="" aria-hidden="true" class="med-card__image">
-                  <p class="med-card__name">Mounjaro®</p>
-                </div>
-
-              </div><!-- [data-motion="carousel"] .medication-card-group -->
-            </div><!-- [data-motion-region="med-carousel"] -->
+            <picture>
+              <source srcset="images/programs/wl-card-02-asset-desktop.png"
+                      media="(min-width: 1025px)">
+              <img src="images/programs/wl-card-02-asset-mobile.png"
+                   alt="" aria-hidden="true"
+                   class="program-card-asset-img">
+            </picture>
 
             <div class="program-card-text">
               <h3 class="program-card-heading">
