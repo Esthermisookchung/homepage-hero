@@ -1001,6 +1001,19 @@
       .conditions-section { padding: 64px 16px; }
     }
 
+    /* ── Page load animations ── */
+    @keyframes page-fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes page-fade-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .nav        { animation: page-fade-in  0.4s ease                            both; }
+    .hero-card  { animation: page-fade-up  0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both; }
+    .stats-section { animation: page-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both; }
+
 </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -1015,7 +1028,7 @@
   </div>
 
   <!-- Navigation -->
-  <nav class="nav" role="navigation" aria-label="Main navigation">
+  <nav class="nav is-stuck" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <div class="nav-left">
         <div class="nav-logo-group">
