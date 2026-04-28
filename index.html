@@ -1195,6 +1195,23 @@
       aspect-ratio: 358.67 / 286.94;
       flex-shrink: 0;
       container-type: size;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .medication-card-group-wrap.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes med-card-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .medication-card-group-wrap.is-visible .featured-med-card {
+      animation: med-card-float 3.5s ease-in-out infinite;
+      animation-delay: 0.5s;
     }
 
     /* Total group width ≈ 261cqw > 100cqw at any size → always overflows */
@@ -1780,6 +1797,16 @@
   document.fonts.load('24px "Material Symbols Sharp"').then(() => {
     matIcons.forEach(el => { el.style.visibility = 'visible'; });
   });
+
+  // Scroll-reveal: medication carousel entrance + featured card float
+  const medCarousel = document.querySelector('[data-motion-region="med-carousel"]');
+  if (medCarousel) {
+    new IntersectionObserver(([entry], obs) => {
+      if (!entry.isIntersecting) return;
+      medCarousel.classList.add('is-visible');
+      obs.disconnect();
+    }, { threshold: 0.3 }).observe(medCarousel);
+  }
 
   // Scroll-reveal: conditions heading then filter pills staggered
   const conditionsHeading = document.querySelector('.conditions-heading');
