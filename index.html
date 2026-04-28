@@ -1175,12 +1175,95 @@
     }
 
     /* Shared asset container for Cards 01 and 03 */
-    /* Static asset image for cards 01 and 03 */
-    .program-card-asset-img {
-      width: 100%;
-      height: auto;
-      display: block;
+    .program-card-asset {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 358.67 / 286.94;
       flex-shrink: 0;
+      container-type: size;
+    }
+
+    /* data-motion="bg-shape" — future: fade/scale entrance */
+    /* Updated SVG (375×300) matches container aspect ratio, fills edge-to-edge */
+    .wl-outcome__bg-shape {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* data-motion="person-image" — future: slide-up entrance */
+    /* Figma: person frame y:-43, h:330 in 286.94-tall container → top:-15%, height:115% */
+    .wl-outcome__person {
+      position: absolute;
+      top: -15%;
+      left: 0;
+      width: 100%;
+      height: 115%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    /* Badge group: pill decoration floats above the glass stat badge */
+    /* data-motion="stat-badge-group" — future: float-up entrance */
+    /* Badge group: all dimensions % of asset container so it scales at any size */
+    .wl-outcome__badge-group {
+      position: absolute;
+      left: 6.84%;
+      top: 55.25%;
+      width: 34.22%;   /* 122.74 / 358.67 */
+      height: 36.14%;  /* 103.7 / 286.94 */
+    }
+
+    /* data-motion="pill-deco" — future: subtle float/rotate */
+    .wl-outcome__pill-deco {
+      position: absolute;
+      top: 0;
+      left: 21.93%;    /* 26.92 / 122.74 of badge-group width */
+      width: 52.77%;   /* 64.79 / 122.74 */
+      height: auto;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* padding/border-radius use % so they scale with badge-group width */
+    /* cqw units (% of asset container width) scale font-size */
+    .stat-badge {
+      position: absolute;
+      top: 40.44%;     /* 41.94 / 103.7 of badge-group height */
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(13px);
+      -webkit-backdrop-filter: blur(13px);
+      border-radius: 4.72%;   /* 5.8 / 122.74 */
+      padding: 12.26% 9.43%;  /* 15.04 / 122.74 top, 11.58 / 122.74 LR+bottom */
+      box-shadow: 3.8px 3.8px 7.6px rgba(0, 0, 0, 0.08);
+      z-index: 1;
+    }
+
+    .stat-badge__content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.81cqw;   /* 2.894 / 358.67 */
+    }
+
+    .stat-badge__icon {
+      font-size: 4.85cqw;  /* 17.4 / 358.67 */
+      color: #219F63;
+      line-height: 1;
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+      visibility: hidden;
+    }
+
+    .stat-badge__value {
+      font-family: var(--f-sans);
+      font-weight: 500;
+      font-size: 6.47cqw;  /* 23.197 / 358.67 */
+      line-height: 1;
+      color: #219F63;
     }
 
     /* ── Card 02: Medications ── */
@@ -1195,23 +1278,6 @@
       aspect-ratio: 358.67 / 286.94;
       flex-shrink: 0;
       container-type: size;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .medication-card-group-wrap.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes med-card-float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-    .medication-card-group-wrap.is-visible .featured-med-card {
-      animation: med-card-float 3.5s ease-in-out infinite;
-      animation-delay: 0.5s;
     }
 
     /* Total group width ≈ 261cqw > 100cqw at any size → always overflows */
@@ -1293,6 +1359,24 @@
     }
 
     /* ── Card 03: Guidance ── */
+
+    /* data-motion="phone-slide" — future: slide in from right */
+    .wl-guidance__phone {
+      position: absolute;
+      top: 4.3%;
+      left: 29.7%;
+      width: 66.4%;
+      height: auto;
+    }
+
+    /* data-motion="badge-pop" — future: scale/pop entrance */
+    .wl-guidance__badge {
+      position: absolute;
+      top: 2.1%;
+      left: 59.6%;
+      width: 35.1%;
+      z-index: 2;
+    }
 
     /* ── Programs responsive ── */
     @media (min-width: 1025px) and (max-width: 1439px) {
@@ -1613,9 +1697,42 @@
               </h3>
             </div>
 
-            <img src="images/programs/wl-card-01-asset.png"
-                 alt="" aria-hidden="true"
-                 class="program-card-asset-img">
+            <!-- Asset: green gradient bg + person photo + stat badge -->
+            <div class="program-card-asset" data-motion-region="outcome-asset">
+
+              <!-- Future: data-motion="bg-shape" — fade/scale on scroll -->
+              <img src="images/programs/wl-bg-shape.svg"
+                   alt="" aria-hidden="true"
+                   class="wl-outcome__bg-shape"
+                   data-motion="bg-shape">
+
+              <!-- Future: data-motion="person-image" — slide-up entrance -->
+              <img src="images/programs/wl-person-2fd977.png"
+                   alt="Person who lost weight with Sesame"
+                   class="wl-outcome__person"
+                   data-motion="person-image">
+
+              <!-- Stat badge: glass card with pill decoration above it -->
+              <!-- Future: data-motion="stat-badge-group" — float entrance -->
+              <div class="wl-outcome__badge-group"
+                   data-motion="stat-badge-group">
+
+                <!-- Future: data-motion="pill-deco" — subtle float/rotate -->
+                <img src="images/programs/wl-pill-deco.svg"
+                     alt="" aria-hidden="true"
+                     class="wl-outcome__pill-deco"
+                     data-motion="pill-deco">
+
+                <!-- Glass stat badge — live text, animatable separately -->
+                <div class="stat-badge" data-motion="stat-badge">
+                  <div class="stat-badge__content">
+                    <span class="material-symbols-sharp stat-badge__icon">arrow_downward</span>
+                    <span class="stat-badge__value">22 lbs</span>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- [data-motion-region="outcome-asset"] -->
           </article>
 
           <!-- ── Card 02: Medications ─────────────────────────────── -->
@@ -1719,9 +1836,24 @@
               </h3>
             </div>
 
-            <img src="images/programs/wl-card-03-asset.png"
-                 alt="Provider guidance shown on a phone"
-                 class="program-card-asset-img">
+            <!-- Asset: phone image + success badge overlaid on top    -->
+            <div class="program-card-asset" data-motion-region="guidance-asset">
+
+              <!-- Phone first (behind badge in stacking order)        -->
+              <!-- Future: data-motion="phone-slide" — slide from right -->
+              <img src="images/programs/guidance-phone.png"
+                   alt="Provider guidance shown on a phone"
+                   class="wl-guidance__phone"
+                   data-motion="phone-slide">
+
+              <!-- Badge on top of phone                               -->
+              <!-- Future: data-motion="badge-pop" — scale/pop entrance -->
+              <img src="images/programs/guidance-badge.png"
+                   alt="" aria-hidden="true"
+                   class="wl-guidance__badge"
+                   data-motion="badge-pop">
+
+            </div><!-- [data-motion-region="guidance-asset"] -->
           </article>
 
         </div><!-- .program-cards -->
@@ -1793,20 +1925,10 @@
   });
 
   // Reveal icon-font spans only after Material Symbols has loaded, preventing FOUT
-  const matIcons = document.querySelectorAll('.nav-menu-icon, .nav-search-icon, .nav-location-icon, .nav-login-icon, .nav-login-chevron');
+  const matIcons = document.querySelectorAll('.nav-menu-icon, .nav-search-icon, .nav-location-icon, .nav-login-icon, .nav-login-chevron, .stat-badge__icon');
   document.fonts.load('24px "Material Symbols Sharp"').then(() => {
     matIcons.forEach(el => { el.style.visibility = 'visible'; });
   });
-
-  // Scroll-reveal: medication carousel entrance + featured card float
-  const medCarousel = document.querySelector('[data-motion-region="med-carousel"]');
-  if (medCarousel) {
-    new IntersectionObserver(([entry], obs) => {
-      if (!entry.isIntersecting) return;
-      medCarousel.classList.add('is-visible');
-      obs.disconnect();
-    }, { threshold: 0.3 }).observe(medCarousel);
-  }
 
   // Scroll-reveal: conditions heading then filter pills staggered
   const conditionsHeading = document.querySelector('.conditions-heading');
