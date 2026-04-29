@@ -98,12 +98,15 @@ function useIsMobile() {
 
 // ─── AnimatedSpan ─────────────────────────────────────────────────────────────
 function AnimatedSpan({ text, scrollYProgress, range, reduced }) {
-  // colour MotionValue: no re-renders, driven directly by scroll RAF
-  const color = useTransform(scrollYProgress, range, [MUTED, BLACK]);
+  // Animate both color AND opacity so the reveal is visually distinct —
+  // unrevealed phrases sit at muted gray + low opacity, making revealed
+  // black text pop clearly against still-unrevealed text.
+  const color   = useTransform(scrollYProgress, range, [MUTED, BLACK]);
+  const opacity = useTransform(scrollYProgress, range, [0.35, 1]);
   if (reduced) {
     return React.createElement('span', { style: { color: BLACK } }, text);
   }
-  return React.createElement(motion.span, { style: { color } }, text);
+  return React.createElement(motion.span, { style: { color, opacity } }, text);
 }
 
 // ─── AnimatedIcon ─────────────────────────────────────────────────────────────
@@ -183,7 +186,7 @@ function BrandStatementScrollSection() {
           alignItems:     'center',
           justifyContent: 'center',
           overflow:       'hidden',
-          background:     'linear-gradient(178deg, #EEE9FA 0%, #FFFFFF 76%)',
+          background:     '#FFFFFF',
         },
       },
 
