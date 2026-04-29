@@ -1914,10 +1914,10 @@
 
         <header class="program-section-header">
           <div class="program-section-title">
-            <h2 class="program-section-heading" id="rx-heading">Never miss out on your medications again.</h2>
-            <p class="program-section-subheading">As low as $29/month.</p>
+            <h2 class="program-section-heading scroll-reveal" id="rx-heading">Never miss out on your medications again.</h2>
+            <p class="program-section-subheading scroll-reveal">As low as $29/month.</p>
           </div>
-          <div class="program-section-buttons">
+          <div class="program-section-buttons scroll-reveal">
             <a href="https://sesamecare.com/prescription-refills"
                class="program-btn program-btn--primary">Get started</a>
             <a href="https://sesamecare.com/prescription-refills"
@@ -2076,6 +2076,21 @@
       el.classList.add('is-visible');
     });
   }, { threshold: 0.5 }).observe(programHeading);
+
+  // Scroll-reveal: rx section heading → subheading → buttons
+  const rxHeading = document.getElementById('rx-heading');
+  const rxSection = rxHeading.closest('.rx-program-section');
+  const rxSubheading = rxSection.querySelector('.program-section-subheading');
+  const rxButtons = rxSection.querySelector('.program-section-buttons');
+  new IntersectionObserver(([entry], obs) => {
+    if (!entry.isIntersecting) return;
+    obs.disconnect();
+    rxHeading.classList.add('is-visible');
+    [rxSubheading, rxButtons].forEach((el, i) => {
+      el.style.animationDelay = (0.13 + i * 0.13) + 's';
+      el.classList.add('is-visible');
+    });
+  }, { threshold: 0.5 }).observe(rxHeading);
 
   // Toggle nav border-radius and status bar color based on announcement bar visibility
   const announcementBar = document.getElementById('announcement-bar');
