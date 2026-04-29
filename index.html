@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#FFFFFF">
   <title>Sesame — Open Sesame for care in minutes</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "react":            "https://esm.sh/react@18.3.1",
+      "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+      "framer-motion":    "https://esm.sh/framer-motion@11.3.8?deps=react@18.3.1,react-dom@18.3.1"
+    }
+  }
+  </script>
   <style>
     /* ====================================================================
        CSS Reset
@@ -1980,6 +1989,9 @@
 
     </section><!-- .programs-section -->
 
+    <!-- Brand statement scroll section (React + Framer Motion) -->
+    <div id="brand-statement-mount"></div>
+
   </main>
 
 <script>
@@ -2102,5 +2114,6 @@
     themeColorMeta.content = stuck ? '#FFFFFF' : '#F0F1F1';
   }, { threshold: 0 }).observe(announcementBar);
 </script>
+  <script type="module" src="js/brand-statement.js"></script>
 </body>
 </html>
