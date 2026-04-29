@@ -1454,10 +1454,16 @@
       gap: 8px;
       padding: 16px 0 24px;
       aspect-ratio: 374.67 / 299.74;
-      background: url(images/rx/conditions-bg.png) center / cover no-repeat;
-      /* Fade edges to suggest overflow/carousel */
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+      position: relative;
+    }
+
+    .rx-conditions-overlay {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
     }
 
     .rx-pill-row {
@@ -1946,6 +1952,7 @@
                 <span class="rx-pill rx-pill--active">Birth control</span>
                 <span class="rx-pill">UTIs</span>
               </div>
+              <img src="images/rx/conditions-bg.png" alt="" class="rx-conditions-overlay" aria-hidden="true">
             </div>
           </article>
 
