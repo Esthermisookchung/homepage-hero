@@ -159,7 +159,7 @@ function BrandStatementScrollSection() {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start start', 'end end'],
+    offset: ['start end', 'end end'],
   });
 
   // Outer section height creates scroll distance; sticky inner fills viewport.
@@ -291,6 +291,7 @@ function BrandStatementScrollSection() {
                 width:      logo.w + 'px',
                 objectFit:  'contain',
                 opacity:    0.5,
+                filter:     'brightness(0)',
                 display:    'block',
                 flexShrink: 0,
               },
