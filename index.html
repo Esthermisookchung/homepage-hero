@@ -1443,18 +1443,18 @@
       color: #000;
     }
 
-    .rx-card-heading--green { color: #219F63; }
+    .rx-heading-blue { color: #2970FF; }
 
     /* ── Card 01: Conditions pills ── */
     .rx-conditions-asset {
-      position: relative;
-      flex: 1;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 8px;
       padding: 16px 0 24px;
+      aspect-ratio: 374.67 / 299.74;
+      background: url(images/rx/conditions-bg.png) center / cover no-repeat;
       /* Fade edges to suggest overflow/carousel */
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
       mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
@@ -1481,7 +1481,7 @@
       padding: 8px 12px;
       border-radius: 9999px;
       border: 1px solid transparent;
-      background: #FFFFFF;
+      background: transparent;
       white-space: nowrap;
       opacity: 0.5;
       flex-shrink: 0;
@@ -1493,186 +1493,12 @@
     }
 
     /* ── Card 02: $1 Medications ── */
-    .rx-meds-asset {
-      position: relative;
-      flex: 1;
-      min-height: 240px;
-      background: #C8CDD4;
-      overflow: hidden;
-    }
-
-    .rx-meds-sticker {
-      position: absolute;
-      top: 36px;
-      right: 28px;
-      width: 93px;
-      height: 93px;
-      border-radius: 50%;
-      background: #2970FF;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-    }
-
-    .rx-meds-sticker__dollar {
-      font-family: var(--f-sans);
-      font-weight: 600;
-      font-size: 27px;
-      line-height: 1;
-      color: #FFFFFF;
-      text-align: center;
-    }
-
-    .rx-meds-sticker__label {
-      font-family: var(--f-sans);
-      font-weight: 600;
-      font-size: 12px;
-      line-height: 1;
-      color: #FFFFFF;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
+    .rx-meds-asset { overflow: hidden; }
+    .rx-meds-asset-img { width: 100%; display: block; }
 
     /* ── Card 03: RX Tracking ── */
-    .rx-tracking-asset {
-      flex: 1;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 0 20px 24px;
-    }
-
-    .rx-tracking-card {
-      background: #FFFFFF;
-      border-radius: 13px;
-      box-shadow: 3px 3px 13px rgba(0,0,0,0.06), -3px 0 13px rgba(0,0,0,0.06);
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .rx-tracking-top {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 13px 13px;
-    }
-
-    .rx-tracking-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #C8D4DB;
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-
-    .rx-tracking-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .rx-tracking-info { flex: 1; min-width: 0; }
-
-    .rx-tracking-med-name {
-      font-family: var(--f-sans);
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 1.3;
-      letter-spacing: -0.01em;
-      color: #000;
-    }
-
-    .rx-tracking-details {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 4px;
-      margin-top: 3px;
-    }
-
-    .rx-tracking-details span {
-      font-family: var(--f-sans);
-      font-weight: 500;
-      font-size: 9px;
-      line-height: 1.4;
-      color: #61646C;
-    }
-
-    .rx-tracking-dot {
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: #61646C;
-      flex-shrink: 0;
-    }
-
-    .rx-tracking-progress {
-      padding: 0 13px 13px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .rx-tracking-bar {
-      height: 3px;
-      background: #E7E5E4;
-      border-radius: 9999px;
-      overflow: hidden;
-    }
-
-    .rx-tracking-bar-fill {
-      width: 100%;
-      height: 100%;
-      background: #219F63;
-      border-radius: 9999px;
-    }
-
-    .rx-tracking-labels {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .rx-tracking-labels span {
-      font-family: var(--f-sans);
-      font-weight: 500;
-      font-size: 9px;
-      color: #85888E;
-    }
-
-    .rx-tracking-labels span.rx-ready {
-      font-weight: 700;
-      color: #000;
-    }
-
-    .rx-tracking-footer {
-      border-top: 1px solid #CECFD2;
-      padding: 13px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .rx-tracking-footer__label {
-      font-family: var(--f-sans);
-      font-weight: 600;
-      font-size: 10.5px;
-      line-height: 1.714;
-      color: #000;
-    }
-
-    .rx-tracking-footer__phone {
-      font-family: var(--f-sans);
-      font-weight: 500;
-      font-size: 9px;
-      color: #61646C;
-    }
+    .rx-tracking-asset { overflow: hidden; }
+    .rx-tracking-asset-img { width: 100%; display: block; }
 
     /* ── RX responsive ── */
     @media (max-width: 1024px) {
@@ -2099,7 +1925,7 @@
           <!-- ── Card 01: Online prescriptions ──────────────────── -->
           <article class="rx-card rx-card--conditions" aria-label="Online prescriptions">
             <div class="rx-card-text">
-              <h3 class="rx-card-heading rx-card-heading--green">Online prescriptions for almost any condition.</h3>
+              <h3 class="rx-card-heading"><span class="rx-heading-blue">Online prescriptions</span> for almost any condition.</h3>
             </div>
             <div class="rx-conditions-asset">
               <div class="rx-pill-row">
@@ -2126,10 +1952,7 @@
           <!-- ── Card 02: $1 Medications ────────────────────────── -->
           <article class="rx-card rx-card--medications" aria-label="Dollar medications">
             <div class="rx-meds-asset">
-              <div class="rx-meds-sticker">
-                <span class="rx-meds-sticker__dollar">$1</span>
-                <span class="rx-meds-sticker__label">Meds</span>
-              </div>
+              <img src="images/rx/meds-asset.png" alt="" class="rx-meds-asset-img" aria-hidden="true">
             </div>
             <div class="rx-card-text">
               <h3 class="rx-card-heading">350+ medications for just $1. No insurance needed.</h3>
@@ -2142,33 +1965,7 @@
               <h3 class="rx-card-heading">Same-day prescriptions.</h3>
             </div>
             <div class="rx-tracking-asset">
-              <div class="rx-tracking-card">
-                <div class="rx-tracking-top">
-                  <div class="rx-tracking-avatar"></div>
-                  <div class="rx-tracking-info">
-                    <p class="rx-tracking-med-name">Metformin 500mg</p>
-                    <div class="rx-tracking-details">
-                      <span>60 pills</span>
-                      <span class="rx-tracking-dot"></span>
-                      <span>30 days</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="rx-tracking-progress">
-                  <div class="rx-tracking-bar">
-                    <div class="rx-tracking-bar-fill"></div>
-                  </div>
-                  <div class="rx-tracking-labels">
-                    <span>Order placed</span>
-                    <span>Preparing</span>
-                    <span class="rx-ready">Ready for pickup!</span>
-                  </div>
-                </div>
-                <div class="rx-tracking-footer">
-                  <span class="rx-tracking-footer__label">Pickup instructions sent to:</span>
-                  <span class="rx-tracking-footer__phone">(917) 293-4098</span>
-                </div>
-              </div>
+              <img src="images/rx/tracking-asset.png" alt="" class="rx-tracking-asset-img" aria-hidden="true">
             </div>
           </article>
 
