@@ -263,7 +263,8 @@ function BrandStatementScrollSection() {
               width:          '100%',
             },
           },
-          // "As seen in" label — first child of the row
+          // "As seen in" label — on mobile takes full width so it sits
+          // above the logos; on desktop it flows inline with them.
           React.createElement(
             'span',
             {
@@ -274,6 +275,7 @@ function BrandStatementScrollSection() {
                 lineHeight:  1.5,
                 color:       MUTED,
                 whiteSpace:  'nowrap',
+                ...(mobile ? { flexBasis: '100%', textAlign: 'center' } : {}),
               },
             },
             'As seen in'
