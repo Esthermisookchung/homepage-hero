@@ -72,14 +72,15 @@ const ICON_CARDS = [
 ];
 
 // ─── Press logos ─────────────────────────────────────────────────────────────
+// w / h from Figma spec (all logos share h=22px, individual widths vary).
 const PRESS_LOGOS = [
-  { id: 'l0', src: 'images/brand/press-0.png',                alt: ''              },
-  { id: 'l1', src: 'images/brand/press-1.png',                alt: ''              },
-  { id: 'l2', src: 'images/brand/press-bloomberg-740a77.png', alt: 'Bloomberg'     },
-  { id: 'l3', src: 'images/brand/press-3.png',                alt: ''              },
-  { id: 'l4', src: 'images/brand/press-forbes-405fe2.png',    alt: 'Forbes'        },
-  { id: 'l5', src: 'images/brand/press-fox-33ec99.png',       alt: 'Fox'           },
-  { id: 'l6', src: 'images/brand/press-entrepreneur-52f229.png', alt: 'Entrepreneur' },
+  { id: 'l0', src: 'images/brand/press-0.png',                alt: '',              w: 97  },
+  { id: 'l1', src: 'images/brand/press-1.png',                alt: '',              w: 56  },
+  { id: 'l2', src: 'images/brand/press-bloomberg-740a77.png', alt: 'Bloomberg',     w: 107 },
+  { id: 'l3', src: 'images/brand/press-3.png',                alt: '',              w: 129 },
+  { id: 'l4', src: 'images/brand/press-forbes-405fe2.png',    alt: 'Forbes',        w: 67  },
+  { id: 'l5', src: 'images/brand/press-fox-33ec99.png',       alt: 'Fox',           w: 28  },
+  { id: 'l6', src: 'images/brand/press-entrepreneur-52f229.png', alt: 'Entrepreneur', w: 111 },
 ];
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -247,16 +248,22 @@ function BrandStatementScrollSection() {
         ),
 
         // ── Press logos ─────────────────────────────────────────────────
+        // Figma: "As seen in" label + logos are ALL siblings in one
+        // flex-wrap row (row, wrap, gap 40px, justify-content center).
         React.createElement(
           'div',
           {
             style: {
               display:        'flex',
-              flexDirection:  'column',
+              flexWrap:       'wrap',
+              justifyContent: 'center',
               alignItems:     'center',
-              gap:            '20px',
+              gap:            '40px',
+              rowGap:         '16px',
+              width:          '100%',
             },
           },
+          // "As seen in" label — first child of the row
           React.createElement(
             'span',
             {
@@ -266,38 +273,26 @@ function BrandStatementScrollSection() {
                 fontSize:    '16px',
                 lineHeight:  1.5,
                 color:       MUTED,
+                whiteSpace:  'nowrap',
               },
             },
             'As seen in'
           ),
-          React.createElement(
-            'div',
-            {
+          // Logos with Figma-spec widths at h=22px
+          ...PRESS_LOGOS.map((logo) =>
+            React.createElement('img', {
+              key:   logo.id,
+              src:   logo.src,
+              alt:   logo.alt,
               style: {
-                display:         'flex',
-                flexWrap:        'wrap',
-                justifyContent:  'center',
-                alignItems:      'center',
-                gap:             '40px',
-                rowGap:          '16px',
+                height:     '22px',
+                width:      logo.w + 'px',
+                objectFit:  'contain',
+                opacity:    0.5,
+                display:    'block',
+                flexShrink: 0,
               },
-            },
-            ...PRESS_LOGOS.map((logo) =>
-              React.createElement('img', {
-                key:   logo.id,
-                src:   logo.src,
-                alt:   logo.alt,
-                style: {
-                  height:        '22px',
-                  width:         'auto',
-                  maxWidth:      '130px',
-                  opacity:       0.5,
-                  display:       'block',
-                  objectFit:     'contain',
-                  mixBlendMode:  'multiply',
-                },
-              })
-            )
+            })
           )
         )
       )
