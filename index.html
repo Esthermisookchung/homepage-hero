@@ -2205,8 +2205,7 @@ function BrandStatementScrollSection() {
           ...TEXT_SPANS.map(s => React.createElement(AnimatedSpan, { key:s.id, text:s.text, scrollYProgress, range:s.range, reduced }))),
         React.createElement('div', { style:{ display:'flex', flexWrap:'wrap', justifyContent:'center', alignItems:'center', gap:'40px', rowGap:'16px', width:'100%' } },
           React.createElement('span', { style:{ fontFamily:FONT, fontWeight:460, fontSize:'16px', lineHeight:1.5, color:MUTED, whiteSpace:'nowrap', ...(mobile?{flexBasis:'100%',textAlign:'center'}:{}) } }, 'As seen in'),
-          ...PRESS_LOGOS.map(logo => React.createElement('img', { key:logo.id, src:logo.src, alt:logo.alt, style:{ height:'22px', width:logo.w+'px', objectFit:'contain', opacity:0.5, filter:'grayscale(1) contrast(5)', display:'block', flexShrink:0 } })))),
-        // Vertical divider — 1px line, 120px tall, gradient stroke fading at edges
+          ...PRESS_LOGOS.map(logo => React.createElement('img', { key:logo.id, src:logo.src, alt:logo.alt, style:{ height:'22px', width:logo.w+'px', objectFit:'contain', opacity:0.5, filter:'grayscale(1) contrast(5)', display:'block', flexShrink:0 } }))),
         React.createElement('div', { style:{ width:'1px', height:'120px', background:'linear-gradient(180deg, rgba(206,207,210,0) 0%, rgba(206,207,210,1) 10%, rgba(206,207,210,1) 90%, rgba(206,207,210,0) 100%)' } }))));
 }
 
