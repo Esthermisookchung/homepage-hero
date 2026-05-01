@@ -10,7 +10,8 @@
     "imports": {
       "react":            "https://esm.sh/react@18.3.1",
       "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
-      "framer-motion":    "https://esm.sh/framer-motion@11.3.8?deps=react@18.3.1,react-dom@18.3.1"
+      "framer-motion":    "https://esm.sh/framer-motion@11.3.8?deps=react@18.3.1,react-dom@18.3.1",
+      "agentation":       "https://esm.sh/agentation@3?deps=react@18.3.1,react-dom@18.3.1"
     }
   }
   </script>
@@ -2384,6 +2385,15 @@ function BrandStatementScrollSection() {
 
 const mountEl = document.getElementById('brand-statement-mount');
 if (mountEl) createRoot(mountEl).render(React.createElement(BrandStatementScrollSection));
+  </script>
+
+  <script type="module">
+    import { createElement } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import { Agentation } from 'agentation';
+    const el = document.createElement('div');
+    document.body.appendChild(el);
+    createRoot(el).render(createElement(Agentation));
   </script>
 </body>
 </html>
