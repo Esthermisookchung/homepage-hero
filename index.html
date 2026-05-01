@@ -1680,7 +1680,7 @@
       gap: 16px;
     }
 
-    /* Typewriter pill — min-width set to widest phrase so it never reflows */
+    /* Typewriter pill — hugs content width; height is stable from padding+line-height */
     .os-pill {
       display: inline-flex;
       align-items: center;
@@ -1688,8 +1688,6 @@
       background: #DED3F5;
       border-radius: 9999px;
       padding: 4px 16px;
-      min-width: 21ch;  /* covers longest phrase at 14px 600 */
-      overflow: hidden;
     }
 
     .os-typed {
