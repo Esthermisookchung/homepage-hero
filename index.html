@@ -1879,18 +1879,18 @@
 
     /* ── Carousel area ── */
     .ps-area {
-      /* Bleed carousel beyond section padding so cards peek past edges */
-      margin-left: calc(-1 * var(--ps-pad));
-      margin-right: calc(-1 * var(--ps-pad));
-      width: calc(100% + 2 * var(--ps-pad));
+      width: 100%;
       overflow: visible;
       display: flex;
       flex-direction: column;
       gap: 40px;
     }
+    /* Bleed viewport to section edges while leaving controls/trust in content flow */
     .ps-viewport {
-      overflow: visible; /* no clipping — ps section handles it */
-      width: 100%;
+      width: calc(100% + 2 * var(--ps-pad));
+      position: relative;
+      left: calc(-1 * var(--ps-pad));
+      overflow: visible;
     }
     .ps-track {
       display: flex;
@@ -1992,43 +1992,56 @@
       gap: 24px;
       flex: 1;
     }
-    .ps-group {          /* layout_EVHWQV: col gap 32px */
+    .ps-group {          /* layout_EVHWQV: col gap between children */
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 16px;  /* rating→headline: 16px, headline→body: 16px */
       flex: 1;
     }
-    .ps-qheader {        /* layout_NL0GBU: col gap 12px */
+    .ps-rating {         /* logo + meta only: NL0GBU gap 12px */
       display: flex;
       flex-direction: column;
-      align-items: flex-start; /* left-align logo and all children */
+      align-items: flex-start;
       gap: 12px;
     }
-    .ps-tp-logo {        /* layout_VTMVLG: 65×16 */
-      height: 16px;
-      width: auto;
-      display: block;
-      object-fit: contain;
-      flex-shrink: 0;
-      align-self: flex-start; /* never stretch to column width */
+    /* headline is a sibling of ps-rating inside ps-group — gap provides separation */
+    .ps-qheader { display: contents; } /* legacy shim, keep for review cards */
+    .ps-tp-logo {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      align-self: flex-start;
     }
-    /* White logo for green card */
-    .ps-tp-logo-inv { filter: grayscale(1) brightness(100); }
+    .ps-tp-logo img { display: block; flex-shrink: 0; }
+    .ps-tp-logo .ps-tp-star-mark { width: 14px; height: 14px; }
+    .ps-tp-logo .ps-tp-wordmark  { height: 10px; width: auto; }
+    /* White logo on green card */
+    .ps-tp-logo-inv img { filter: brightness(0) invert(1); }
     .ps-meta-row {       /* layout_WGN15B: row gap 12px */
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 12px;
     }
-    /* Trustpilot filled-block star row (tp-stars-5.png from Figma node 826:18788) */
-    .ps-stars { display: block; }
-    .ps-stars-img {
-      height: 18px;
-      width: auto;
-      display: block;
+    /* Trustpilot filled-block star rating */
+    .ps-stars { display: flex; align-items: center; gap: 2px; }
+    .tp-star {
+      width: 18px; height: 18px;
+      background-color: #00B67A;
+      display: inline-block;
+      flex-shrink: 0;
+      position: relative;
     }
-    /* White stars for green card */
-    .ps-card-quote .ps-stars-img { filter: grayscale(1) brightness(100); }
+    .tp-star::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: #fff;
+      -webkit-mask: url('images/trustpilot-star.svg') center / 12px no-repeat;
+      mask: url('images/trustpilot-star.svg') center / 12px no-repeat;
+    }
+    /* On green card: subtle white-translucent blocks so stars float on green */
+    .ps-card-quote .tp-star { background-color: rgba(255,255,255,0.25); }
     .ps-reviewer-q {
       font-family: var(--f-sans);
       font-weight: 600;
@@ -2808,16 +2821,19 @@
               <div class="ps-card ps-card-quote" role="listitem">
                 <div class="ps-ci">
                   <div class="ps-group">
-                    <div class="ps-qheader">
-                      <img src="images/stories/trustpilot-logo-star.png" alt="Trustpilot" class="ps-tp-logo ps-tp-logo-inv" loading="lazy">
+                    <div class="ps-rating">
+                      <div class="ps-tp-logo ps-tp-logo-inv" role="img" aria-label="Trustpilot">
+                        <img src="images/trustpilot-star.svg" class="ps-tp-star-mark" alt="" aria-hidden="true">
+                        <img src="images/trustpilot-logo.svg" class="ps-tp-wordmark" alt="" aria-hidden="true">
+                      </div>
                       <div class="ps-meta-row">
                         <div class="ps-stars" aria-label="5 out of 5 stars">
-                          <img src="images/stories/tp-stars-5.png" alt="" class="ps-stars-img" aria-hidden="true" loading="lazy">
+                          <span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span>
                         </div>
                         <span class="ps-reviewer-q">John King.</span>
                       </div>
-                      <h3 class="ps-qheadline">&ldquo;She&rsquo;s amazing, she heard me out.&rdquo;</h3>
                     </div>
+                    <h3 class="ps-qheadline">&ldquo;She&rsquo;s amazing, she heard me out.&rdquo;</h3>
                     <p class="ps-qbody">I come to Sesame because I trust that they will take good care of me. I have been seeing the same physician for a couple of years. The experience is positive because he listens to what is wrong and involves me in the treatment plan.</p>
                   </div>
                 </div>
@@ -2859,16 +2875,19 @@
               <div class="ps-card ps-card-review ps-card-gray" role="listitem">
                 <div class="ps-ci">
                   <div class="ps-group">
-                    <div class="ps-qheader">
-                      <img src="images/stories/trustpilot-logo-star.png" alt="Trustpilot" class="ps-tp-logo" loading="lazy">
+                    <div class="ps-rating">
+                      <div class="ps-tp-logo" role="img" aria-label="Trustpilot">
+                        <img src="images/trustpilot-star.svg" class="ps-tp-star-mark" alt="" aria-hidden="true">
+                        <img src="images/trustpilot-logo.svg" class="ps-tp-wordmark" alt="" aria-hidden="true">
+                      </div>
                       <div class="ps-meta-row">
                         <div class="ps-stars" aria-label="5 out of 5 stars">
-                          <img src="images/stories/tp-stars-5.png" alt="" class="ps-stars-img" aria-hidden="true" loading="lazy">
+                          <span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span>
                         </div>
                         <span class="ps-reviewer-r">John King.</span>
                       </div>
-                      <h3 class="ps-rheadline">Sesame is the BEST.</h3>
                     </div>
+                    <h3 class="ps-rheadline">Sesame is the BEST.</h3>
                     <div>
                       <div style="display:flex;flex-direction:column;gap:12px">
       <div class="ps-rbody-wrap">
@@ -2885,16 +2904,19 @@
               <div class="ps-card ps-card-review ps-card-blue ps-card-no-trunc" role="listitem">
                 <div class="ps-ci">
                   <div class="ps-group">
-                    <div class="ps-qheader">
-                      <img src="images/stories/trustpilot-logo-star.png" alt="Trustpilot" class="ps-tp-logo" loading="lazy">
+                    <div class="ps-rating">
+                      <div class="ps-tp-logo" role="img" aria-label="Trustpilot">
+                        <img src="images/trustpilot-star.svg" class="ps-tp-star-mark" alt="" aria-hidden="true">
+                        <img src="images/trustpilot-logo.svg" class="ps-tp-wordmark" alt="" aria-hidden="true">
+                      </div>
                       <div class="ps-meta-row">
                         <div class="ps-stars" aria-label="5 out of 5 stars">
-                          <img src="images/stories/tp-stars-5.png" alt="" class="ps-stars-img" aria-hidden="true" loading="lazy">
+                          <span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span><span class="tp-star" aria-hidden="true"></span>
                         </div>
                         <span class="ps-reviewer-r">John King.</span>
                       </div>
-                      <h3 class="ps-rheadline">Sesame is the BEST.</h3>
                     </div>
+                    <h3 class="ps-rheadline">Sesame is the BEST.</h3>
                     <div>
                       <div class="ps-rbody-wrap">
                         <p class="ps-rbody">Far better than an in-person Doctor&rsquo;s visit for routine prescriptions or inquiries. Dr. Okeke is highly recommended. Very pleasant and helpful. We&rsquo;ve used him several times for both me and my mother-in-law. Much better costs and structure than most any other telemedicine.</p>
