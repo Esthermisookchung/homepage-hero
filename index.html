@@ -1818,12 +1818,13 @@
     }
 
     /* ================================================================
-       Patient Stories / Trust Section  (nodes 826-18720 / 989-28789)
+       Patient Stories / Trust  —  826:18720 (desktop) · 989:28789 (mobile)
+       Exact values from Figma globalVars
        ================================================================ */
 
-    /* ── Section shell ── */
-    .ps-section {
-      background: #FFFFFF;
+    /* ── Outer section ── */
+    .ps {
+      background: #fff;
       padding: 80px 142px;
     }
     .ps-inner {
@@ -1831,6 +1832,7 @@
       flex-direction: column;
       align-items: center;
       gap: 80px;
+      width: 100%;
     }
 
     /* ── Header row ── */
@@ -1848,18 +1850,18 @@
       font-weight: 670;
       font-size: 32px;
       line-height: 1.4;
-      letter-spacing: -0.02em;
+      letter-spacing: -.02em;
       color: #000;
       margin: 0;
       max-width: 480px;
     }
     .ps-cta {
+      flex-shrink: 0;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
       background: #5921CF;
-      color: #FFFFFF;
+      color: #fff;
       font-family: var(--f-sans);
       font-feature-settings: "ss01" 1;
       font-weight: 670;
@@ -1868,31 +1870,31 @@
       padding: 16px 24px;
       border-radius: 9999px;
       text-decoration: none;
-      transition: opacity 0.15s;
+      transition: opacity .15s;
     }
-    .ps-cta:hover { opacity: 0.88; }
+    .ps-cta:hover { opacity: .88; }
     .ps-cta:focus-visible { outline: 3px solid #DED3F5; outline-offset: 3px; }
 
     /* ── Carousel area ── */
-    .ps-carousel-area {
+    .ps-area {
       width: 100%;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
       gap: 40px;
     }
-    .ps-carousel-wrapper {
+    .ps-viewport {
+      overflow: hidden;
       width: 100%;
     }
-    .ps-carousel-track {
+    .ps-track {
       display: flex;
       gap: 16px;
       transform: translateX(0);
-      transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform .42s cubic-bezier(.4,0,.2,1);
       will-change: transform;
     }
     @media (prefers-reduced-motion: reduce) {
-      .ps-carousel-track { transition: none; }
+      .ps-track { transition: none; }
     }
 
     /* ── Base card ── */
@@ -1906,7 +1908,7 @@
     }
 
     /* ── Video card ── */
-    .ps-card--video .ps-card-bg {
+    .ps-card-video .ps-card-photo {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -1914,7 +1916,7 @@
       object-fit: cover;
       display: block;
     }
-    .ps-play-btn {
+    .ps-card-video .ps-play {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -1922,7 +1924,7 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,.5);
       border: none;
       cursor: pointer;
       display: flex;
@@ -1930,125 +1932,113 @@
       justify-content: center;
       z-index: 2;
     }
-    .ps-play-btn svg { width: 20px; height: 20px; }
-    .ps-play-btn:focus-visible { outline: 3px solid #FFF; outline-offset: 2px; }
-    .ps-card--video .ps-video-gradient {
+    .ps-card-video .ps-play:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+    .ps-card-video .ps-play svg { width: 20px; height: 20px; fill: #fff; }
+    .ps-card-video .ps-grad {
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      left: 0; right: 0; bottom: 0;
       height: 200px;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 50%);
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.5) 50%);
       z-index: 1;
     }
-    .ps-card--video .ps-card-footer {
+    .ps-card-video .ps-video-footer {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      left: 0; right: 0; bottom: 0;
       padding: 40px 16px 16px;
       z-index: 2;
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
-    .ps-patient-row {
+    .ps-name-row {
       display: flex;
       align-items: center;
       gap: 4px;
     }
-    .ps-patient-name {
+    .ps-vname {
       font-family: var(--f-sans);
       font-weight: 600;
       font-size: 14px;
       line-height: 1.714;
-      color: #FFFFFF;
+      color: #fff;
     }
-    .ps-check-icon {
-      width: 16px;
-      height: 16px;
-      fill: #FFFFFF;
-      flex-shrink: 0;
-    }
-    .ps-patient-label {
+    .ps-check { width: 16px; height: 16px; display: block; flex-shrink: 0; }
+    .ps-vlabel {
       font-family: var(--f-sans);
       font-weight: 460;
       font-size: 12px;
       line-height: 1.333;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255,255,255,.85);
     }
 
-    /* ── Quote card (green Trustpilot) ── */
-    .ps-card--quote {
+    /* ── Quote card (green, Trustpilot) ── */
+    /* structure matches layout_DILAZE → layout_EVHWQV → layout_NL0GBU */
+    .ps-card-quote {
       background: #219F63;
       display: flex;
       flex-direction: column;
     }
-    .ps-card--quote .ps-card-inner {
+    .ps-card-quote .ps-ci {
       padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex: 1;
+    }
+    .ps-group {          /* layout_EVHWQV: col gap 32px */
       display: flex;
       flex-direction: column;
       gap: 32px;
       flex: 1;
     }
-    .ps-card--quote .ps-card-top {
+    .ps-qheader {        /* layout_NL0GBU: col gap 12px */
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
-    .ps-tp-header {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .ps-tp-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .ps-tp-logo {
+    .ps-tp-logo {        /* layout_VTMVLG: 65×16 */
       height: 16px;
       width: auto;
       display: block;
       object-fit: contain;
       flex-shrink: 0;
     }
-    .ps-tp-logo-white { filter: brightness(0) invert(1); }
-    .ps-stars {
+    .ps-tp-logo-inv { filter: brightness(0) invert(1); } /* white on green */
+    .ps-meta-row {       /* layout_WGN15B: row gap 12px */
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
+    .ps-stars {          /* layout_MNQZBA: row gap 2px */
       display: flex;
       align-items: center;
       gap: 2px;
     }
     .ps-star {
-      width: 20px;
-      height: 20px;
-      display: block;
-      flex-shrink: 0;
-    }
-    .ps-star--white { filter: brightness(0) invert(1); }
-    .ps-star {
       width: 18px;
       height: 18px;
-      fill: #00B67A;
+      display: block;
+      object-fit: contain;
     }
-    .ps-reviewer {
+    .ps-reviewer-q {
       font-family: var(--f-sans);
       font-weight: 600;
       font-size: 14px;
       line-height: 1.714;
       color: #F5F8FF;
     }
-    .ps-quote-headline {
+    .ps-qheadline {      /* semantic/header/tertiary */
       font-family: var(--f-sans);
       font-feature-settings: "ss01" 1;
       font-weight: 600;
       font-size: 22px;
       line-height: 1.273;
-      letter-spacing: -0.01em;
+      letter-spacing: -.01em;
       color: #F5F8FF;
       margin: 0;
     }
-    .ps-quote-body {
+    .ps-qbody {          /* semantic/body/rich */
       font-family: var(--f-sans);
       font-weight: 460;
       font-size: 18px;
@@ -2058,42 +2048,44 @@
     }
 
     /* ── Review card (gray / blue) ── */
-    .ps-card--review { display: flex; flex-direction: column; }
-    .ps-card--review .ps-card-inner {
+    .ps-card-review {
+      display: flex;
+      flex-direction: column;
+    }
+    .ps-card-gray { background: #F0F1F1; }
+    .ps-card-blue { background: #E0F2FE; }
+    .ps-card-review .ps-ci {
       padding: 24px;
       display: flex;
       flex-direction: column;
       gap: 24px;
       flex: 1;
-      justify-content: space-between;
+      justify-content: center; /* layout_ASK5UX: justifyContent center */
     }
-    .ps-card--gray { background: #F0F1F1; }
-    .ps-card--blue  { background: #E0F2FE; }
-    .ps-card--review .ps-reviewer {
+    .ps-card-review .ps-group { gap: 32px; }
+    .ps-reviewer-r {
       font-family: var(--f-sans);
       font-weight: 600;
       font-size: 16px;
       line-height: 1.5;
       color: #000;
     }
-    .ps-card--review .ps-tp-logo { filter: none; }
-    .ps-review-headline {
+    .ps-rheadline {
       font-family: var(--f-sans);
       font-feature-settings: "ss01" 1;
       font-weight: 600;
       font-size: 22px;
       line-height: 1.273;
-      letter-spacing: -0.01em;
+      letter-spacing: -.01em;
       color: #000;
       margin: 0;
     }
-    .ps-review-body-wrap {
+    .ps-rbody-wrap {
       position: relative;
-      flex: 1;
       overflow: hidden;
-      max-height: 260px;  /* truncate body; fade+Read more sit below */
+      max-height: 280px; /* truncate → fade shows at bottom */
     }
-    .ps-review-body {
+    .ps-rbody {
       font-family: var(--f-sans);
       font-weight: 460;
       font-size: 18px;
@@ -2101,19 +2093,17 @@
       color: #000;
       margin: 0;
     }
-    .ps-review-fade {
+    .ps-rfade {          /* layout_N9DKGD: abs 252×32, gradient */
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 0; left: 0; right: 0;
       height: 48px;
-      background: linear-gradient(to bottom, transparent 0%, #F0F1F1 100%);
+      background: linear-gradient(180deg, rgba(240,241,241,0) 0%, #F0F1F1 100%);
       pointer-events: none;
     }
-    .ps-card--blue .ps-review-fade {
-      background: linear-gradient(to bottom, transparent 0%, #E0F2FE 100%);
+    .ps-card-blue .ps-rfade {
+      background: linear-gradient(180deg, rgba(224,242,254,0) 0%, #E0F2FE 100%);
     }
-    .ps-read-more {
+    .ps-read-more {      /* semantic/body/rich-bold */
       font-family: var(--f-sans);
       font-weight: 670;
       font-size: 18px;
@@ -2121,15 +2111,15 @@
       color: #000;
       background: none;
       border: none;
-      cursor: pointer;
       padding: 0;
+      cursor: pointer;
       text-align: left;
     }
     .ps-read-more:focus-visible { outline: 2px solid #5921CF; outline-offset: 2px; }
-    .ps-card--no-truncate .ps-review-body-wrap { overflow: visible; }
-    .ps-card--no-truncate .ps-review-fade { display: none; }
+    .ps-card-no-trunc .ps-rbody-wrap { max-height: none; overflow: visible; }
+    .ps-card-no-trunc .ps-rfade { display: none; }
 
-    /* ── Controls ── */
+    /* ── Controls row ── */
     .ps-controls {
       display: flex;
       flex-direction: row;
@@ -2143,193 +2133,64 @@
       gap: 8px;
     }
     .ps-dot {
+      display: block;
       height: 8px;
       border-radius: 9999px;
       background: #85888E;
       border: none;
       cursor: pointer;
       padding: 0;
-      transition: width 0.2s, background 0.2s;
       width: 8px;
+      transition: width .2s, background .2s;
     }
-    .ps-dot[aria-selected="true"] {
-      width: 16px;
-      background: #000000;
-    }
+    .ps-dot[aria-selected="true"] { width: 16px; background: #000; }
     .ps-dot:focus-visible { outline: 2px solid #5921CF; outline-offset: 2px; }
-    .ps-arrows {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    .ps-arrows { display: flex; align-items: center; gap: 16px; }
     .ps-arrow {
-      width: 40px;
-      height: 40px;
+      width: 40px; height: 40px;
       border-radius: 50%;
       border: 2px solid #5921CF;
       background: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      transition: background 0.15s, border-color 0.15s;
+      transition: background .15s;
     }
-    .ps-arrow svg { width: 16px; height: 16px; stroke: #5921CF; }
-    .ps-arrow:hover:not(:disabled) { background: rgba(89,33,207,0.06); }
+    .ps-arrow svg { width: 16px; height: 16px; stroke: #5921CF; fill: none; stroke-width: 2; }
+    .ps-arrow:hover:not(:disabled) { background: rgba(89,33,207,.06); }
     .ps-arrow:focus-visible { outline: 2px solid #5921CF; outline-offset: 2px; }
-    .ps-arrow:disabled {
-      border-color: #CECFD2;
-      cursor: not-allowed;
-    }
+    .ps-arrow:disabled { border-color: #CECFD2; cursor: not-allowed; }
     .ps-arrow:disabled svg { stroke: #94969C; }
 
-    /* ── Trust badges ── */
-    .ps-trust {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-    .ps-trust-row {
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-    .ps-trust-divider {
-      width: 1px;
-      height: 64px;
-      background: linear-gradient(180deg, #219F63 0%, #C4E9D7 100%);
-      flex-shrink: 0;
-      margin: 0 48px;
-    }
-    .ps-trust-badge {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-    .ps-badge-rating {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-    .ps-badge-number {
-      font-family: var(--f-sans);
-      font-feature-settings: "ss01" 1;
-      font-weight: 600;
-      font-size: 24px;
-      line-height: 1.333;
-      letter-spacing: -0.02em;
-      color: #000;
-      text-align: center;
-    }
-    .ps-badge-stars {
-      display: flex;
-      gap: 3px;
-      align-items: center;
-    }
-    .ps-badge-star {
-      width: 22px;
-      height: 22px;
-      fill: #FAC515;
-    }
-    .ps-badge-star--tp { fill: #00B67A; }
-    .ps-badge-label {
-      font-family: var(--f-sans);
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 1.714;
-      color: #000;
-      text-align: center;
-    }
-    .ps-badge-headline {
-      font-family: var(--f-sans);
-      font-feature-settings: "ss01" 1;
-      font-weight: 600;
-      font-size: 32px;
-      line-height: 1.1875;
-      letter-spacing: -0.02em;
-      text-align: center;
-      color: #000;
-      margin: 0;
-      white-space: nowrap;
-    }
-    .ps-healthline-logo {
-      height: 20px;
-      width: auto;
-      display: block;
-    }
-    .ps-tp-logo-badge { height: 20px; width: auto; }
-    .ps-badge-sub {
-      font-family: var(--f-sans);
-      font-weight: 460;
-      font-size: 12px;
-      line-height: 1.333;
-      color: #61646C;
-      text-align: center;
-    }
+    /* ── Trust badges (static Figma images) ── */
+    .ps-trust { width: 100%; display: flex; justify-content: center; }
+    .ps-trust-d { width: 100%; height: auto; display: block; }
+    .ps-trust-m { display: none; }
 
     /* ── Responsive ── */
     @media (min-width: 1025px) and (max-width: 1439px) {
-      .ps-section { padding: 64px 40px; }
+      .ps { padding: 64px 40px; }
     }
     @media (max-width: 1024px) {
-      .ps-section { padding: 64px 24px; }
-      .ps-trust-divider { margin: 0 32px; }
+      .ps { padding: 64px 24px; }
     }
     @media (max-width: 767px) {
-      .ps-section { padding: 64px 16px; }
+      .ps { padding: 64px 16px; }
       .ps-inner { gap: 64px; }
-      .ps-header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 24px;
-      }
+      .ps-header { flex-direction: column; align-items: center; text-align: center; gap: 40px; }
       .ps-headline { font-size: 32px; max-width: 100%; text-align: center; }
-      .ps-carousel-area { gap: 32px; }
-      .ps-controls { justify-content: space-between; width: 100%; }
-      /* Trust badges: Trustpilot top, then 2-col row */
-      .ps-trust-row {
-        flex-direction: column;
-        gap: 24px;
-        align-items: center;
-      }
-      .ps-trust-row-bottom {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 0;
-      }
-      .ps-trust-divider {
-        margin: 0 24px;
-        height: 48px;
-      }
-      .ps-trust-divider--top { display: none; }
-    }
-
-    /* ── Static trust section images ── */
-    .ps-trust-static-desktop { width: 100%; height: auto; display: block; }
-    .ps-trust-static-mobile  { display: none; }
-    @media (max-width: 767px) {
-      .ps-trust-static-desktop { display: none; }
-      .ps-trust-static-mobile {
+      .ps-area { gap: 32px; }
+      .ps-controls { gap: 24px; justify-content: space-between; }
+      .ps-trust-d { display: none; }
+      .ps-trust-m {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 24px;
         width: 100%;
       }
-      .ps-trust-static-top { max-height: 92px; width: auto; height: auto; max-width: 80%; display: block; }
-      .ps-trust-static-row  {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-        width: 100%;
-      }
-      .ps-trust-static-row img { max-height: 96px; max-width: 46%; width: auto; height: auto; display: block; }
+      .ps-trust-m .ps-tm-top { max-height: 92px; width: auto; height: auto; max-width: 80%; }
+      .ps-trust-m .ps-tm-row { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 16px; }
+      .ps-trust-m .ps-tm-row img { max-height: 96px; width: auto; height: auto; max-width: 44%; }
     }
 
 </style>
@@ -2899,12 +2760,12 @@
 
 
     <!-- ================================================================
-         Patient Stories / Trust Section
+         Patient Stories / Trust Section  —  826:18720 / 989:28789
          ================================================================ -->
-    <section class="ps-section" aria-labelledby="ps-headline">
+    <section class="ps" aria-labelledby="ps-headline">
       <div class="ps-inner">
 
-        <!-- Header: headline + CTA -->
+        <!-- Header: headline left, CTA right (desktop) / stacked (mobile) -->
         <div class="ps-header">
           <h2 class="ps-headline" id="ps-headline">
             Sesame is changing how 1M+ patients think about healthcare.
@@ -2913,143 +2774,141 @@
         </div>
 
         <!-- Carousel -->
-        <div class="ps-carousel-area">
-          <div class="ps-carousel-wrapper" id="ps-wrapper">
-            <div class="ps-carousel-track" id="ps-track"
-                 role="list" aria-label="Patient stories">
+        <div class="ps-area">
+          <div class="ps-viewport" id="ps-vp">
+            <div class="ps-track" id="ps-tr" role="list" aria-label="Patient stories">
 
-              <!-- Card 1: Video — Christina P. -->
-              <div class="ps-card ps-card--video" role="listitem">
-                <img src="images/stories/video-1-5c2e81.png"
-                     alt="Christina P., Sesame patient" class="ps-card-bg" loading="lazy">
-                <button class="ps-play-btn" aria-label="Play Christina P.'s story">
-                  <svg viewBox="0 0 20 20" fill="white"><path d="M6 4l12 6-12 6V4z"/></svg>
+              <!-- Card 1: Video -->
+              <div class="ps-card ps-card-video" role="listitem">
+                <img src="images/stories/video-1-5c2e81.png" alt="Christina P., Sesame patient" class="ps-card-photo" loading="lazy">
+                <button class="ps-play" aria-label="Play Christina P.'s story">
+                  <svg viewBox="0 0 20 20"><path d="M6 4l12 6-12 6V4z"/></svg>
                 </button>
-                <div class="ps-video-gradient" aria-hidden="true"></div>
-                <div class="ps-card-footer">
-                  <div class="ps-patient-row">
-                    <span class="ps-patient-name">Christina P.</span>
-                    <svg class="ps-check-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/></svg>
+                <div class="ps-grad" aria-hidden="true"></div>
+                <div class="ps-video-footer">
+                  <div class="ps-name-row">
+                    <span class="ps-vname">Christina P.</span>
+                    <svg class="ps-check" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/></svg>
                   </div>
-                  <span class="ps-patient-label">Sesame patient</span>
+                  <span class="ps-vlabel">Sesame patient</span>
                 </div>
               </div>
 
               <!-- Card 2: Trustpilot quote (green) -->
-              <div class="ps-card ps-card--quote" role="listitem">
-                <div class="ps-card-inner">
-                  <div class="ps-card-top">
-                    <!-- Logo stacked above stars+name per Figma layout_NL0GBU -->
-                    <div style="display:flex;flex-direction:column;gap:12px">
-                      <img src="images/stories/trustpilot-logo-white.png"
-                           alt="Trustpilot" class="ps-tp-logo ps-tp-logo-white" loading="lazy">
-                      <div style="display:flex;align-items:center;gap:12px">
-                        <div class="ps-stars" aria-label="5 stars">
-                          <img src="images/trustpilot-star.svg" class="ps-star ps-star--white" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star ps-star--white" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star ps-star--white" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star ps-star--white" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star ps-star--white" alt="" aria-hidden="true">
+              <div class="ps-card ps-card-quote" role="listitem">
+                <div class="ps-ci">
+                  <div class="ps-group">
+                    <div class="ps-qheader">
+                      <img src="images/stories/trustpilot-logo-white.png" alt="Trustpilot" class="ps-tp-logo ps-tp-logo-inv" loading="lazy">
+                      <div class="ps-meta-row">
+                        <div class="ps-stars" aria-label="5 out of 5 stars">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true" style="filter:brightness(0) invert(1)">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true" style="filter:brightness(0) invert(1)">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true" style="filter:brightness(0) invert(1)">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true" style="filter:brightness(0) invert(1)">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true" style="filter:brightness(0) invert(1)">
                         </div>
-                        <span class="ps-reviewer">John King.</span>
+                        <span class="ps-reviewer-q">John King.</span>
                       </div>
+                      <h3 class="ps-qheadline">&ldquo;She&rsquo;s amazing, she heard me out.&rdquo;</h3>
                     </div>
-                    <h3 class="ps-quote-headline">"She's amazing, she heard me out."</h3>
+                    <p class="ps-qbody">I come to Sesame because I trust that they will take good care of me. I have been seeing the same physician for a couple of years. The experience is positive because he listens to what is wrong and involves me in the treatment plan.</p>
                   </div>
-                  <p class="ps-quote-body">I come to Sesame because I trust that they will take good care of me. I have been seeing the same physician for a couple of years. The experience is positive because he listens to what is wrong and involves me in the treatment plan.</p>
                 </div>
               </div>
 
-              <!-- Card 3: Video — Christina P. -->
-              <div class="ps-card ps-card--video" role="listitem">
-                <img src="images/stories/video-2.png"
-                     alt="Christina P., Sesame patient" class="ps-card-bg" loading="lazy">
-                <button class="ps-play-btn" aria-label="Play Christina P.'s story">
-                  <svg viewBox="0 0 20 20" fill="white"><path d="M6 4l12 6-12 6V4z"/></svg>
+              <!-- Card 3: Video -->
+              <div class="ps-card ps-card-video" role="listitem">
+                <img src="images/stories/video-2.png" alt="Christina P., Sesame patient" class="ps-card-photo" loading="lazy">
+                <button class="ps-play" aria-label="Play Christina P.'s story">
+                  <svg viewBox="0 0 20 20"><path d="M6 4l12 6-12 6V4z"/></svg>
                 </button>
-                <div class="ps-video-gradient" aria-hidden="true"></div>
-                <div class="ps-card-footer">
-                  <div class="ps-patient-row">
-                    <span class="ps-patient-name">Christina P.</span>
-                    <svg class="ps-check-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/></svg>
+                <div class="ps-grad" aria-hidden="true"></div>
+                <div class="ps-video-footer">
+                  <div class="ps-name-row">
+                    <span class="ps-vname">Christina P.</span>
+                    <svg class="ps-check" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/></svg>
                   </div>
-                  <span class="ps-patient-label">Sesame patient</span>
+                  <span class="ps-vlabel">Sesame patient</span>
                 </div>
               </div>
 
-              <!-- Card 4: Video — Christina P. -->
-              <div class="ps-card ps-card--video" role="listitem">
-                <img src="images/stories/video-3.png"
-                     alt="Christina P., Sesame patient" class="ps-card-bg" loading="lazy">
-                <button class="ps-play-btn" aria-label="Play Christina P.'s story">
-                  <svg viewBox="0 0 20 20" fill="white"><path d="M6 4l12 6-12 6V4z"/></svg>
+              <!-- Card 4: Video -->
+              <div class="ps-card ps-card-video" role="listitem">
+                <img src="images/stories/video-3.png" alt="Christina P., Sesame patient" class="ps-card-photo" loading="lazy">
+                <button class="ps-play" aria-label="Play Christina P.'s story">
+                  <svg viewBox="0 0 20 20"><path d="M6 4l12 6-12 6V4z"/></svg>
                 </button>
-                <div class="ps-video-gradient" aria-hidden="true"></div>
-                <div class="ps-card-footer">
-                  <div class="ps-patient-row">
-                    <span class="ps-patient-name">Christina P.</span>
-                    <svg class="ps-check-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/></svg>
+                <div class="ps-grad" aria-hidden="true"></div>
+                <div class="ps-video-footer">
+                  <div class="ps-name-row">
+                    <span class="ps-vname">Christina P.</span>
+                    <svg class="ps-check" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/></svg>
                   </div>
-                  <span class="ps-patient-label">Sesame patient</span>
+                  <span class="ps-vlabel">Sesame patient</span>
                 </div>
               </div>
 
               <!-- Card 5: Gray review (truncated) -->
-              <div class="ps-card ps-card--review ps-card--gray" role="listitem">
-                <div class="ps-card-inner">
-                  <div class="ps-tp-header">
-                    <div class="ps-tp-meta">
-                      <img src="images/trustpilot-logo.svg" alt="Trustpilot"
-                           class="ps-tp-logo" style="height:14px" loading="lazy">
-                      <div class="ps-stars" aria-label="5 stars">
-                        <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                        <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                        <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                        <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                        <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+              <div class="ps-card ps-card-review ps-card-gray" role="listitem">
+                <div class="ps-ci">
+                  <div class="ps-group">
+                    <div class="ps-qheader">
+                      <img src="images/trustpilot-logo.svg" alt="Trustpilot" class="ps-tp-logo" loading="lazy">
+                      <div class="ps-meta-row">
+                        <div class="ps-stars" aria-label="5 out of 5 stars">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                        </div>
+                        <span class="ps-reviewer-r">John King.</span>
                       </div>
-                      <span class="ps-reviewer" style="color:#000">John King.</span>
+                      <h3 class="ps-rheadline">Sesame is the BEST.</h3>
+                    </div>
+                    <div>
+                      <div class="ps-rbody-wrap">
+                        <p class="ps-rbody">I turn to Sesame as an alternative to germ-infested urgent care centers when I need immediate care and feel something simple coming on (like a sinus infection or UTI). I am familiar with the symptoms and know how it&rsquo;s been treated effectively in the past. Thank God we have options like this. The cost is SO reasonable for the value, and I&rsquo;ve never waited more than a couple of hours for an appointment.</p>
+                        <div class="ps-rfade" aria-hidden="true"></div>
                       </div>
+                      <button class="ps-read-more" aria-label="Read more of John King&rsquo;s review">Read more</button>
                     </div>
                   </div>
-                  <h3 class="ps-review-headline">Sesame is the BEST.</h3>
-                  <div class="ps-review-body-wrap">
-                    <p class="ps-review-body">I turn to Sesame as an alternative to germ-infested urgent care centers when I need immediate care and feel something simple coming on (like a sinus infection or UTI). I am familiar with the symptoms and know how it's been treated effectively in the past. Thank God we have options like this. The cost is SO reasonable for the value, and I've never waited more than a couple of hours for an appointment.</p>
-                    <div class="ps-review-fade" aria-hidden="true"></div>
-                  </div>
-                  <button class="ps-read-more" aria-label="Read more of John King's review">Read more</button>
                 </div>
               </div>
 
               <!-- Card 6: Blue review (full) -->
-              <div class="ps-card ps-card--review ps-card--blue ps-card--no-truncate" role="listitem">
-                <div class="ps-card-inner">
-                  <div class="ps-tp-header">
-                    <div class="ps-tp-meta">
-                      <img src="images/trustpilot-logo.svg" alt="Trustpilot"
-                           class="ps-tp-logo" style="height:14px" loading="lazy">
-                      <div class="ps-stars" aria-label="5 stars">
-                        <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                        <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                        <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                        <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                        <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+              <div class="ps-card ps-card-review ps-card-blue ps-card-no-trunc" role="listitem">
+                <div class="ps-ci">
+                  <div class="ps-group">
+                    <div class="ps-qheader">
+                      <img src="images/trustpilot-logo.svg" alt="Trustpilot" class="ps-tp-logo" loading="lazy">
+                      <div class="ps-meta-row">
+                        <div class="ps-stars" aria-label="5 out of 5 stars">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                        </div>
+                        <span class="ps-reviewer-r">John King.</span>
                       </div>
-                      <span class="ps-reviewer" style="color:#000">John King.</span>
+                      <h3 class="ps-rheadline">Sesame is the BEST.</h3>
+                    </div>
+                    <div>
+                      <div class="ps-rbody-wrap">
+                        <p class="ps-rbody">Far better than an in-person Doctor&rsquo;s visit for routine prescriptions or inquiries. Dr. Okeke is highly recommended. Very pleasant and helpful. We&rsquo;ve used him several times for both me and my mother-in-law. Much better costs and structure than most any other telemedicine.</p>
                       </div>
                     </div>
-                  </div>
-                  <h3 class="ps-review-headline">Sesame is the BEST.</h3>
-                  <div class="ps-review-body-wrap">
-                    <p class="ps-review-body">Far better than an in-person Doctor's visit for routine prescriptions or inquiries. Dr. Okeke is highly recommended. Very pleasant and helpful. We've used him several times for both me and my mother-in-law. Much better costs and structure than most any other telemedicine.</p>
                   </div>
                 </div>
               </div>
 
-            </div><!-- /.ps-carousel-track -->
-          </div><!-- /.ps-carousel-wrapper -->
+            </div><!-- /.ps-tr -->
+          </div><!-- /.ps-vp -->
 
-          <!-- Controls: dots + arrows -->
+          <!-- Controls: dots left, arrows right -->
           <div class="ps-controls">
             <div class="ps-dots" id="ps-dots" role="group" aria-label="Story navigation">
               <button class="ps-dot" aria-selected="true"  aria-label="Go to story group 1"></button>
@@ -3059,38 +2918,31 @@
             </div>
             <div class="ps-arrows">
               <button class="ps-arrow" id="ps-prev" aria-label="Previous stories" disabled>
-                <svg viewBox="0 0 16 16" fill="none" stroke-width="2" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
               </button>
               <button class="ps-arrow" id="ps-next" aria-label="Next stories">
-                <svg viewBox="0 0 16 16" fill="none" stroke-width="2" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
               </button>
             </div>
           </div>
-        </div><!-- /.ps-carousel-area -->
+        </div><!-- /.ps-area -->
 
-        <!-- Trust badges — static Figma exports for pixel-perfect accuracy -->
+        <!-- Trust badges — pixel-perfect Figma exports -->
         <div class="ps-trust">
-          <!-- Desktop: single row image exported from Figma node 826:18781 -->
           <img src="images/stories/trust-section.png"
-               alt="Sesame trust ratings: 4.9 stars on App &amp; Play Store · #1 Best Telehealth (Healthline 2021–2025) · 4.5 stars on Trustpilot"
-               class="ps-trust-static-desktop" loading="lazy">
-
-          <!-- Mobile: Trustpilot first, then 2-column row -->
-          <div class="ps-trust-static-mobile">
-            <img src="images/stories/trust-badge-trustpilot.png"
-                 alt="4.5 stars on Trustpilot"
-                 class="ps-trust-static-top" loading="lazy">
-            <div class="ps-trust-static-row">
-              <img src="images/stories/trust-badge-appstore.png"
-                   alt="4.9 stars on App &amp; Play Store" loading="lazy">
-              <img src="images/stories/trust-badge-healthline.png"
-                   alt="#1 Best Telehealth (Healthline 2021–2025)" loading="lazy">
+               alt="4.9 stars App &amp; Play Store · #1 Best Telehealth Healthline 2021–2025 · 4.5 stars Trustpilot"
+               class="ps-trust-d" loading="lazy">
+          <div class="ps-trust-m">
+            <img src="images/stories/trust-badge-trustpilot.png" alt="4.5 stars on Trustpilot" class="ps-tm-top" loading="lazy">
+            <div class="ps-tm-row">
+              <img src="images/stories/trust-badge-appstore.png" alt="4.9 stars App &amp; Play Store" loading="lazy">
+              <img src="images/stories/trust-badge-healthline.png" alt="#1 Best Telehealth Healthline 2021–2025" loading="lazy">
             </div>
           </div>
-        </div><!-- /.ps-trust -->
+        </div>
 
       </div><!-- /.ps-inner -->
-    </section><!-- /.ps-section -->
+    </section><!-- /.ps -->
 
   </main>
 
@@ -3216,8 +3068,8 @@
 
   // ── Patient Stories Carousel ─────────────────────────────────────────
   (function () {
-    const track    = document.getElementById('ps-track');
-    const wrapper  = document.getElementById('ps-wrapper');
+    const track    = document.getElementById('ps-tr');
+    const wrapper  = document.getElementById('ps-vp');
     const prevBtn  = document.getElementById('ps-prev');
     const nextBtn  = document.getElementById('ps-next');
     const dotsEl   = document.getElementById('ps-dots');
