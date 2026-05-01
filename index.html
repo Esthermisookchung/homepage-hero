@@ -1824,7 +1824,18 @@
 
     /* ── Outer section ── */
     .ps {
-      --ps-pad: 142px;
+      /* Spacing tokens */
+      --ps-pad:  142px;
+      --ps-gap:  16px;
+      --ps-peek: 120px;
+      /*
+       * Card width formula: fit exactly 4 full cards + peek of 5th.
+       * visibleWidth = 100vw - 2*pad
+       * cardWidth    = (visibleWidth - 3*gap - peek) / 4
+       */
+      --ps-card-w: calc(
+        (100vw - 2 * var(--ps-pad) - 3 * var(--ps-gap) - var(--ps-peek)) / 4
+      );
       background: #fff;
       padding: 80px var(--ps-pad);
       overflow-x: hidden;
@@ -1882,30 +1893,47 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 40px;
+      gap: 32px;
     }
-    /* Viewport: overflow hidden clips the track; peek is the partial card at the right edge */
+
+    /*
+     * Viewport: clips the track so partial cards peek naturally.
+     * Width = full section content width.
+     * Overflow hidden ensures no card bleeds outside the intended region.
+     */
     .ps-viewport {
-      overflow: hidden;
       width: 100%;
+      overflow: hidden;
     }
+
+    /*
+     * Track: single horizontal flex row.
+     * width:max-content so it always expands to fit all cards.
+     * Only this element translates — never individual cards.
+     */
     .ps-track {
       display: flex;
       flex-wrap: nowrap;
-      gap: 16px;
+      gap: var(--ps-gap, 16px);
+      width: max-content;
       transform: translateX(0);
-      transition: transform .42s cubic-bezier(.4,0,.2,1);
+      transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
       will-change: transform;
     }
     @media (prefers-reduced-motion: reduce) {
       .ps-track { transition: none; }
     }
 
-    /* ── Base card ── */
+    /*
+     * Card: fixed size from CSS variable, aspect ratio 300:534.
+     * flex: 0 0 var(--ps-card-w) — never shrinks or grows.
+     * position:relative only for internal absolute children (play btn, gradient).
+     * NO transform, NO negative margin, NO absolute positioning at card level.
+     */
     .ps-card {
-      flex: 0 0 300px;
-      width: 300px;
-      height: 534px;
+      flex: 0 0 var(--ps-card-w, 300px);
+      width: var(--ps-card-w, 300px);
+      height: calc(var(--ps-card-w, 300px) * 1.78);
       border-radius: 16px;
       overflow: hidden;
       position: relative;
@@ -2189,10 +2217,16 @@
       .ps { --ps-pad: 40px; padding: 64px var(--ps-pad); }
     }
     @media (max-width: 1024px) {
-      .ps { --ps-pad: 24px; padding: 64px var(--ps-pad); }
+      /* ≤1024px: 3 cards + peek */
+      .ps { --ps-pad: 24px; --ps-peek: 80px;
+           --ps-card-w: calc((100vw - 2*var(--ps-pad) - 2*var(--ps-gap) - var(--ps-peek)) / 3);
+           padding: 64px var(--ps-pad); }
     }
     @media (max-width: 767px) {
-      .ps { --ps-pad: 16px; padding: 64px var(--ps-pad); }
+      /* ≤767px: 1 card + peek */
+      .ps { --ps-pad: 16px; --ps-peek: 56px;
+           --ps-card-w: calc(100vw - 2*var(--ps-pad) - var(--ps-gap) - var(--ps-peek));
+           padding: 64px var(--ps-pad); }
       .ps-inner { gap: 64px; }
       .ps-header { flex-direction: column; align-items: center; text-align: center; gap: 40px; }
       .ps-headline { font-size: 32px; max-width: 100%; text-align: center; }
@@ -3093,21 +3127,24 @@
     const dotsEl   = document.getElementById('ps-dots');
     if (!track || !wrapper) return;
 
-    const CARD_W  = 300;
-    const GAP     = 16;
-    const TOTAL   = 4;
+    const GAP   = 16;
+    const TOTAL = 4;
     let pos = 0;
 
-    // Advance one full card at a time; peek is the partial card visible at right edge
-    function getStep() { return CARD_W + GAP; }  // 316px
+    // Step = rendered card width + gap (reads from DOM after CSS resolves)
+    function getCardW() {
+      const card = track.querySelector('.ps-card');
+      return card ? card.offsetWidth : 300;
+    }
+    function getStep() { return getCardW() + GAP; }
 
     function maxOffset() {
-      // Track scroll width minus the visible viewport width
       return Math.max(0, track.scrollWidth - wrapper.offsetWidth);
     }
 
+    // Build 4 stop positions: step * 0..3, clamped to maxOffset
     function offsets() {
-      const max = maxOffset();
+      const max  = maxOffset();
       const step = getStep();
       return [0, 1, 2, 3].map(i => Math.min(i * step, max));
     }
@@ -3123,12 +3160,15 @@
       }
       track.style.transform = 'translateX(-' + steps[pos] + 'px)';
 
-      prevBtn.disabled = pos === 0;
-      nextBtn.disabled = pos === TOTAL - 1;
+      prevBtn.disabled = (pos === 0);
+      nextBtn.disabled = (pos === TOTAL - 1);
 
       const dots = dotsEl.querySelectorAll('.ps-dot');
       dots.forEach((d, i) => d.setAttribute('aria-selected', i === pos ? 'true' : 'false'));
     }
+
+    // Recalculate on resize (card width changes with viewport)
+    window.addEventListener('resize', () => goTo(pos, false));
 
     prevBtn.addEventListener('click', () => goTo(pos - 1));
     nextBtn.addEventListener('click', () => goTo(pos + 1));
