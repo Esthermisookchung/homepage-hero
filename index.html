@@ -1599,7 +1599,7 @@
     .hiw-card-text-inner {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
     }
 
     .hiw-step-label {
@@ -2112,11 +2112,6 @@
     <!-- Brand statement scroll section (React + Framer Motion) -->
     <div id="brand-statement-mount"></div>
 
-    <!-- Vertical divider separating brand statement from How It Works -->
-    <div style="display:flex;justify-content:center;padding:80px 0 0;">
-      <div style="width:1px;height:120px;background:linear-gradient(180deg,rgba(206,207,210,0) 0%,rgba(206,207,210,1) 10%,rgba(206,207,210,1) 90%,rgba(206,207,210,0) 100%);"></div>
-    </div>
-
     <!-- ================================================================
          How It Works Section
          ================================================================ -->
@@ -2304,17 +2299,13 @@ const FONT  = 'var(--f-sans, "Saans", system-ui, sans-serif)';
 const MUTED = '#61646C';
 const BLACK = '#000000';
 
-const TEXT_SPANS = [
-  { id: 's0', text: 'Sesame was built to make ',      range: [0.00, 0.10] },
-  { id: 's1', text: 'quality healthcare ',             range: [0.07, 0.17] },
-  { id: 's2', text: 'simpler, faster, and ',           range: [0.13, 0.23] },
-  { id: 's3', text: 'more affordable. ',               range: [0.19, 0.29] },
-  { id: 's4', text: 'No insurance games, ',            range: [0.26, 0.36] },
-  { id: 's5', text: 'no surprise bills — ',       range: [0.32, 0.42] },
-  { id: 's6', text: 'just clear prices, ',             range: [0.38, 0.48] },
-  { id: 's7', text: 'real doctors, ',                  range: [0.43, 0.53] },
-  { id: 's8', text: 'and care whenever you need it.', range: [0.47, 0.57] },
-];
+// Word-by-word reveal — each word gets its own scroll window
+const _words = 'Sesame was built to make quality healthcare simpler, faster, and more affordable. No insurance games, no surprise bills — just clear prices, real doctors, and care whenever you need it.'.split(' ');
+const TEXT_SPANS = _words.map((w, i) => ({
+  id: 's' + i,
+  text: i < _words.length - 1 ? w + ' ' : w,
+  range: [+(i * 0.018).toFixed(3), +(i * 0.018 + 0.07).toFixed(3)],
+}));
 
 const ICON_CARDS = [
   { id: 'ic-green',  src: 'images/brand/icon-green.png',  radius: '16px',
@@ -2378,7 +2369,7 @@ function BrandStatementScrollSection() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.5', 'end end'] });
   const sectionH = mobile ? '150vh' : '200vh';
 
-  return React.createElement('section', { ref, id:'brand-statement', style:{ height:sectionH, position:'relative' } },
+  return React.createElement('section', { ref, id:'brand-statement', style:{ height:sectionH, position:'relative', background:'#FFFFFF' } },
     React.createElement('div', { style:{ position:'sticky', top:0, height:'100vh', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', overflow:'hidden', background:'#FFFFFF' } },
       ...ICON_CARDS.map(card => React.createElement(AnimatedIcon, { key:card.id, card, scrollYProgress, isMobile:mobile, reduced })),
       React.createElement('div', { style:{ position:'relative', zIndex:1, width:'100%', padding: mobile?'0 16px':'0 142px', maxWidth: mobile?'none':'1440px', display:'flex', flexDirection:'column', alignItems:'center', gap: mobile?'60px':'80px' } },
@@ -2386,8 +2377,8 @@ function BrandStatementScrollSection() {
           ...TEXT_SPANS.map(s => React.createElement(AnimatedSpan, { key:s.id, text:s.text, scrollYProgress, range:s.range, reduced }))),
         React.createElement('div', { style:{ display:'flex', flexWrap:'wrap', justifyContent:'center', alignItems:'center', gap:'40px', rowGap:'16px', width:'100%' } },
           React.createElement('span', { style:{ fontFamily:FONT, fontWeight:460, fontSize:'16px', lineHeight:1.5, color:MUTED, whiteSpace:'nowrap', ...(mobile?{flexBasis:'100%',textAlign:'center'}:{}) } }, 'As seen in'),
-          ...PRESS_LOGOS.map(logo => React.createElement('img', { key:logo.id, src:logo.src, alt:logo.alt, style:{ height:'22px', width:logo.w+'px', objectFit:'contain', opacity:0.5, filter:'grayscale(1) contrast(5)', display:'block', flexShrink:0 } }))))));
-}
+          ...PRESS_LOGOS.map(logo => React.createElement('img', { key:logo.id, src:logo.src, alt:logo.alt, style:{ height:'22px', width:logo.w+'px', objectFit:'cover', opacity:0.5, filter:'grayscale(1)', display:'block', flexShrink:0 } }))),
+        React.createElement('div', { style:{ width:'1px', height:'120px', marginTop: mobile?'60px':'40px', background:'linear-gradient(180deg, rgba(206,207,210,0) 0%, rgba(206,207,210,1) 10%, rgba(206,207,210,1) 90%, rgba(206,207,210,0) 100%)' } }))));
 
 const mountEl = document.getElementById('brand-statement-mount');
 if (mountEl) createRoot(mountEl).render(React.createElement(BrandStatementScrollSection));
