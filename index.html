@@ -1680,38 +1680,15 @@
       gap: 16px;
     }
 
-    /* Typewriter pill */
+    /* Typewriter pill — min-width set to widest phrase so it never reflows */
     .os-pill {
-      position: relative;
       display: inline-flex;
       align-items: center;
       align-self: flex-start;
       background: #DED3F5;
       border-radius: 9999px;
       padding: 4px 16px;
-    }
-
-    /* Invisible ghost spans to hold the pill width stable */
-    .os-pill-ghost {
-      font-family: var(--f-sans, 'Saans', system-ui, sans-serif);
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 1.714;
-      white-space: nowrap;
-      visibility: hidden;
-      pointer-events: none;
-      color: #5921CF;
-    }
-
-    /* Absolutely positioned animated layer */
-    .os-pill-live {
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      top: 0;
-      bottom: 0;
-      display: flex;
-      align-items: center;
+      min-width: 21ch;  /* covers longest phrase at 14px 600 */
       overflow: hidden;
     }
 
@@ -2375,15 +2352,8 @@
           <div class="os-content">
 
             <!-- Typewriter pill -->
-            <div class="os-pill" role="region" aria-label="Example health questions">
-              <!-- Ghost keeps pill width stable at longest phrase width -->
-              <span class="os-pill-ghost" aria-hidden="true">My throat has been sore for 3 days...</span>
-              <!-- Animated layer -->
-              <div class="os-pill-live" aria-hidden="true">
-                <span class="os-typed" id="os-typed"></span><span class="os-cursor"></span>
-              </div>
-              <!-- Screen-reader-accessible current phrase -->
-              <span class="sr-only" id="os-sr-phrase" aria-live="polite" aria-atomic="true"></span>
+            <div class="os-pill" aria-hidden="true">
+              <span class="os-typed" id="os-typed"></span><span class="os-cursor"></span>
             </div>
 
             <h2 class="os-headline" id="os-headline">
@@ -2546,13 +2516,11 @@
     const PAUSE_GAP = 380;  // ms before next phrase
 
     const typedEl = document.getElementById('os-typed');
-    const srEl    = document.getElementById('os-sr-phrase');
     if (!typedEl) return;
 
     // Reduced motion: show first phrase statically, hide cursor
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       typedEl.textContent = PHRASES[0];
-      if (srEl) srEl.textContent = PHRASES[0];
       const cursor = typedEl.nextElementSibling;
       if (cursor) cursor.style.display = 'none';
       return;
@@ -2566,7 +2534,6 @@
         pos++;
         typedEl.textContent = phrase.slice(0, pos);
         if (pos === phrase.length) {
-          if (srEl) srEl.textContent = phrase; // announce to screen readers once
           deleting = true;
           return setTimeout(tick, PAUSE_END);
         }
