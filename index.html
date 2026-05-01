@@ -2112,6 +2112,11 @@
     <!-- Brand statement scroll section (React + Framer Motion) -->
     <div id="brand-statement-mount"></div>
 
+    <!-- Vertical divider separating brand statement from How It Works -->
+    <div style="display:flex;justify-content:center;padding:80px 0 0;">
+      <div style="width:1px;height:120px;background:linear-gradient(180deg,rgba(206,207,210,0) 0%,rgba(206,207,210,1) 10%,rgba(206,207,210,1) 90%,rgba(206,207,210,0) 100%);"></div>
+    </div>
+
     <!-- ================================================================
          How It Works Section
          ================================================================ -->
@@ -2300,15 +2305,15 @@ const MUTED = '#61646C';
 const BLACK = '#000000';
 
 const TEXT_SPANS = [
-  { id: 's0', text: 'Sesame was built to make ',      range: [0.00, 0.05] },
-  { id: 's1', text: 'quality healthcare ',             range: [0.03, 0.08] },
-  { id: 's2', text: 'simpler, faster, and ',           range: [0.06, 0.11] },
-  { id: 's3', text: 'more affordable. ',               range: [0.09, 0.14] },
-  { id: 's4', text: 'No insurance games, ',            range: [0.12, 0.18] },
-  { id: 's5', text: 'no surprise bills — ',       range: [0.15, 0.21] },
-  { id: 's6', text: 'just clear prices, ',             range: [0.18, 0.24] },
-  { id: 's7', text: 'real doctors, ',                  range: [0.21, 0.26] },
-  { id: 's8', text: 'and care whenever you need it.', range: [0.23, 0.28] },
+  { id: 's0', text: 'Sesame was built to make ',      range: [0.00, 0.10] },
+  { id: 's1', text: 'quality healthcare ',             range: [0.07, 0.17] },
+  { id: 's2', text: 'simpler, faster, and ',           range: [0.13, 0.23] },
+  { id: 's3', text: 'more affordable. ',               range: [0.19, 0.29] },
+  { id: 's4', text: 'No insurance games, ',            range: [0.26, 0.36] },
+  { id: 's5', text: 'no surprise bills — ',       range: [0.32, 0.42] },
+  { id: 's6', text: 'just clear prices, ',             range: [0.38, 0.48] },
+  { id: 's7', text: 'real doctors, ',                  range: [0.43, 0.53] },
+  { id: 's8', text: 'and care whenever you need it.', range: [0.47, 0.57] },
 ];
 
 const ICON_CARDS = [
@@ -2381,8 +2386,7 @@ function BrandStatementScrollSection() {
           ...TEXT_SPANS.map(s => React.createElement(AnimatedSpan, { key:s.id, text:s.text, scrollYProgress, range:s.range, reduced }))),
         React.createElement('div', { style:{ display:'flex', flexWrap:'wrap', justifyContent:'center', alignItems:'center', gap:'40px', rowGap:'16px', width:'100%' } },
           React.createElement('span', { style:{ fontFamily:FONT, fontWeight:460, fontSize:'16px', lineHeight:1.5, color:MUTED, whiteSpace:'nowrap', ...(mobile?{flexBasis:'100%',textAlign:'center'}:{}) } }, 'As seen in'),
-          ...PRESS_LOGOS.map(logo => React.createElement('img', { key:logo.id, src:logo.src, alt:logo.alt, style:{ height:'22px', width:logo.w+'px', objectFit:'contain', opacity:0.5, filter:'grayscale(1) contrast(5)', display:'block', flexShrink:0 } }))),
-        React.createElement('div', { style:{ width:'1px', height:'120px', background:'linear-gradient(180deg, rgba(206,207,210,0) 0%, rgba(206,207,210,1) 10%, rgba(206,207,210,1) 90%, rgba(206,207,210,0) 100%)' } }))));
+          ...PRESS_LOGOS.map(logo => React.createElement('img', { key:logo.id, src:logo.src, alt:logo.alt, style:{ height:'22px', width:logo.w+'px', objectFit:'contain', opacity:0.5, filter:'grayscale(1) contrast(5)', display:'block', flexShrink:0 } }))))));
 }
 
 const mountEl = document.getElementById('brand-statement-mount');
