@@ -1530,7 +1530,7 @@
        ================================================================ */
     .hiw-section {
       background: #FFFFFF;
-      padding: 0 142px 80px;
+      padding: 80px 142px 80px;
     }
 
     .hiw-header {
@@ -1632,16 +1632,17 @@
 
     /* ── How It Works responsive ── */
     @media (min-width: 1025px) and (max-width: 1439px) {
-      .hiw-section { padding: 0 40px 80px; }
+      .hiw-section { padding: 80px 40px 80px; }
     }
 
     @media (max-width: 1024px) {
-      .hiw-section { padding: 0 40px 64px; }
+      .hiw-section { padding: 80px 40px 64px; }
       .hiw-cards { grid-template-columns: 1fr; gap: 40px; }
     }
 
     @media (max-width: 767px) {
-      .hiw-section { padding: 0 16px 64px; }
+      /* 120px top = brand statement outer frame's 120px bottom padding (Figma mobile spec) */
+      .hiw-section { padding: 120px 16px 64px; }
     }
 
 </style>
@@ -2370,14 +2371,14 @@ function BrandStatementScrollSection() {
   const sectionH = mobile ? '150vh' : '200vh';
 
   return React.createElement('section', { ref, id:'brand-statement', style:{ height:sectionH, position:'relative', background:'#FFFFFF' } },
-    React.createElement('div', { style:{ position:'sticky', top:0, height:'100vh', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', overflow:'hidden', background:'#FFFFFF' } },
+    React.createElement('div', { style:{ position:'sticky', top:0, height:'100vh', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', overflow:'hidden', background:'#FFFFFF', paddingTop: mobile?'80px':'0' } },
       ...ICON_CARDS.map(card => React.createElement(AnimatedIcon, { key:card.id, card, scrollYProgress, isMobile:mobile, reduced })),
-      React.createElement('div', { style:{ position:'relative', zIndex:1, width:'100%', padding: mobile?'0 16px':'0 142px', maxWidth: mobile?'none':'1440px', display:'flex', flexDirection:'column', alignItems:'center', gap: mobile?'60px':'80px' } },
+      React.createElement('div', { style:{ position:'relative', zIndex:1, width:'100%', padding: mobile?'0 16px':'0 142px', maxWidth: mobile?'none':'1440px', display:'flex', flexDirection:'column', alignItems:'center', gap: '120px' } },
         React.createElement('p', { style:{ fontFamily:FONT, fontWeight: mobile?600:700, fontSize: mobile?'clamp(28px,8vw,32px)':'clamp(36px,3.33vw,48px)', lineHeight: mobile?1.1875:1.4, letterSpacing:'-0.02em', textAlign:'center', margin:0, maxWidth: mobile?'none':'1156px' } },
           ...TEXT_SPANS.map(s => React.createElement(AnimatedSpan, { key:s.id, text:s.text, scrollYProgress, range:s.range, reduced }))),
         React.createElement('div', { style:{ display:'flex', flexWrap:'wrap', justifyContent:'center', alignItems:'center', gap:'40px', rowGap:'16px', width:'100%' } },
           React.createElement('span', { style:{ fontFamily:FONT, fontWeight:460, fontSize:'16px', lineHeight:1.5, color:MUTED, whiteSpace:'nowrap', ...(mobile?{flexBasis:'100%',textAlign:'center'}:{}) } }, 'As seen in'),
-          ...PRESS_LOGOS.map(logo => React.createElement('img', { key:logo.id, src:logo.src, alt:logo.alt, style:{ height:'22px', width:logo.w+'px', objectFit:'cover', opacity:0.5, filter:'grayscale(1)', display:'block', flexShrink:0 } }))),
+          ...PRESS_LOGOS.map(logo => React.createElement('img', { key:logo.id, src:logo.src, alt:logo.alt, style:{ height:'22px', width:logo.w+'px', objectFit: logo.id==='l0' ? 'cover' : 'contain', opacity:0.5, filter:'grayscale(1)', display:'block', flexShrink:0 } }))),
         React.createElement('div', { style:{ width:'1px', height:'120px', marginTop: mobile?'60px':'40px', background:'linear-gradient(180deg, rgba(206,207,210,0) 0%, rgba(206,207,210,1) 10%, rgba(206,207,210,1) 90%, rgba(206,207,210,0) 100%)' } }))));
 }
 
