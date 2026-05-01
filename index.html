@@ -1904,8 +1904,8 @@
      * Overflow hidden ensures no card bleeds outside the intended region.
      */
     .ps-viewport {
-      width: 100%;  /* full section width — no padding constraint */
-      overflow: visible;  /* does not clip; section handles it */
+      width: 100%;  /* full section width (ps has no h-padding) */
+      overflow: hidden;  /* direct parent of track — correctly clips translateX */
     }
 
     /*
