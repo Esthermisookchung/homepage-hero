@@ -1680,7 +1680,7 @@
       gap: 16px;
     }
 
-    /* Typewriter pill — hugs content width; height is stable from padding+line-height */
+    /* Typewriter pill — hugs content width; min-height locks to full-text height */
     .os-pill {
       display: inline-flex;
       align-items: center;
@@ -1688,6 +1688,9 @@
       background: #DED3F5;
       border-radius: 9999px;
       padding: 4px 16px;
+      /* 32px = padding(4+4) + one line of text at 14px/1.714 line-height(≈24px).
+         Prevents the pill from collapsing to cursor-only height when text is empty. */
+      min-height: 32px;
     }
 
     .os-typed {
