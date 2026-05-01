@@ -1837,13 +1837,13 @@
         (100vw - 2 * var(--ps-pad) - 3 * var(--ps-gap) - var(--ps-peek)) / 4
       );
       background: #fff;
-      padding: 80px var(--ps-pad);
-      overflow-x: hidden;
+      padding: 80px 0;  /* no horizontal padding — section is full width */
+      overflow-x: hidden;  /* clips at browser viewport edge only */
     }
     .ps-inner {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       gap: 80px;
       width: 100%;
     }
@@ -1856,6 +1856,8 @@
       align-items: center;
       gap: 24px;
       width: 100%;
+      padding-left: var(--ps-pad);
+      padding-right: var(--ps-pad);
     }
     .ps-headline {
       font-family: var(--f-sans);
@@ -1902,8 +1904,8 @@
      * Overflow hidden ensures no card bleeds outside the intended region.
      */
     .ps-viewport {
-      width: 100%;
-      overflow: hidden;
+      width: 100%;  /* full section width — no padding constraint */
+      overflow: visible;  /* does not clip; section handles it */
     }
 
     /*
@@ -1916,6 +1918,7 @@
       flex-wrap: nowrap;
       gap: var(--ps-gap, 16px);
       width: max-content;
+      padding-left: var(--ps-pad);  /* card 1 aligns to content left edge */
       transform: translateX(0);
       transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
       will-change: transform;
@@ -2171,6 +2174,8 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
+      padding-left: var(--ps-pad);
+      padding-right: var(--ps-pad);
       margin-top: 8px;
     }
     .ps-dots {
@@ -2208,25 +2213,25 @@
     .ps-arrow:disabled svg { stroke: #94969C; }
 
     /* ── Trust badges (static Figma images) ── */
-    .ps-trust { width: 100%; display: flex; justify-content: center; }
+    .ps-trust { width: 100%; display: flex; justify-content: center; padding-left: var(--ps-pad); padding-right: var(--ps-pad); }
     .ps-trust-d { width: 100%; height: auto; display: block; }
     .ps-trust-m { display: none; }
 
     /* ── Responsive ── */
     @media (min-width: 1025px) and (max-width: 1439px) {
-      .ps { --ps-pad: 40px; padding: 64px var(--ps-pad); }
+      .ps { --ps-pad: 40px; padding: 64px 0; }
     }
     @media (max-width: 1024px) {
       /* ≤1024px: 3 cards + peek */
       .ps { --ps-pad: 24px; --ps-peek: 80px;
            --ps-card-w: calc((100vw - 2*var(--ps-pad) - 2*var(--ps-gap) - var(--ps-peek)) / 3);
-           padding: 64px var(--ps-pad); }
+           padding: 64px 0; }
     }
     @media (max-width: 767px) {
       /* ≤767px: 1 card + peek */
       .ps { --ps-pad: 16px; --ps-peek: 56px;
            --ps-card-w: calc(100vw - 2*var(--ps-pad) - var(--ps-gap) - var(--ps-peek));
-           padding: 64px var(--ps-pad); }
+           padding: 64px 0; }
       .ps-inner { gap: 64px; }
       .ps-header { flex-direction: column; align-items: center; text-align: center; gap: 40px; }
       .ps-headline { font-size: 32px; max-width: 100%; text-align: center; }
