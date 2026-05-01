@@ -1841,7 +1841,6 @@
       align-items: center;
       gap: 24px;
       width: 100%;
-      max-width: 1156px;
     }
     .ps-headline {
       font-family: var(--f-sans);
@@ -1877,7 +1876,6 @@
     /* ── Carousel area ── */
     .ps-carousel-area {
       width: 100%;
-      max-width: 1156px;
       display: flex;
       flex-direction: column;
       gap: 40px;
@@ -2282,7 +2280,7 @@
       }
       .ps-headline { font-size: 32px; max-width: 100%; text-align: center; }
       .ps-carousel-area { gap: 32px; }
-      .ps-controls { justify-content: center; gap: 32px; }
+      .ps-controls { justify-content: space-between; width: 100%; }
       /* Trust badges: Trustpilot top, then 2-col row */
       .ps-trust-row {
         flex-direction: column;
@@ -2300,6 +2298,30 @@
         height: 48px;
       }
       .ps-trust-divider--top { display: none; }
+    }
+
+    /* ── Static trust section images ── */
+    .ps-trust-static-desktop { width: 100%; height: auto; display: block; }
+    .ps-trust-static-mobile  { display: none; }
+    @media (max-width: 767px) {
+      .ps-trust-static-desktop { display: none; }
+      .ps-trust-static-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        width: 100%;
+      }
+      .ps-trust-static-top { height: 92px; width: auto; max-width: 100%; }
+      .ps-trust-static-row  {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        width: 100%;
+      }
+      .ps-trust-static-row img { height: 96px; width: auto; max-width: 46%; }
     }
 
 </style>
@@ -2909,10 +2931,11 @@
               <div class="ps-card ps-card--quote" role="listitem">
                 <div class="ps-card-inner">
                   <div class="ps-card-top">
-                    <div class="ps-tp-header">
-                      <div class="ps-tp-meta">
-                        <img src="images/stories/trustpilot-logo-white.png"
-                             alt="Trustpilot" class="ps-tp-logo ps-tp-logo-white" loading="lazy">
+                    <!-- Logo stacked above stars+name per Figma layout_NL0GBU -->
+                    <div style="display:flex;flex-direction:column;gap:12px">
+                      <img src="images/stories/trustpilot-logo-white.png"
+                           alt="Trustpilot" class="ps-tp-logo ps-tp-logo-white" loading="lazy">
+                      <div style="display:flex;align-items:center;gap:12px">
                         <div class="ps-stars" aria-label="5 stars">
                           <svg class="ps-star ps-star--white" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                           <svg class="ps-star ps-star--white" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -3035,58 +3058,24 @@
           </div>
         </div><!-- /.ps-carousel-area -->
 
-        <!-- Trust badges -->
+        <!-- Trust badges — static Figma exports for pixel-perfect accuracy -->
         <div class="ps-trust">
-          <!-- Desktop: horizontal row with dividers -->
-          <div class="ps-trust-row" id="ps-trust-row">
+          <!-- Desktop: single row image exported from Figma node 826:18781 -->
+          <img src="images/stories/trust-section.png"
+               alt="Sesame trust ratings: 4.9 stars on App &amp; Play Store · #1 Best Telehealth (Healthline 2021–2025) · 4.5 stars on Trustpilot"
+               class="ps-trust-static-desktop" loading="lazy">
 
-            <div class="ps-trust-divider ps-trust-divider--top" aria-hidden="true"></div>
-
-            <!-- Badge 1: App & Play Store 4.9 -->
-            <div class="ps-trust-badge">
-              <div class="ps-badge-rating">
-                <span class="ps-badge-number">4.9</span>
-                <div class="ps-badge-stars" aria-label="4.9 out of 5 stars">
-                  <svg class="ps-badge-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg class="ps-badge-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg class="ps-badge-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg class="ps-badge-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg class="ps-badge-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                </div>
-                <span class="ps-badge-label">App &amp; Play Store</span>
-              </div>
+          <!-- Mobile: Trustpilot first, then 2-column row -->
+          <div class="ps-trust-static-mobile">
+            <img src="images/stories/trust-badge-trustpilot.png"
+                 alt="4.5 stars on Trustpilot"
+                 class="ps-trust-static-top" loading="lazy">
+            <div class="ps-trust-static-row">
+              <img src="images/stories/trust-badge-appstore.png"
+                   alt="4.9 stars on App &amp; Play Store" loading="lazy">
+              <img src="images/stories/trust-badge-healthline.png"
+                   alt="#1 Best Telehealth (Healthline 2021–2025)" loading="lazy">
             </div>
-
-            <div class="ps-trust-divider" aria-hidden="true"></div>
-
-            <!-- Badge 2: #1 Best Telehealth -->
-            <div class="ps-trust-badge">
-              <p class="ps-badge-headline">#1<br>Best Telehealth</p>
-              <img src="images/stories/healthline-logo.png" alt="Healthline"
-                   class="ps-healthline-logo" loading="lazy">
-              <span class="ps-badge-sub">2021 – 2025</span>
-            </div>
-
-            <div class="ps-trust-divider" aria-hidden="true"></div>
-
-            <!-- Badge 3: Trustpilot 4.5 -->
-            <div class="ps-trust-badge">
-              <div class="ps-badge-rating">
-                <span class="ps-badge-number">4.5</span>
-                <div class="ps-badge-stars" aria-label="4.5 out of 5 stars">
-                  <svg class="ps-badge-star ps-badge-star--tp" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg class="ps-badge-star ps-badge-star--tp" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg class="ps-badge-star ps-badge-star--tp" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg class="ps-badge-star ps-badge-star--tp" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  <svg class="ps-badge-star ps-badge-star--tp" viewBox="0 0 24 24" aria-hidden="true" style="opacity:0.45"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                </div>
-                <img src="images/trustpilot-logo.svg" alt="Trustpilot"
-                     class="ps-tp-logo-badge" loading="lazy">
-              </div>
-            </div>
-
-            <div class="ps-trust-divider ps-trust-divider--top" aria-hidden="true"></div>
-
           </div>
         </div><!-- /.ps-trust -->
 
