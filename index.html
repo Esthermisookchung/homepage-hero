@@ -1826,13 +1826,13 @@
     .ps {
       --ps-pad: 142px;
       background: #fff;
-      padding: 80px 0;  /* horizontal padding handled per-child below */
+      padding: 80px var(--ps-pad);
       overflow-x: hidden;
     }
     .ps-inner {
       display: flex;
       flex-direction: column;
-      align-items: stretch;
+      align-items: center;
       gap: 80px;
       width: 100%;
     }
@@ -1845,8 +1845,6 @@
       align-items: center;
       gap: 24px;
       width: 100%;
-      padding-left: var(--ps-pad);
-      padding-right: var(--ps-pad);
     }
     .ps-headline {
       font-family: var(--f-sans);
@@ -1882,19 +1880,19 @@
     /* ── Carousel area ── */
     .ps-area {
       width: 100%;
-      overflow: visible;
       display: flex;
       flex-direction: column;
       gap: 40px;
     }
+    /* Viewport: overflow hidden clips the track; peek is the partial card at the right edge */
     .ps-viewport {
-      overflow: visible; /* let cards peek; ps section clips at viewport edge */
+      overflow: hidden;
       width: 100%;
     }
     .ps-track {
       display: flex;
+      flex-wrap: nowrap;
       gap: 16px;
-      padding-left: var(--ps-pad); /* first card aligns to content left edge */
       transform: translateX(0);
       transition: transform .42s cubic-bezier(.4,0,.2,1);
       will-change: transform;
@@ -2145,9 +2143,7 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      padding-left: var(--ps-pad);
-      padding-right: var(--ps-pad);
-      margin-top: 8px; /* gap from carousel to controls */
+      margin-top: 8px;
     }
     .ps-dots {
       display: flex;
@@ -2184,26 +2180,26 @@
     .ps-arrow:disabled svg { stroke: #94969C; }
 
     /* ── Trust badges (static Figma images) ── */
-    .ps-trust { width: 100%; display: flex; justify-content: center; padding-left: var(--ps-pad); padding-right: var(--ps-pad); }
+    .ps-trust { width: 100%; display: flex; justify-content: center; }
     .ps-trust-d { width: 100%; height: auto; display: block; }
     .ps-trust-m { display: none; }
 
     /* ── Responsive ── */
     @media (min-width: 1025px) and (max-width: 1439px) {
-      .ps { --ps-pad: 40px; padding: 64px 0; }
+      .ps { --ps-pad: 40px; padding: 64px var(--ps-pad); }
     }
     @media (max-width: 1024px) {
-      .ps { --ps-pad: 24px; padding: 64px 0; }
+      .ps { --ps-pad: 24px; padding: 64px var(--ps-pad); }
     }
     @media (max-width: 767px) {
-      .ps { --ps-pad: 16px; padding: 64px 0; }
+      .ps { --ps-pad: 16px; padding: 64px var(--ps-pad); }
       .ps-inner { gap: 64px; }
       .ps-header { flex-direction: column; align-items: center; text-align: center; gap: 40px; }
       .ps-headline { font-size: 32px; max-width: 100%; text-align: center; }
       .ps-area { gap: 32px; }
       .ps-controls { gap: 24px; justify-content: space-between; }
       /* Mobile: center active card — first card at (390-300)/2=45px from left */
-      .ps-track { padding-left: calc((100vw - 300px) / 2); }
+      /* ps-track: no padding change on mobile — layout handled by section padding */
       .ps-trust-d { display: none; }
       .ps-trust-m {
         display: flex;
@@ -3102,11 +3098,8 @@
     const TOTAL   = 4;
     let pos = 0;
 
-    // Mobile: full card+gap step so active card lands centered.
-    // Desktop: partial step (< card width) so previous card always peeks left.
-    function getStep() {
-      return window.innerWidth <= 767 ? CARD_W + GAP : 240;
-    }
+    // Advance one full card at a time; peek is the partial card visible at right edge
+    function getStep() { return CARD_W + GAP; }  // 316px
 
     function maxOffset() {
       // Track scroll width minus the visible viewport width
