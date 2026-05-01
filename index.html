@@ -1824,8 +1824,10 @@
 
     /* ── Outer section ── */
     .ps {
+      --ps-pad: 142px;
       background: #fff;
-      padding: 80px 142px;
+      padding: 80px var(--ps-pad);
+      overflow-x: hidden; /* clips at section level, prevents page scroll */
     }
     .ps-inner {
       display: flex;
@@ -1877,18 +1879,23 @@
 
     /* ── Carousel area ── */
     .ps-area {
-      width: 100%;
+      /* Bleed carousel beyond section padding so cards peek past edges */
+      margin-left: calc(-1 * var(--ps-pad));
+      margin-right: calc(-1 * var(--ps-pad));
+      width: calc(100% + 2 * var(--ps-pad));
+      overflow: visible;
       display: flex;
       flex-direction: column;
       gap: 40px;
     }
     .ps-viewport {
-      overflow: hidden;
+      overflow: visible; /* no clipping — ps section handles it */
       width: 100%;
     }
     .ps-track {
       display: flex;
       gap: 16px;
+      padding-left: var(--ps-pad); /* first card aligns to content left edge */
       transform: translateX(0);
       transition: transform .42s cubic-bezier(.4,0,.2,1);
       will-change: transform;
@@ -1994,6 +2001,7 @@
     .ps-qheader {        /* layout_NL0GBU: col gap 12px */
       display: flex;
       flex-direction: column;
+      align-items: flex-start; /* left-align logo and all children */
       gap: 12px;
     }
     .ps-tp-logo {        /* layout_VTMVLG: 65×16 */
@@ -2002,25 +2010,25 @@
       display: block;
       object-fit: contain;
       flex-shrink: 0;
+      align-self: flex-start; /* never stretch to column width */
     }
-    .ps-tp-logo-inv { filter: brightness(0) invert(1); } /* white on green */
+    /* White logo for green card */
+    .ps-tp-logo-inv { filter: grayscale(1) brightness(100); }
     .ps-meta-row {       /* layout_WGN15B: row gap 12px */
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 12px;
     }
-    .ps-stars {          /* layout_MNQZBA: row gap 2px */
-      display: flex;
-      align-items: center;
-      gap: 2px;
-    }
-    .ps-star {
-      width: 18px;
+    /* Trustpilot filled-block star row (tp-stars-5.png from Figma node 826:18788) */
+    .ps-stars { display: block; }
+    .ps-stars-img {
       height: 18px;
+      width: auto;
       display: block;
-      object-fit: contain;
     }
+    /* White stars for green card */
+    .ps-card-quote .ps-stars-img { filter: grayscale(1) brightness(100); }
     .ps-reviewer-q {
       font-family: var(--f-sans);
       font-weight: 600;
@@ -2168,18 +2176,20 @@
 
     /* ── Responsive ── */
     @media (min-width: 1025px) and (max-width: 1439px) {
-      .ps { padding: 64px 40px; }
+      .ps { --ps-pad: 40px; padding: 64px var(--ps-pad); }
     }
     @media (max-width: 1024px) {
-      .ps { padding: 64px 24px; }
+      .ps { --ps-pad: 24px; padding: 64px var(--ps-pad); }
     }
     @media (max-width: 767px) {
-      .ps { padding: 64px 16px; }
+      .ps { --ps-pad: 16px; padding: 64px var(--ps-pad); }
       .ps-inner { gap: 64px; }
       .ps-header { flex-direction: column; align-items: center; text-align: center; gap: 40px; }
       .ps-headline { font-size: 32px; max-width: 100%; text-align: center; }
       .ps-area { gap: 32px; }
       .ps-controls { gap: 24px; justify-content: space-between; }
+      /* Mobile: center active card — first card at (390-300)/2=45px from left */
+      .ps-track { padding-left: calc((100vw - 300px) / 2); }
       .ps-trust-d { display: none; }
       .ps-trust-m {
         display: flex;
@@ -2799,14 +2809,10 @@
                 <div class="ps-ci">
                   <div class="ps-group">
                     <div class="ps-qheader">
-                      <img src="images/stories/trustpilot-logo-white.png" alt="Trustpilot" class="ps-tp-logo ps-tp-logo-inv" loading="lazy">
+                      <img src="images/stories/trustpilot-logo-star.png" alt="Trustpilot" class="ps-tp-logo ps-tp-logo-inv" loading="lazy">
                       <div class="ps-meta-row">
                         <div class="ps-stars" aria-label="5 out of 5 stars">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true" style="filter:brightness(0) invert(1)">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true" style="filter:brightness(0) invert(1)">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true" style="filter:brightness(0) invert(1)">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true" style="filter:brightness(0) invert(1)">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true" style="filter:brightness(0) invert(1)">
+                          <img src="images/stories/tp-stars-5.png" alt="" class="ps-stars-img" aria-hidden="true" loading="lazy">
                         </div>
                         <span class="ps-reviewer-q">John King.</span>
                       </div>
@@ -2854,26 +2860,23 @@
                 <div class="ps-ci">
                   <div class="ps-group">
                     <div class="ps-qheader">
-                      <img src="images/trustpilot-logo.svg" alt="Trustpilot" class="ps-tp-logo" loading="lazy">
+                      <img src="images/stories/trustpilot-logo-star.png" alt="Trustpilot" class="ps-tp-logo" loading="lazy">
                       <div class="ps-meta-row">
                         <div class="ps-stars" aria-label="5 out of 5 stars">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                          <img src="images/stories/tp-stars-5.png" alt="" class="ps-stars-img" aria-hidden="true" loading="lazy">
                         </div>
                         <span class="ps-reviewer-r">John King.</span>
                       </div>
                       <h3 class="ps-rheadline">Sesame is the BEST.</h3>
                     </div>
                     <div>
-                      <div class="ps-rbody-wrap">
+                      <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="ps-rbody-wrap">
                         <p class="ps-rbody">I turn to Sesame as an alternative to germ-infested urgent care centers when I need immediate care and feel something simple coming on (like a sinus infection or UTI). I am familiar with the symptoms and know how it&rsquo;s been treated effectively in the past. Thank God we have options like this. The cost is SO reasonable for the value, and I&rsquo;ve never waited more than a couple of hours for an appointment.</p>
                         <div class="ps-rfade" aria-hidden="true"></div>
                       </div>
+                      </div><!-- /gap wrapper -->
                       <button class="ps-read-more" aria-label="Read more of John King&rsquo;s review">Read more</button>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -2883,14 +2886,10 @@
                 <div class="ps-ci">
                   <div class="ps-group">
                     <div class="ps-qheader">
-                      <img src="images/trustpilot-logo.svg" alt="Trustpilot" class="ps-tp-logo" loading="lazy">
+                      <img src="images/stories/trustpilot-logo-star.png" alt="Trustpilot" class="ps-tp-logo" loading="lazy">
                       <div class="ps-meta-row">
                         <div class="ps-stars" aria-label="5 out of 5 stars">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
-                          <img src="images/trustpilot-star.svg" class="ps-star" alt="" aria-hidden="true">
+                          <img src="images/stories/tp-stars-5.png" alt="" class="ps-stars-img" aria-hidden="true" loading="lazy">
                         </div>
                         <span class="ps-reviewer-r">John King.</span>
                       </div>
@@ -3077,17 +3076,24 @@
 
     const CARD_W  = 300;
     const GAP     = 16;
-    const STEP    = 240;    // < card width → previous card always peeks left
-    const TOTAL   = 4;                     // dot groups (matches Figma itemsCount=4)
+    const TOTAL   = 4;
     let pos = 0;
 
+    // Mobile: full card+gap step so active card lands centered.
+    // Desktop: partial step (< card width) so previous card always peeks left.
+    function getStep() {
+      return window.innerWidth <= 767 ? CARD_W + GAP : 240;
+    }
+
     function maxOffset() {
-      return track.scrollWidth - wrapper.offsetWidth;
+      // Track scroll width minus the visible viewport width
+      return Math.max(0, track.scrollWidth - wrapper.offsetWidth);
     }
 
     function offsets() {
       const max = maxOffset();
-      return [0, 1, 2, 3].map(i => Math.min(i * STEP, max));
+      const step = getStep();
+      return [0, 1, 2, 3].map(i => Math.min(i * step, max));
     }
 
     function goTo(n, animate = true) {
