@@ -1826,13 +1826,13 @@
     .ps {
       --ps-pad: 142px;
       background: #fff;
-      padding: 80px var(--ps-pad);
-      overflow-x: hidden; /* clips at section level, prevents page scroll */
+      padding: 80px 0;  /* horizontal padding handled per-child below */
+      overflow-x: hidden;
     }
     .ps-inner {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       gap: 80px;
       width: 100%;
     }
@@ -1845,6 +1845,8 @@
       align-items: center;
       gap: 24px;
       width: 100%;
+      padding-left: var(--ps-pad);
+      padding-right: var(--ps-pad);
     }
     .ps-headline {
       font-family: var(--f-sans);
@@ -1885,12 +1887,9 @@
       flex-direction: column;
       gap: 40px;
     }
-    /* Bleed viewport to section edges while leaving controls/trust in content flow */
     .ps-viewport {
-      width: calc(100% + 2 * var(--ps-pad));
-      position: relative;
-      left: calc(-1 * var(--ps-pad));
-      overflow: visible;
+      overflow: visible; /* let cards peek; ps section clips at viewport edge */
+      width: 100%;
     }
     .ps-track {
       display: flex;
@@ -1995,10 +1994,10 @@
     .ps-group {          /* layout_EVHWQV: col gap between children */
       display: flex;
       flex-direction: column;
-      gap: 16px;  /* rating→headline: 16px, headline→body: 16px */
+      gap: 32px;  /* layout_EVHWQV: 32px between rating-group and body */
       flex: 1;
     }
-    .ps-rating {         /* logo + meta only: NL0GBU gap 12px */
+    .ps-rating {         /* NL0GBU: logo → stars+name → headline, gap 12px */
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -2025,14 +2024,14 @@
     }
     /* Trustpilot filled-block star rating */
     .ps-stars { display: flex; align-items: center; gap: 2px; }
-    .tp-star {
+    .ps-card .tp-star {
       width: 18px; height: 18px;
       background-color: #00B67A;
       display: inline-block;
       flex-shrink: 0;
       position: relative;
     }
-    .tp-star::after {
+    .ps-card .tp-star::after {
       content: '';
       position: absolute;
       inset: 0;
@@ -2040,7 +2039,6 @@
       -webkit-mask: url('images/trustpilot-star.svg') center / 12px no-repeat;
       mask: url('images/trustpilot-star.svg') center / 12px no-repeat;
     }
-    /* On green card: subtle white-translucent blocks so stars float on green */
     .ps-card-quote .tp-star { background-color: rgba(255,255,255,0.25); }
     .ps-reviewer-q {
       font-family: var(--f-sans);
@@ -2147,6 +2145,9 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
+      padding-left: var(--ps-pad);
+      padding-right: var(--ps-pad);
+      margin-top: 8px; /* gap from carousel to controls */
     }
     .ps-dots {
       display: flex;
@@ -2183,19 +2184,19 @@
     .ps-arrow:disabled svg { stroke: #94969C; }
 
     /* ── Trust badges (static Figma images) ── */
-    .ps-trust { width: 100%; display: flex; justify-content: center; }
+    .ps-trust { width: 100%; display: flex; justify-content: center; padding-left: var(--ps-pad); padding-right: var(--ps-pad); }
     .ps-trust-d { width: 100%; height: auto; display: block; }
     .ps-trust-m { display: none; }
 
     /* ── Responsive ── */
     @media (min-width: 1025px) and (max-width: 1439px) {
-      .ps { --ps-pad: 40px; padding: 64px var(--ps-pad); }
+      .ps { --ps-pad: 40px; padding: 64px 0; }
     }
     @media (max-width: 1024px) {
-      .ps { --ps-pad: 24px; padding: 64px var(--ps-pad); }
+      .ps { --ps-pad: 24px; padding: 64px 0; }
     }
     @media (max-width: 767px) {
-      .ps { --ps-pad: 16px; padding: 64px var(--ps-pad); }
+      .ps { --ps-pad: 16px; padding: 64px 0; }
       .ps-inner { gap: 64px; }
       .ps-header { flex-direction: column; align-items: center; text-align: center; gap: 40px; }
       .ps-headline { font-size: 32px; max-width: 100%; text-align: center; }
@@ -2832,8 +2833,8 @@
                         </div>
                         <span class="ps-reviewer-q">John King.</span>
                       </div>
+                      <h3 class="ps-qheadline">&ldquo;She&rsquo;s amazing, she heard me out.&rdquo;</h3>
                     </div>
-                    <h3 class="ps-qheadline">&ldquo;She&rsquo;s amazing, she heard me out.&rdquo;</h3>
                     <p class="ps-qbody">I come to Sesame because I trust that they will take good care of me. I have been seeing the same physician for a couple of years. The experience is positive because he listens to what is wrong and involves me in the treatment plan.</p>
                   </div>
                 </div>
@@ -2915,8 +2916,8 @@
                         </div>
                         <span class="ps-reviewer-r">John King.</span>
                       </div>
+                      <h3 class="ps-rheadline">Sesame is the BEST.</h3>
                     </div>
-                    <h3 class="ps-rheadline">Sesame is the BEST.</h3>
                     <div>
                       <div class="ps-rbody-wrap">
                         <p class="ps-rbody">Far better than an in-person Doctor&rsquo;s visit for routine prescriptions or inquiries. Dr. Okeke is highly recommended. Very pleasant and helpful. We&rsquo;ve used him several times for both me and my mother-in-law. Much better costs and structure than most any other telemedicine.</p>
