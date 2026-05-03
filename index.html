@@ -1468,7 +1468,6 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      min-height: 400px;
     }
 
     .rx-card-text {
@@ -1534,20 +1533,13 @@
       white-space: nowrap;
       opacity: 0.5;
       flex-shrink: 0;
-    }
-
-    /* Chip selection with smooth color/border transition */
-    .rx-pill {
-      border: 1px solid transparent;
-      transition: opacity 350ms cubic-bezier(0, 0.8, 0.6, 1),
-                  border-color 350ms cubic-bezier(0, 0.8, 0.6, 1),
-                  color 350ms cubic-bezier(0, 0.8, 0.6, 1);
+      transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 600ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .rx-pill--active {
       opacity: 1;
       border-color: #2970FF;
-      color: #2970FF;
     }
     /* Carousel rows – start offset, animate to 0 */
     .rx-pill-row { will-change: transform; }
@@ -1617,9 +1609,8 @@
     .rx-prog-wrap {
       display: flex;
       flex-direction: column;
-      gap: 18.77px;
-      flex: 1;
-      padding: 18.77px 15.64px 0;
+      gap: 12px;
+      padding: 18.77px 15.64px 18.77px;
     }
     .rx-prog-track {
       height: 3.13px; background: #E7E5E4; border-radius: 7820.45px; overflow: hidden;
@@ -1653,7 +1644,7 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
-      padding: 15.64px 15.64px;
+      padding: 12.51px 15.64px;
     }
     .rx-pickup-tel {
       font-family: var(--f-sans); font-weight: 500; font-size: 8.96px;
@@ -3664,13 +3655,7 @@
               renderer: 'svg',
               loop: false,
               autoplay: false,
-              path: 'images/rx/confetti.json'
-            });
-            confettiAnim.addEventListener('data_ready', function() {
-              console.log('Confetti loaded successfully');
-            });
-            confettiAnim.addEventListener('error', function(e) {
-              console.error('Confetti error:', e);
+              path: 'images/rx/confetti-1.json'
             });
           } catch (e) {
             console.error('Confetti load exception:', e);

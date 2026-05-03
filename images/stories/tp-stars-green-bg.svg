@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="108" height="20" viewBox="0 0 108 20">
+  <defs>
+    <symbol id="gs" viewBox="0 0 24 24">
+      <path fill="white" d="M22.1157 9.64341H14.4784L12.1194 2L9.75302 9.64341L2.11572 9.63566L8.30076 14.3643L5.93437 22L12.1194 17.2791L18.2971 22L15.9381 14.3643L22.1157 9.64341Z"/>
+    </symbol>
+  </defs>
+  <rect x="0"  y="0" width="20" height="20" fill="#00B67A"/>
+  <use href="#gs" x="0"  y="0" width="20" height="20"/>
+  <rect x="22" y="0" width="20" height="20" fill="#00B67A"/>
+  <use href="#gs" x="22" y="0" width="20" height="20"/>
+  <rect x="44" y="0" width="20" height="20" fill="#00B67A"/>
+  <use href="#gs" x="44" y="0" width="20" height="20"/>
+  <rect x="66" y="0" width="20" height="20" fill="#00B67A"/>
+  <use href="#gs" x="66" y="0" width="20" height="20"/>
+  <rect x="88" y="0" width="20" height="20" fill="#00B67A"/>
+  <use href="#gs" x="88" y="0" width="20" height="20"/>
+</svg>
