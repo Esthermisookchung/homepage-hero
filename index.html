@@ -1536,53 +1536,18 @@
       flex-shrink: 0;
     }
 
-    /* Chip selection with dual animations: text + border opacity + glimmer */
+    /* Chip selection with smooth color/border transition */
     .rx-pill {
-      position: relative;
       border: 1px solid transparent;
-    }
-
-    /* Text opacity animation: 0.5 -> 1 over 450ms */
-    @keyframes rx-pill-text-reveal {
-      0% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-
-    /* Border/outline opacity animation: 0 -> 1 over 450ms */
-    @keyframes rx-pill-border-reveal {
-      0% { border-color: rgba(41, 112, 255, 0); }
-      100% { border-color: #2970FF; }
-    }
-
-    /* Glimmer sweep: subtle light sweep across chip ~650ms */
-    @keyframes rx-pill-glimmer {
-      0% { left: -100%; opacity: 0; }
-      10% { opacity: 0.4; }
-      50% { opacity: 0.6; }
-      90% { opacity: 0.3; }
-      100% { left: 100%; opacity: 0; }
+      transition: opacity 350ms cubic-bezier(0, 0.8, 0.6, 1),
+                  border-color 350ms cubic-bezier(0, 0.8, 0.6, 1),
+                  color 350ms cubic-bezier(0, 0.8, 0.6, 1);
     }
 
     .rx-pill--active {
-      animation: rx-pill-text-reveal 450ms cubic-bezier(0.22, 1, 0.36, 1) forwards,
-                 rx-pill-border-reveal 450ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    /* Glimmer pseudo-element */
-    .rx-pill::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 40%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-      border-radius: 9999px;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .rx-pill--active::before {
-      animation: rx-pill-glimmer 650ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+      opacity: 1;
+      border-color: #2970FF;
+      color: #2970FF;
     }
     /* Carousel rows – start offset, animate to 0 */
     .rx-pill-row { will-change: transform; }
@@ -1615,15 +1580,19 @@
       background: #fff;
       border-radius: 12.51px;
       box-shadow: 3.13px 3.13px 12.51px rgba(0,0,0,0.06), -3.13px 0 12.51px rgba(0,0,0,0.06);
-      padding: 15.64px 12.51px;
       display: flex;
       flex-direction: column;
-      gap: 18.77px;
       width: 280px;
       flex-shrink: 0;
       position: relative;
+      overflow: hidden;
     }
-    .rx-presc-header { display: flex; align-items: center; gap: 12.51px; }
+    .rx-presc-header {
+      display: flex;
+      align-items: center;
+      gap: 12.51px;
+      padding: 15.64px 15.64px 0;
+    }
     .rx-presc-icon {
       width: 43.8px; height: 43.8px; border-radius: 50%;
       flex-shrink: 0; overflow: hidden; object-fit: cover;
@@ -1645,7 +1614,13 @@
       color: #61646C; margin: 0; display: flex; align-items: center; gap: 2.99px;
     }
     .rx-presc-meta-bullet { width: 2.99px; height: 2.99px; background: #61646C; border-radius: 50%; flex-shrink: 0; }
-    .rx-prog-wrap { display: flex; flex-direction: column; gap: 18.77px; flex: 1; }
+    .rx-prog-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 18.77px;
+      flex: 1;
+      padding: 18.77px 15.64px 0;
+    }
     .rx-prog-track {
       height: 3.13px; background: #E7E5E4; border-radius: 7820.45px; overflow: hidden;
     }
@@ -1664,11 +1639,21 @@
     }
     .rx-prog-label--ready.is-active { color: #000; font-weight: 700; }
     .rx-pickup-divider {
-      width: 100%; height: 0.78px; background: #CECFD2; flex-shrink: 0;
+      width: 100%;
+      height: 0.78px;
+      background: #CECFD2;
+      flex-shrink: 0;
     }
     .rx-pickup-info {
-      font-family: var(--f-sans); font-weight: 600; font-size: 10.45px;
-      color: #000; line-height: 1.5; display: flex; flex-direction: column; gap: 2px;
+      font-family: var(--f-sans);
+      font-weight: 600;
+      font-size: 10.45px;
+      color: #000;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 15.64px 15.64px;
     }
     .rx-pickup-tel {
       font-family: var(--f-sans); font-weight: 500; font-size: 8.96px;
@@ -1678,29 +1663,25 @@
     /* Confetti: positioned within the prescription card */
     .rx-confetti-wrap {
       position: absolute;
-      bottom: 8px;
-      right: 8px;
-      width: 140px;
-      height: 140px;
+      bottom: 10px;
+      right: 10px;
+      width: 120px;
+      height: 120px;
       pointer-events: none;
-      z-index: 11;
+      z-index: 15;
       opacity: 0;
       transition: opacity 0.2s ease;
     }
     .rx-confetti-wrap.is-active { opacity: 1; }
     #rx-confetti-container {
-      width: 140px;
-      height: 140px;
+      width: 120px;
+      height: 120px;
       display: block;
-      position: relative;
     }
     #rx-confetti-container svg {
-      width: 140px !important;
-      height: 140px !important;
-      display: block;
-      position: absolute;
-      bottom: 0;
-      right: 0;
+      width: 120px !important;
+      height: 120px !important;
+      display: block !important;
     }
 
     /* ── Card 02: $1 Medications ── */
@@ -2891,15 +2872,10 @@
               <div class="rx-presc-card">
                 <div class="rx-presc-header">
                   <div class="rx-presc-icon">
-                    <img src="images/avatar-1.png" alt="">
+                    <img src="images/programs/med-fig-pink-pill.png" alt="Metformin pill">
                   </div>
                   <div class="rx-presc-info">
-                    <div class="rx-presc-name">
-                      <svg class="rx-pill-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <ellipse cx="12" cy="12" rx="8" ry="10" fill="#2970FF" opacity="0.8"/>
-                      </svg>
-                      Metformin 500mg
-                    </div>
+                    <div class="rx-presc-name">Metformin 500mg</div>
                     <div class="rx-presc-meta">
                       <span>60 pills</span>
                       <span class="rx-presc-meta-bullet"></span>
@@ -3681,7 +3657,7 @@
         fired = true; io.disconnect();
 
         /* Load confetti when card is in view */
-        if (confEl && typeof lottie !== 'undefined') {
+        if (confEl && typeof lottie !== 'undefined' && !confettiAnim) {
           try {
             confettiAnim = lottie.loadAnimation({
               container: confEl,
@@ -3690,8 +3666,14 @@
               autoplay: false,
               path: 'images/rx/confetti.json'
             });
+            confettiAnim.addEventListener('data_ready', function() {
+              console.log('Confetti loaded successfully');
+            });
+            confettiAnim.addEventListener('error', function(e) {
+              console.error('Confetti error:', e);
+            });
           } catch (e) {
-            console.error('Confetti load failed:', e);
+            console.error('Confetti load exception:', e);
           }
         }
 
