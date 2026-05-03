@@ -1459,6 +1459,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
+      align-items: stretch;
     }
 
     .rx-card {
@@ -1467,6 +1468,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      min-height: 400px;
     }
 
     .rx-card-text {
@@ -3669,35 +3671,7 @@
       return;
     }
 
-    /* Pre-load Lottie animation (wait for lottie to be available) */
     var confettiAnim = null;
-    var lottieReady = false;
-
-    function loadConfetti() {
-      if (confEl && typeof lottie !== 'undefined' && !lottieReady) {
-        lottieReady = true;
-        try {
-          confettiAnim = lottie.loadAnimation({
-            container: confEl,
-            renderer:  'svg',
-            loop:      false,
-            autoplay:  false,
-            path:      'images/rx/confetti.json'
-          });
-          if (confettiAnim) {
-            confettiAnim.addEventListener('error', function(e) {
-              console.error('Lottie load error:', e);
-            });
-          }
-        } catch (e) {
-          console.error('Confetti load error:', e);
-        }
-      } else if (!lottieReady && typeof lottie === 'undefined') {
-        /* Lottie not ready yet, try again in a moment */
-        setTimeout(loadConfetti, 100);
-      }
-    }
-    loadConfetti();
 
     var fired = false;
     var io = new IntersectionObserver(function (entries) {
@@ -3705,6 +3679,21 @@
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         fired = true; io.disconnect();
+
+        /* Load confetti when card is in view */
+        if (confEl && typeof lottie !== 'undefined') {
+          try {
+            confettiAnim = lottie.loadAnimation({
+              container: confEl,
+              renderer: 'svg',
+              loop: false,
+              autoplay: false,
+              path: 'images/rx/confetti.json'
+            });
+          } catch (e) {
+            console.error('Confetti load failed:', e);
+          }
+        }
 
         setTimeout(function () {
           /* Animate final bar segment 80% → 100% */
@@ -3716,19 +3705,12 @@
             if (ready) ready.classList.add('is-active');
             /* Fire confetti */
             if (confWrap) confWrap.classList.add('is-active');
-            /* Ensure confetti is loaded before playing */
-            if (confettiAnim) {
+            /* Play confetti animation */
+            if (confettiAnim && confettiAnim.play) {
               try {
                 confettiAnim.play();
-                /* Auto-hide after animation completes */
-                confettiAnim.addEventListener('complete', function () {
-                  if (confWrap) {
-                    confWrap.style.transition = 'opacity 0.6s ease';
-                    confWrap.style.opacity = '0';
-                  }
-                });
               } catch (e) {
-                console.error('Confetti animation error:', e);
+                console.error('Confetti play failed:', e);
               }
             }
           }, Math.round(FILL_DUR * LABEL_PCT));
