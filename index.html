@@ -1567,6 +1567,7 @@
       justify-content: center;
       padding: 20px 24px;
       position: relative;
+      overflow: hidden;
       min-height: 300px;
     }
     .rx-presc-card {
@@ -1656,10 +1657,7 @@
     /* Confetti: fills asset frame, sits BEHIND the prescription card */
     .rx-confetti-wrap {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
@@ -1669,12 +1667,13 @@
     }
     .rx-confetti-wrap.is-active { opacity: 1; }
     #rx-confetti-container {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
+      transform: scale(1.4);
+      transform-origin: center center;
     }
     #rx-confetti-container svg {
       width: 100% !important;
@@ -3662,7 +3661,11 @@
               renderer: 'svg',
               loop: false,
               autoplay: false,
-              path: 'images/rx/confetti-1.json'
+              path: 'images/rx/confetti-1.json',
+              rendererSettings: {
+                preserveAspectRatio: 'xMidYMid slice',
+                progressiveLoad: false
+              }
             });
           } catch (e) {
             console.error('Confetti load exception:', e);
