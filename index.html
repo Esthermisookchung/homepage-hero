@@ -1533,8 +1533,8 @@
       white-space: nowrap;
       opacity: 0.5;
       flex-shrink: 0;
-      transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 600ms cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 450ms cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 450ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .rx-pill--active {
@@ -1567,6 +1567,7 @@
       justify-content: center;
       padding: 20px 24px;
       position: relative;
+      min-height: 300px;
     }
     .rx-presc-card {
       background: #fff;
@@ -1578,12 +1579,13 @@
       flex-shrink: 0;
       position: relative;
       overflow: hidden;
+      z-index: 2;
     }
     .rx-presc-header {
       display: flex;
       align-items: center;
       gap: 12.51px;
-      padding: 15.64px 15.64px 0;
+      padding: 15.64px 12.51px 0;
     }
     .rx-presc-icon {
       width: 43.8px; height: 43.8px; border-radius: 50%;
@@ -1610,7 +1612,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      padding: 18.77px 15.64px 18.77px;
+      padding: 18.77px 12.51px;
     }
     .rx-prog-track {
       height: 3.13px; background: #E7E5E4; border-radius: 7820.45px; overflow: hidden;
@@ -1644,34 +1646,39 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
-      padding: 12.51px 15.64px;
+      padding: 12.51px 12.51px 15.64px;
     }
     .rx-pickup-tel {
       font-family: var(--f-sans); font-weight: 500; font-size: 8.96px;
       color: #61646C;
     }
     .rx-pickup-tel { color: #61646C; }
-    /* Confetti: positioned within the prescription card */
+    /* Confetti: fills asset frame, sits BEHIND the prescription card */
     .rx-confetti-wrap {
       position: absolute;
-      bottom: 10px;
-      right: 10px;
-      width: 120px;
-      height: 120px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
-      z-index: 15;
+      z-index: 1;
       opacity: 0;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.3s ease;
     }
     .rx-confetti-wrap.is-active { opacity: 1; }
     #rx-confetti-container {
-      width: 120px;
-      height: 120px;
+      width: 100%;
+      height: 100%;
       display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
     #rx-confetti-container svg {
-      width: 120px !important;
-      height: 120px !important;
+      width: 100% !important;
+      height: 100% !important;
       display: block !important;
     }
 
@@ -2860,10 +2867,14 @@
               <h3 class="rx-card-heading">Same-day prescriptions.</h3>
             </div>
             <div class="rx-tracking-asset" data-rx-tracking aria-hidden="true">
+              <!-- Confetti Lottie - sits behind the prescription card, fills asset frame -->
+              <div class="rx-confetti-wrap" id="rx-confetti-wrap" aria-hidden="true">
+                <div id="rx-confetti-container"></div>
+              </div>
               <div class="rx-presc-card">
                 <div class="rx-presc-header">
                   <div class="rx-presc-icon">
-                    <img src="images/programs/med-fig-pink-pill.png" alt="Metformin pill">
+                    <img src="images/rx/metformin-pill.png" alt="Metformin pill">
                   </div>
                   <div class="rx-presc-info">
                     <div class="rx-presc-name">Metformin 500mg</div>
@@ -2888,10 +2899,6 @@
                 <div class="rx-pickup-info">
                   <span>Pickup instructions sent to:</span>
                   <span class="rx-pickup-tel">(917) 293-4098</span>
-                </div>
-                <!-- Confetti – rendered by lottie-web into this container -->
-                <div class="rx-confetti-wrap" id="rx-confetti-wrap" aria-hidden="true">
-                  <div id="rx-confetti-container"></div>
                 </div>
               </div>
             </div>
@@ -3611,7 +3618,7 @@
         if (asset) asset.classList.add('rx-conditions-animated');
         /* Step 2: chips become selected as rows settle */
         setTimeout(function () { chip1.classList.add('rx-pill--active'); }, 1200);
-        setTimeout(function () { chip2.classList.add('rx-pill--active'); }, 1380);
+        setTimeout(function () { chip2.classList.add('rx-pill--active'); }, 1400);
       });
     }, { threshold: 0.35 });
     io.observe(card);
