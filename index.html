@@ -1542,21 +1542,24 @@
     }
     /* Shimmer light sweep effect on selection */
     @keyframes rx-chip-shimmer {
-      0% { left: -100%; opacity: 0; }
-      50% { opacity: 0.6; }
-      100% { left: 100%; opacity: 0; }
+      0% { transform: translateX(-100%); opacity: 0; }
+      50% { opacity: 0.5; }
+      100% { transform: translateX(100%); opacity: 0; }
     }
     .rx-pill::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
       border-radius: 9999px;
       opacity: 0;
       pointer-events: none;
     }
     .rx-pill--active::before {
-      animation: rx-chip-shimmer 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1 forwards;
+      animation: rx-chip-shimmer 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
     .rx-pill--active {
       opacity: 1;
@@ -1582,13 +1585,13 @@
 
     /* ── Card 03: Prescription tracking ── */
     .rx-tracking-asset {
+      flex: 1;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px 24px;
       position: relative;
-      aspect-ratio: 374.67 / 299.74;
     }
     .rx-presc-card {
       background: #fff;
@@ -1600,6 +1603,7 @@
       gap: 18.77px;
       width: 280px;
       flex-shrink: 0;
+      position: relative;
     }
     .rx-presc-header { display: flex; align-items: center; gap: 12.51px; }
     .rx-presc-icon {
@@ -1646,20 +1650,26 @@
       color: #61646C;
     }
     .rx-pickup-tel { color: #61646C; }
-    /* Confetti: contained within the tracking asset */
+    /* Confetti: positioned within the prescription card */
     .rx-confetti-wrap {
       position: absolute;
-      bottom: 0; right: 0;
-      width: 200px; height: 200px;
-      pointer-events: none; overflow: visible; z-index: 10;
-      opacity: 0; transition: opacity 0.2s ease;
+      bottom: -20px; right: -20px;
+      width: 240px; height: 240px;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
     .rx-confetti-wrap.is-active { opacity: 1; }
     #rx-confetti-container {
-      width: 200px; height: 200px; display: block;
+      width: 240px;
+      height: 240px;
+      display: block;
     }
     #rx-confetti-container svg {
-      width: 100% !important; height: 100% !important;
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
     }
 
     /* ── Card 02: $1 Medications ── */
@@ -2875,10 +2885,10 @@
                   <span>Pickup instructions sent to:</span>
                   <span class="rx-pickup-tel">(917) 293-4098</span>
                 </div>
-              </div>
-              <!-- Confetti – rendered by lottie-web into this container -->
-              <div class="rx-confetti-wrap" id="rx-confetti-wrap" aria-hidden="true">
-                <div id="rx-confetti-container"></div>
+                <!-- Confetti – rendered by lottie-web into this container -->
+                <div class="rx-confetti-wrap" id="rx-confetti-wrap" aria-hidden="true">
+                  <div id="rx-confetti-container"></div>
+                </div>
               </div>
             </div>
           </article>
