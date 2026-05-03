@@ -1586,7 +1586,6 @@
     /* ── Card 03: Prescription tracking ── */
     .rx-tracking-asset {
       flex: 1;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1653,17 +1652,20 @@
     /* Confetti: positioned within the prescription card */
     .rx-confetti-wrap {
       position: absolute;
-      bottom: -20px; right: -20px;
-      width: 240px; height: 240px;
+      bottom: 0;
+      right: 0;
+      width: 160px;
+      height: 160px;
       pointer-events: none;
       z-index: 10;
       opacity: 0;
       transition: opacity 0.3s ease;
+      overflow: hidden;
     }
     .rx-confetti-wrap.is-active { opacity: 1; }
     #rx-confetti-container {
-      width: 240px;
-      height: 240px;
+      width: 160px;
+      height: 160px;
       display: block;
     }
     #rx-confetti-container svg {
