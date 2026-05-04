@@ -344,16 +344,9 @@
       background: var(--c-lavender);
       border-radius: var(--r-card);
     }
-    /* Inner content of hero card capped at 1596px */
-    .hero-top,
-    .hero-card .chat-section,
-    .hero-card .input-section,
-    .hero-card .stats-section {
-      width: 100%;
-      max-width: 1596px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    /* Hero inner content keeps its original (narrower) widths.
+       .chat-section / .input-section / .stats-section already cap themselves
+       at 640/640/1156px. .hero-top stays full-width but children center. */
 
     /* ── Trustpilot ── */
     .trustpilot {
