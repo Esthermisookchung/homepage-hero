@@ -327,22 +327,32 @@
       flex-direction: column;
       align-items: center;
       gap: 48px;
-      padding: 0 24px 80px;
+      padding: 0 0 80px;
     }
 
-    /* ── Lavender card ── */
+    /* ── Lavender card (full-bleed background panel) ── */
     .hero-card {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 64px;
       padding: 56px 80px;
-      width: 100%;
-      max-width: 1596px;
-      margin: 0 auto;
+      width: calc(100% - 48px);
+      margin-left: 24px;
+      margin-right: 24px;
       box-sizing: border-box;
       background: var(--c-lavender);
       border-radius: var(--r-card);
+    }
+    /* Inner content of hero card capped at 1596px */
+    .hero-top,
+    .hero-card .chat-section,
+    .hero-card .input-section,
+    .hero-card .stats-section {
+      width: 100%;
+      max-width: 1596px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* ── Trustpilot ── */
@@ -1067,13 +1077,13 @@
 
     .programs-section {
       background: #FAFAFA;
-      padding: 24px;
+      padding: 24px 0;
       display: flex;
       flex-direction: column;
       gap: 24px;
     }
 
-    /* White rounded container */
+    /* White rounded container (full-bleed panel: 24px from viewport edges) */
     .program-section {
       background: #FFFFFF;
       border-radius: 16px;
@@ -1081,10 +1091,19 @@
       display: flex;
       flex-direction: column;
       gap: 40px;
-      max-width: 1596px;
-      width: 100%;
-      margin: 0 auto;
+      width: calc(100% - 48px);
+      margin-left: 24px;
+      margin-right: 24px;
       box-sizing: border-box;
+    }
+    /* Inner content of program-section capped at 1596px */
+    .program-section-header,
+    .program-cards,
+    .rx-cards {
+      width: 100%;
+      max-width: 1596px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* ── Section header ── */
@@ -2015,17 +2034,21 @@
          .ps-track > .ps-card(flex:0 0 --card-w, NO per-card transforms)
        ================================================================ */
     .ps-section {
-      --ps-pad:    142px;
-      --ps-gap:    16px;
-      --ps-peek:    80px;
-      /* ≥1280px: 4 full cards + peek */
-      --ps-card-w: max(220px, calc((100vw - var(--ps-pad) - 3 * var(--ps-gap) - var(--ps-peek)) / 4));
+      /* Side gutter: 142px on standard screens, grows on wide screens to keep
+         heading aligned with the centered 1596px content grid */
+      --ps-pad: max(142px, calc((100vw - 1596px) / 2));
+      --ps-gap: 16px;
+      /* Content area width: capped at 1596px, scales down on smaller screens */
+      --ps-content-w: min(1596px, calc(100vw - 284px));
+      /* Card width: 4 full cards fit exactly inside content area; 5th peeks past */
+      --ps-card-w: max(220px, calc((var(--ps-content-w) - 3 * var(--ps-gap)) / 4));
       --ps-card-h: calc(var(--ps-card-w) * 1.78);
       background: #fff;
       padding: 80px 0;
       overflow-x: hidden;
     }
-    .ps-inner { display: flex; flex-direction: column; align-items: stretch; gap: 80px; width: 100%; max-width: 1596px; margin: 0 auto; }
+    /* Static content (header, controls, badges) capped at 1596px */
+    .ps-inner { display: flex; flex-direction: column; align-items: stretch; gap: 80px; width: 100%; }
 
     /* Header ── */
     .ps-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 0 var(--ps-pad); }
@@ -2197,7 +2220,7 @@
     @media (min-width: 1025px) and (max-width: 1279px) {
       .ps-section {
         --ps-pad: 40px;
-        --ps-card-w: max(200px, calc((100vw - var(--ps-pad) - 2 * var(--ps-gap) - var(--ps-peek)) / 3));
+        --ps-card-w: max(200px, calc((100vw - var(--ps-pad) - 2 * var(--ps-gap)) / 3));
         padding: 64px 0;
       }
     }
@@ -2205,7 +2228,7 @@
     @media (min-width: 768px) and (max-width: 1024px) {
       .ps-section {
         --ps-pad: 24px;
-        --ps-card-w: max(200px, calc((100vw - var(--ps-pad) - var(--ps-gap) - var(--ps-peek)) / 2));
+        --ps-card-w: max(200px, calc((100vw - var(--ps-pad) - var(--ps-gap)) / 2));
         padding: 64px 0;
       }
     }
