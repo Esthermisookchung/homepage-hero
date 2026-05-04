@@ -793,6 +793,10 @@
         gap: 32px;
         padding: 32px 16px;
         border-radius: 0 0 16px 16px;
+        /* Full-bleed on mobile: no 24px inset */
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
       }
       .stats-section {
         background: var(--c-white);
@@ -1470,7 +1474,14 @@
 
     @media (max-width: 767px) {
       .programs-section { padding: 16px 0; gap: 16px; }
-      .program-section { padding: 40px 20px; gap: 24px; }
+      .program-section {
+        padding: 40px 20px;
+        gap: 24px;
+        /* Full-bleed on mobile: no 24px inset */
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+      }
       .program-section-buttons { width: 100%; }
       .program-btn { max-width: none; }
       .program-card-text { padding: 16px; }
