@@ -95,7 +95,7 @@
       color: var(--c-text);
       background: var(--c-white);
     }
-    main { display: block; margin: 0 auto; padding: 0; max-width: 1596px; }
+    main { display: block; margin: 0; padding: 0; }
 
     /* ====================================================================
        Navigation
@@ -164,6 +164,7 @@
       max-width: 1596px;
       margin: 0 auto;
       box-sizing: border-box;
+      /* nav stays full-width, content inside aligns with main */
     }
     .nav-left {
       display: flex;
@@ -337,6 +338,9 @@
       gap: 64px;
       padding: 56px 80px;
       width: 100%;
+      max-width: 1596px;
+      margin: 0 auto;
+      box-sizing: border-box;
       background: var(--c-lavender);
       border-radius: var(--r-card);
     }
@@ -870,6 +874,9 @@
       flex-direction: column;
       align-items: center;
       gap: 32px;
+      max-width: 1596px;
+      margin: 0 auto;
+      width: 100%;
     }
     .conditions-heading {
       font-family: var(--f-sans);
@@ -1074,6 +1081,10 @@
       display: flex;
       flex-direction: column;
       gap: 40px;
+      max-width: 1596px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
 
     /* ── Section header ── */
@@ -1741,6 +1752,10 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
+      max-width: 1596px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .hiw-card {
@@ -1834,6 +1849,8 @@
       flex-direction: row;
       align-items: stretch;
       overflow: hidden;
+      max-width: 1596px;
+      margin: 0 auto;
     }
 
     /* ── Left panel ── */
@@ -2008,7 +2025,7 @@
       padding: 80px 0;
       overflow-x: hidden;
     }
-    .ps-inner { display: flex; flex-direction: column; align-items: stretch; gap: 80px; width: 100%; }
+    .ps-inner { display: flex; flex-direction: column; align-items: stretch; gap: 80px; width: 100%; max-width: 1596px; margin: 0 auto; }
 
     /* Header ── */
     .ps-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 0 var(--ps-pad); }
@@ -2232,6 +2249,10 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
+      max-width: 1596px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
     .uca-headline {
       font-family: var(--f-sans); font-feature-settings: "ss01" 1;
@@ -2300,6 +2321,10 @@
       flex-direction: row;
       overflow: hidden;
       align-items: stretch;
+      max-width: 1596px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
     .prov-promo-left {
       flex: 1;
